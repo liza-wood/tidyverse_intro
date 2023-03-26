@@ -10,7 +10,7 @@ home:
 authors:
   Allison Horst:
     href: liza-wood.github.io
-    
+
 template:
   bootstrap: 5
   bslib:

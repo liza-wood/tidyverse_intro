@@ -8,6 +8,7 @@ url: "https://liza-wood.github.io/tidyverse_intro/"
 
 site: "bookdown::bookdown_site"
 knit: "bookdown::render_book"
+
 output:
   bookdown::gitbook:
     config:
@@ -17,14 +18,11 @@ output:
             <img src="https://github.com/d-rug/d-rug.github.io/raw/main/DRUG_final_cobalt.png" style="height: 100%; width: 100%; object-fit: contain" />
           </a></li>
           <li><a href="./" style="font-size: 18px">Tidyverse: Data wrangling & visualization</a></li>
-        after: |
-          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
-            <img alt="CC BY-SA 4.0" src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg" style="float: right; padding-right: 10px;" />
-          </a>
-        collapse: section
-      sharing: no
-      view: https://github.com/liza-wood/tidyverse_intro/blob/master/%s
-      edit: https://github.com/liza-wood/tidyverse_intro/edit/master/%s
+    fontsettings:
+      theme: night
+      family: serif
+      size: 3
+
 ---
 
 # Overview {-}

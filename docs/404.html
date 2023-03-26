@@ -75,11 +75,6 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path=""><a href="#overview"><i class="fa fa-check"></i>Overview</a></li>
-<li class="divider"></li>
-<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
-  <img alt="CC BY-SA 4.0" src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg" style="float: right; padding-right: 10px;" />
-</a>
-
 </ul>
 
       </nav>
@@ -123,22 +118,32 @@ the table of contents to find the page you are looking for.</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": false,
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
 "fontsettings": {
 "theme": "white",
 "family": "sans",
 "size": 2
 },
 "edit": {
-"link": "https://github.com/liza-wood/tidyverse_intro/edit/master/%s",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
 "text": null
 },
 "view": {
-"link": "https://github.com/liza-wood/tidyverse_intro/blob/master/%s",
+"link": null,
 "text": null
 },
 "download": null,
@@ -147,7 +152,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "subsection"
 }
 });
 });
