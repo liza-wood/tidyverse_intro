@@ -2,22 +2,3 @@ delete_merged_file: true
 new_session: true
 output_dir: "docs"
 
-github-repo: liza-wood/tidyverse_intro
-url: "https://github.com/liza-wood/tidyverse_intro"
-
-site: "bookdown::bookdown_site"
-knit: "bookdown::render_book"
-
-output:
-  bookdown::gitbook:
-    css: styling.css
-    config:
-      code_folding: show
-      toc: 
-        before: |
-          <li><a href="https://allisonhorst.github.io/palmerpenguins/">
-            <img src="img/lter_penguins.png" style="height: 100%; width: 100%; object-fit: contain" />
-            <figcaption style="font-size: 8px">Artwork by @allison_horst</figcaption>
-          </a></li>
-          <li><a href="./" style="font-size: 15px">Tidyverse: Data wrangling & visualization</a></li>
-        collapse: section
