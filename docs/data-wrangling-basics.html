@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Data wrangling basics | Tidyverse: Data wrangling &amp; visualization</title>
+  <meta name="description" content="3 Data wrangling basics | Tidyverse: Data wrangling &amp; visualization" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Data wrangling basics | Tidyverse: Data wrangling &amp; visualization" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="liza-wood/tidyverse_intro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Data wrangling basics | Tidyverse: Data wrangling &amp; visualization" />
+  
+  
+  
+
+<meta name="author" content="Liza Wood" />
+
+
+<meta name="date" content="2023-03-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data.html"/>
+<link rel="next" href="data-wrangling-beyond-basics.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://liza-wood.github.io/">
+  <img src="https://github.com/allisonhorst/palmerpenguins/blob/main/man/figures/lter_penguins.png" style="height: 100%; width: 100%; object-fit: contain" />
+</a></li>
+<li><a href="./" style="font-size: 18px">Tidyverse: Data wrangling & visualization</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>1</b> Introduction to the Tidyverse</a></li>
+<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#palmer-station-penguins"><i class="fa fa-check"></i><b>2.1</b> Palmer Station penguins</a></li>
+<li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#palmer-station-weather"><i class="fa fa-check"></i><b>2.2</b> Palmer Station weather</a></li>
+<li class="chapter" data-level="2.3" data-path="data.html"><a href="data.html#why-palmer-data"><i class="fa fa-check"></i><b>2.3</b> Why Palmer data?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html"><i class="fa fa-check"></i><b>3</b> Data wrangling basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#function-outline"><i class="fa fa-check"></i><b>3.1</b> Function outline</a></li>
+<li class="chapter" data-level="3.2" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#reducing-data-dimensionality"><i class="fa fa-check"></i><b>3.2</b> Reducing data dimensionality</a></li>
+<li class="chapter" data-level="3.3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#combining-multiple-steps"><i class="fa fa-check"></i><b>3.3</b> Combining multiple steps</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#check-in-challenge"><i class="fa fa-check"></i><b>3.3.1</b> Check in challenge</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#creating-new-variables"><i class="fa fa-check"></i><b>3.4</b> Creating new variables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#new-columns"><i class="fa fa-check"></i><b>3.4.1</b> New columns</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#summary-tables"><i class="fa fa-check"></i><b>3.4.2</b> Summary tables</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#check-in-challenge-1"><i class="fa fa-check"></i><b>3.4.3</b> Check in challenge</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html"><i class="fa fa-check"></i><b>4</b> Data wrangling: beyond basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#manipulating-date-variables"><i class="fa fa-check"></i><b>4.1</b> Manipulating date variables</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#summary-challenge"><i class="fa fa-check"></i><b>4.1.1</b> Summary challenge</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#joining-multiple-data-frames"><i class="fa fa-check"></i><b>4.2</b> Joining multiple data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization</a></li>
+<li class="chapter" data-level="6" data-path="create-a-scatterplot-with-colored-points-based-on-species.html"><a href="create-a-scatterplot-with-colored-points-based-on-species.html"><i class="fa fa-check"></i><b>6</b> Create a scatterplot with colored points based on species</a></li>
+<li class="chapter" data-level="7" data-path="year-of-interest.html"><a href="year-of-interest.html"><i class="fa fa-check"></i><b>7</b> Year of interest?</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tidyverse: Data wrangling &amp; visualization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-wrangling-basics" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Data wrangling basics<a href="data-wrangling-basics.html#data-wrangling-basics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="function-outline" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Function outline<a href="data-wrangling-basics.html#function-outline" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Reducing data dimensionality:
+<ul>
+<li><code>select</code>: Name the columns to keep, separated by a comma. Using select will reduce the number of columns in your data frame</li>
+<li><code>filter</code>: Set conditions by which you want to filter (keep) some of the data. Using the filter function will reduce the number of rows in your data frame</li>
+<li><code>is.na()</code>: Insert a column name to get a logical vector indicated whether each value in that row has an NA value</li>
+</ul></li>
+<li>Combining multiple steps
+<ul>
+<li><code>%v%</code>: Link together multiple steps by ‘piping’ the output of one line of code into the next</li>
+</ul></li>
+<li>Creating new variables
+<ul>
+<li>Summary tables
+<ul>
+<li><code>group_by</code>: Set a column (or columns) by which you want to perform a summarizing function on. Using this function does apparently nothing on its own, but is powerful when paired with <code>summarize</code> (or <code>mutate</code>)</li>
+<li><code>summarize</code>: Create a new variable by performing a variety of summary/transformative functions on an existing column (or set of columns). When paired with <code>group_by</code>, data is reduced to a summary table</li>
+</ul></li>
+<li>New columns
+<ul>
+<li><code>mutate</code>: Create a new column by assigning a value (transformed or otherwise)</li>
+<li><code>case_when</code>: Pair with mutate to create a new variable that is based on &gt;1 conditions, typically for creating categorical variables</li>
+</ul></li>
+</ul></li>
+<li>Miscallenous
+<ul>
+<li><code>arrange</code></li>
+<li><code>rename</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="reducing-data-dimensionality" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Reducing data dimensionality<a href="data-wrangling-basics.html#reducing-data-dimensionality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The functions, <code>select</code> and <code>filter</code>, are what you can use to reduce dimensionality of your data frame. That means reducing the number of column (with <code>select</code>) and/or the number of rows (with <code>filter</code>). To use <code>select</code>, name the columns to keep, separated by a comma. For example, let’s select the species, year, sex, and body mass.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-wrangling-basics.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hint: check your column names first</span></span>
+<span id="cb12-2"><a href="data-wrangling-basics.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins)</span></code></pre></div>
+<pre><code>## [1] &quot;species&quot;           &quot;island&quot;            &quot;bill_length_mm&quot;   
+## [4] &quot;bill_depth_mm&quot;     &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;      
+## [7] &quot;sex&quot;               &quot;year&quot;</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-wrangling-basics.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select species, year, sex, and body mass</span></span>
+<span id="cb14-2"><a href="data-wrangling-basics.html#cb14-2" aria-hidden="true" tabindex="-1"></a>penguins_selected <span class="ot">&lt;-</span> <span class="fu">select</span>(penguins, species, year, sex, body_mass_g)</span>
+<span id="cb14-3"><a href="data-wrangling-basics.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at the &#39;dimensions&#39; with dim()</span></span>
+<span id="cb14-4"><a href="data-wrangling-basics.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(penguins_selected)</span></code></pre></div>
+<pre><code>## [1] 344   4</code></pre>
+<p>The select columns can also be used to remove columns (unselect) rather than select by using the <code>-</code> operator. For example, we may want to remove only two columns, island and year:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-wrangling-basics.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Un-select the island and year columns by using -.</span></span>
+<span id="cb16-2"><a href="data-wrangling-basics.html#cb16-2" aria-hidden="true" tabindex="-1"></a>penguins_unselected <span class="ot">&lt;-</span> <span class="fu">select</span>(penguins, <span class="sc">-</span>island, <span class="sc">-</span>year)</span>
+<span id="cb16-3"><a href="data-wrangling-basics.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at the &#39;dimensions&#39; with dim()</span></span>
+<span id="cb16-4"><a href="data-wrangling-basics.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(penguins_unselected)</span></code></pre></div>
+<pre><code>## [1] 344   6</code></pre>
+<p>New, let’s filter the data based on a certain condition. Creating ‘conditions’ in R means writing logical statements with a response that will be either TRUE or FALSE. To write conditions we can use <a href="https://www.w3schools.com/r/r_operators.asp">comparative operators</a>, which give a logical output:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Comparative Operator</th>
+<th>Name</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>==</td>
+<td>Equal</td>
+<td>x == y</td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td>Not equal</td>
+<td>x != y</td>
+</tr>
+<tr class="odd">
+<td>&gt;</td>
+<td>Greater than</td>
+<td>x &gt; y</td>
+</tr>
+<tr class="even">
+<td>&lt;</td>
+<td>Less than</td>
+<td>x &lt; y</td>
+</tr>
+<tr class="odd">
+<td>&gt;=</td>
+<td>Greater than or equal to</td>
+<td>x &gt;= y</td>
+</tr>
+<tr class="even">
+<td>&lt;=</td>
+<td>Less than or equal to</td>
+<td>x &lt;= y</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-wrangling-basics.html#cb18-1" aria-hidden="true" tabindex="-1"></a>penguins<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">2007</span></span></code></pre></div>
+<pre><code>##   [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [25]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [37]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [49]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [61] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [73] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [85] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [97] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [109] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [121] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [133] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [145] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
+## [157]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [169]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [181]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+## [193] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [205] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [217] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [229] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [241] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [253] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [265] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [277]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [289]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [301]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [313] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [325] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [337] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>The filter function evaluates those conditions, and keeps only the rows for which the value os TRUE. For example, let’s filter observations so that we only keep those from the year 2007.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-wrangling-basics.html#cb20-1" aria-hidden="true" tabindex="-1"></a>penguins_filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, year <span class="sc">==</span> <span class="dv">2007</span>)</span>
+<span id="cb20-2"><a href="data-wrangling-basics.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(penguins_filtered)</span></code></pre></div>
+<pre><code>## [1] 110   8</code></pre>
+<p>There are other functions to evaluate columns and get a T/F output. An important one is <code>is.na()</code>. This function evaluates a column and reports back a TRUE value when there is an NA in that column’s row. For example, we can use the <code>head()</code> function to look at the top 6 values of the <code>sex</code> column, and see that there is an NA in the fourth row.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-wrangling-basics.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins<span class="sc">$</span>sex)</span></code></pre></div>
+<pre><code>## [1] male   female female &lt;NA&gt;   female male  
+## Levels: female male</code></pre>
+<p>The <code>is.na</code> function evaluates the whole column and gives us TRUES whenever it sees an NA. Not surprisingly, we see a TRUE in the fourth observation.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-wrangling-basics.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(penguins<span class="sc">$</span>sex)</span></code></pre></div>
+<pre><code>##   [1] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
+##  [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+##  [49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [61] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [73] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [85] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [97] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [109] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [121] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [133] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [145] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [157] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [169] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+## [181] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [193] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [205] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [217] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [229] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [241] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [253] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [265] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+## [277] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [289] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [301] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [313] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [325] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [337] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>Since <code>is.na()</code> gives us a T/F vector, it is already a good candidate for putting right into filter. Below we are asking the filter function to keep only the observations that have an NA in the sex column.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-wrangling-basics.html#cb26-1" aria-hidden="true" tabindex="-1"></a>penguins_filtered_nas <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, <span class="fu">is.na</span>(sex))</span>
+<span id="cb26-2"><a href="data-wrangling-basics.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(penguins_filtered_nas)</span></code></pre></div>
+<pre><code>## [1] 11  8</code></pre>
+<p>To do the reverse, i.e. keep only the observations that do NOT have an NA in the sex column, we can use the <code>!</code> sign to denote ‘not’ and reverse the T/F.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-wrangling-basics.html#cb28-1" aria-hidden="true" tabindex="-1"></a>penguins_filtered_nonas <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, <span class="sc">!</span><span class="fu">is.na</span>(sex))</span>
+<span id="cb28-2"><a href="data-wrangling-basics.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(penguins_filtered_nonas)</span></code></pre></div>
+<pre><code>## [1] 333   8</code></pre>
+<p>You can combined multiple conditions using <a href="https://www.w3schools.com/r/r_operators.asp">logical operators</a>:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Logical Operator</th>
+<th>Name</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&amp;</td>
+<td>AND</td>
+<td>x == 2 &amp; y == 10</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>OR</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="combining-multiple-steps" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Combining multiple steps<a href="data-wrangling-basics.html#combining-multiple-steps" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are several ways to combine steps in coding. You can perform one function at a time and save intermediate objects as you work, you can ‘nest’ functions, or you can use ‘pipes’ (<code>%&gt;%</code>). So for example, if you wanted to select the species, sex, bill length, and bill depth, and filter data so to only keep data ‘Adelie’ penguins, with no NAs in the sex column, these first two options would look as follows:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-wrangling-basics.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple steps with intermediate objects</span></span>
+<span id="cb30-2"><a href="data-wrangling-basics.html#cb30-2" aria-hidden="true" tabindex="-1"></a>penguins_step1 <span class="ot">&lt;-</span> <span class="fu">select</span>(penguins, species, sex, bill_length_mm, bill_depth_mm)</span>
+<span id="cb30-3"><a href="data-wrangling-basics.html#cb30-3" aria-hidden="true" tabindex="-1"></a>penguins_step2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins_step1, species <span class="sc">==</span> <span class="st">&#39;Adelie&#39;</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(sex))</span>
+<span id="cb30-4"><a href="data-wrangling-basics.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins_step2)</span></code></pre></div>
+<pre><code>##       species        sex     bill_length_mm  bill_depth_mm  
+##  Adelie   :146   female:73   Min.   :32.10   Min.   :15.50  
+##  Chinstrap:  0   male  :73   1st Qu.:36.73   1st Qu.:17.50  
+##  Gentoo   :  0               Median :38.85   Median :18.40  
+##                              Mean   :38.82   Mean   :18.35  
+##                              3rd Qu.:40.77   3rd Qu.:19.00  
+##                              Max.   :46.00   Max.   :21.50</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="data-wrangling-basics.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple steps with nested functions</span></span>
+<span id="cb32-2"><a href="data-wrangling-basics.html#cb32-2" aria-hidden="true" tabindex="-1"></a>penguins_nested <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="fu">select</span>(penguins, species, sex, bill_length_mm, bill_depth_mm), </span>
+<span id="cb32-3"><a href="data-wrangling-basics.html#cb32-3" aria-hidden="true" tabindex="-1"></a>                          species <span class="sc">==</span> <span class="st">&#39;Adelie&#39;</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(sex))</span>
+<span id="cb32-4"><a href="data-wrangling-basics.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins_nested)</span></code></pre></div>
+<pre><code>##       species        sex     bill_length_mm  bill_depth_mm  
+##  Adelie   :146   female:73   Min.   :32.10   Min.   :15.50  
+##  Chinstrap:  0   male  :73   1st Qu.:36.73   1st Qu.:17.50  
+##  Gentoo   :  0               Median :38.85   Median :18.40  
+##                              Mean   :38.82   Mean   :18.35  
+##                              3rd Qu.:40.77   3rd Qu.:19.00  
+##                              Max.   :46.00   Max.   :21.50</code></pre>
+<p>The third option is pipes. Pipes let you take the output of one function and send it directly to the next, which is useful when you need to do many things to the same data set. Pipes in R look like <code>%&gt;%</code> and are made available via the <code>magrittr</code> package, installed automatically with the <code>tidyverse</code>. If you use RStudio, you can type the pipe with Ctrl + Shift + M if you have a PC or Cmd + Shift + M if you have a Mac.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-wrangling-basics.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple steps with pipes</span></span>
+<span id="cb34-2"><a href="data-wrangling-basics.html#cb34-2" aria-hidden="true" tabindex="-1"></a>penguins_piped <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href="data-wrangling-basics.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, sex, bill_length_mm, bill_depth_mm) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-4"><a href="data-wrangling-basics.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&#39;Adelie&#39;</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(sex))</span>
+<span id="cb34-5"><a href="data-wrangling-basics.html#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins_piped)</span></code></pre></div>
+<pre><code>##       species        sex     bill_length_mm  bill_depth_mm  
+##  Adelie   :146   female:73   Min.   :32.10   Min.   :15.50  
+##  Chinstrap:  0   male  :73   1st Qu.:36.73   1st Qu.:17.50  
+##  Gentoo   :  0               Median :38.85   Median :18.40  
+##                              Mean   :38.82   Mean   :18.35  
+##                              3rd Qu.:40.77   3rd Qu.:19.00  
+##                              Max.   :46.00   Max.   :21.50</code></pre>
+<p>We will use the piping approach, as it helps make a smoother workflow for other wrangling functions we’ll use.</p>
+<div id="check-in-challenge" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Check in challenge<a href="data-wrangling-basics.html#check-in-challenge" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Use pipes to select only the columns for species, sex, bill_length_mm, and body_mass_g, and filter out where sex is missing and body_mass_g is greater than 3500. Name this new data frame ‘filter_challenge’ and look at a summary of it to check your work.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="data-wrangling-basics.html#cb36-1" aria-hidden="true" tabindex="-1"></a>filter_challenge <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="data-wrangling-basics.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, sex, bill_length_mm, body_mass_g) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="data-wrangling-basics.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(sex) <span class="sc">&amp;</span> body_mass_g <span class="sc">&gt;</span> <span class="dv">3500</span>)</span>
+<span id="cb36-4"><a href="data-wrangling-basics.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(filter_challenge)</span></code></pre></div>
+<pre><code>## tibble [6 × 4] (S3: tbl_df/tbl/data.frame)
+##  $ species       : Factor w/ 3 levels &quot;Adelie&quot;,&quot;Chinstrap&quot;,..: 1 1 3 3 3 3
+##  $ sex           : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: NA NA NA NA NA NA
+##  $ bill_length_mm: num [1:6] 42 37.8 44.5 46.2 47.3 44.5
+##  $ body_mass_g   : int [1:6] 4250 3700 4100 4650 4725 4875</code></pre>
+</div>
+</div>
+<div id="creating-new-variables" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Creating new variables<a href="data-wrangling-basics.html#creating-new-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="new-columns" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> New columns<a href="data-wrangling-basics.html#new-columns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We may often want to make a new column with some updated or transformed value. We can use the <code>mutate</code> function for this, in which you can assign the new column name and its value. The idea is generally mutate(data, new_column_name = value). For example, if we wanted to calculate a new value, the ratio of bill length to bill depth, we could do the following</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="data-wrangling-basics.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mutate to create a new column; use penguins_piped so our output is</span></span>
+<span id="cb38-2"><a href="data-wrangling-basics.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># easier to view</span></span>
+<span id="cb38-3"><a href="data-wrangling-basics.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(penguins_piped, <span class="at">bill_ratio =</span> bill_length_mm <span class="sc">/</span> bill_depth_mm) </span></code></pre></div>
+<pre><code>## # A tibble: 146 × 5
+##    species sex    bill_length_mm bill_depth_mm bill_ratio
+##    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Adelie  male             39.1          18.7       2.09
+##  2 Adelie  female           39.5          17.4       2.27
+##  3 Adelie  female           40.3          18         2.24
+##  4 Adelie  female           36.7          19.3       1.90
+##  5 Adelie  male             39.3          20.6       1.91
+##  6 Adelie  female           38.9          17.8       2.19
+##  7 Adelie  male             39.2          19.6       2   
+##  8 Adelie  female           41.1          17.6       2.34
+##  9 Adelie  male             38.6          21.2       1.82
+## 10 Adelie  male             34.6          21.1       1.64
+## # … with 136 more rows</code></pre>
+<p>Note that in order to save the column in the data frame, we must assign it as a new data frame object. The output of mutate is not just a new column on its own, but the whole data frame with the new column appended. So far we have not overwritten in, and we can see that bill_depth_cm is not in our penguins data frame</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="data-wrangling-basics.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins_piped)</span></code></pre></div>
+<pre><code>## [1] &quot;species&quot;        &quot;sex&quot;            &quot;bill_length_mm&quot; &quot;bill_depth_mm&quot;</code></pre>
+<p>Only once we assign it do we have a data frame now with the new column appended</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="data-wrangling-basics.html#cb42-1" aria-hidden="true" tabindex="-1"></a>penguins_newcolumn <span class="ot">&lt;-</span> <span class="fu">mutate</span>(penguins_piped, <span class="at">bill_ratio =</span> bill_length_mm <span class="sc">/</span> bill_depth_mm) </span>
+<span id="cb42-2"><a href="data-wrangling-basics.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins_newcolumn)</span></code></pre></div>
+<pre><code>## [1] &quot;species&quot;        &quot;sex&quot;            &quot;bill_length_mm&quot; &quot;bill_depth_mm&quot; 
+## [5] &quot;bill_ratio&quot;</code></pre>
+<p>In addition to the mathematical transformations we just tried, we may want to create new, discrete categories with our data. For example, let’s categorize bill length into discrete size groups, small,</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="data-wrangling-basics.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins_newcolumn<span class="sc">$</span>bill_ratio)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.640   2.013   2.138   2.121   2.239   2.450</code></pre>
+<p>All values are greater than 1, so all bill lengths are greater than depths. Still, lower ratio values mean that the bill depth is large relative to its length (deep bills) and higher values mean that bill depth is small relative to its length (shallow bills). Let’s say we wanted to use these bill lengths ratios to group penguins into one of three groups: ‘deep’ ‘average’ and ‘shallow’.</p>
+<p>The <code>case_when</code> functions, combined with <code>mutate</code>, lets us set multiple conditions and resulting categories. This function uses a series of two-sided formulas where the left-hand side determines describes the condition, and the right supplies the result. The final condition should always be TRUE, meaning that when the previous conditions have not been met, assign the last value.</p>
+<p>Using these functions we can create a depth ratio category variable:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="data-wrangling-basics.html#cb46-1" aria-hidden="true" tabindex="-1"></a>penguins_newcolumn <span class="ot">&lt;-</span> penguins_newcolumn <span class="sc">%&gt;%</span> </span>
+<span id="cb46-2"><a href="data-wrangling-basics.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_depth_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb46-3"><a href="data-wrangling-basics.html#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Using the 1st Q as cutoff</span></span>
+<span id="cb46-4"><a href="data-wrangling-basics.html#cb46-4" aria-hidden="true" tabindex="-1"></a>    bill_ratio <span class="sc">&lt;=</span> <span class="fl">2.013</span> <span class="sc">~</span> <span class="st">&#39;deep&#39;</span>,</span>
+<span id="cb46-5"><a href="data-wrangling-basics.html#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Between 1st and 2rd Q</span></span>
+<span id="cb46-6"><a href="data-wrangling-basics.html#cb46-6" aria-hidden="true" tabindex="-1"></a>    bill_ratio <span class="sc">&gt;</span> <span class="fl">2.013</span> <span class="sc">&amp;</span> bill_ratio <span class="sc">&lt;=</span> <span class="fl">2.239</span> <span class="sc">~</span> <span class="st">&#39;average&#39;</span>,</span>
+<span id="cb46-7"><a href="data-wrangling-basics.html#cb46-7" aria-hidden="true" tabindex="-1"></a>    T <span class="sc">~</span> <span class="st">&#39;shallow&#39;</span></span>
+<span id="cb46-8"><a href="data-wrangling-basics.html#cb46-8" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb46-9"><a href="data-wrangling-basics.html#cb46-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-10"><a href="data-wrangling-basics.html#cb46-10" aria-hidden="true" tabindex="-1"></a>penguins_newcolumn<span class="sc">$</span>bill_depth_cat</span></code></pre></div>
+<pre><code>##   [1] &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot; &quot;deep&quot;   
+##   [8] &quot;shallow&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;   
+##  [15] &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;   
+##  [22] &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot;
+##  [29] &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;shallow&quot; &quot;deep&quot;    &quot;average&quot;
+##  [36] &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot;
+##  [43] &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;deep&quot;   
+##  [50] &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;deep&quot;   
+##  [57] &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot;
+##  [64] &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot;
+##  [71] &quot;shallow&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;deep&quot;   
+##  [78] &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot;
+##  [85] &quot;deep&quot;    &quot;shallow&quot; &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot;
+##  [92] &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;    &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;   
+##  [99] &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;shallow&quot; &quot;shallow&quot;
+## [106] &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;shallow&quot; &quot;deep&quot;   
+## [113] &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;average&quot; &quot;average&quot;
+## [120] &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot;
+## [127] &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot;
+## [134] &quot;average&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot;
+## [141] &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;shallow&quot;</code></pre>
+<p>A note: Always be cautious about what might be left out when naming the conditions. In the previous example, we assumes that everything left after the first two conditions would be shallow. To be on the safe side, I often set every condition and leave the last condition either an error notice, or NA, so that I can check my conditions.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="data-wrangling-basics.html#cb48-1" aria-hidden="true" tabindex="-1"></a>penguins_newcolumn <span class="ot">&lt;-</span> penguins_newcolumn <span class="sc">%&gt;%</span> </span>
+<span id="cb48-2"><a href="data-wrangling-basics.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_depth_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb48-3"><a href="data-wrangling-basics.html#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Using the 1st Q as cutoff</span></span>
+<span id="cb48-4"><a href="data-wrangling-basics.html#cb48-4" aria-hidden="true" tabindex="-1"></a>    bill_ratio <span class="sc">&lt;=</span> <span class="fl">2.013</span> <span class="sc">~</span> <span class="st">&#39;deep&#39;</span>,</span>
+<span id="cb48-5"><a href="data-wrangling-basics.html#cb48-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Between 1st and 2rd Q</span></span>
+<span id="cb48-6"><a href="data-wrangling-basics.html#cb48-6" aria-hidden="true" tabindex="-1"></a>    bill_ratio <span class="sc">&gt;</span> <span class="fl">2.013</span> <span class="sc">&amp;</span> bill_ratio <span class="sc">&lt;=</span> <span class="fl">2.239</span> <span class="sc">~</span> <span class="st">&#39;average&#39;</span>,</span>
+<span id="cb48-7"><a href="data-wrangling-basics.html#cb48-7" aria-hidden="true" tabindex="-1"></a>    bill_ratio <span class="sc">&gt;=</span> <span class="fl">2.239</span> <span class="sc">~</span> <span class="st">&#39;shallow&#39;</span>,</span>
+<span id="cb48-8"><a href="data-wrangling-basics.html#cb48-8" aria-hidden="true" tabindex="-1"></a>    T <span class="sc">~</span> <span class="st">&#39;error&#39;</span></span>
+<span id="cb48-9"><a href="data-wrangling-basics.html#cb48-9" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb48-10"><a href="data-wrangling-basics.html#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="data-wrangling-basics.html#cb48-11" aria-hidden="true" tabindex="-1"></a>penguins_newcolumn<span class="sc">$</span>bill_depth_cat</span></code></pre></div>
+<pre><code>##   [1] &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot; &quot;deep&quot;   
+##   [8] &quot;shallow&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;   
+##  [15] &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;   
+##  [22] &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot;
+##  [29] &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;shallow&quot; &quot;deep&quot;    &quot;average&quot;
+##  [36] &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot;
+##  [43] &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;deep&quot;   
+##  [50] &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;deep&quot;   
+##  [57] &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot;
+##  [64] &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot;
+##  [71] &quot;shallow&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;deep&quot;   
+##  [78] &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot;
+##  [85] &quot;deep&quot;    &quot;shallow&quot; &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot;
+##  [92] &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;    &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;   
+##  [99] &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;shallow&quot; &quot;shallow&quot;
+## [106] &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;shallow&quot; &quot;deep&quot;   
+## [113] &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;average&quot; &quot;average&quot;
+## [120] &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot;
+## [127] &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot;
+## [134] &quot;average&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot;
+## [141] &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;shallow&quot;</code></pre>
+</div>
+<div id="summary-tables" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Summary tables<a href="data-wrangling-basics.html#summary-tables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Often we want to aggregate data at certain levels to better understand differences across groups. For instance, does flipper length differ by species? Does body mass change between years? We can combined <code>group_by</code> and <code>summarize</code> to help answer that. <code>group_by</code> sets a column (or columns) by which you want to perform a summarizing function on, then <code>summarize</code> creates a new variable by performing a variety of summary/transformative functions on an existing column.</p>
+<p>First, we can use sumamrize on its own, without any grouping, to get a single summary about the data frame. For example, if we want to know the mean body mass:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="data-wrangling-basics.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the mean body mass for the whole data frame</span></span>
+<span id="cb50-2"><a href="data-wrangling-basics.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(penguins, <span class="at">mean_body_mass_g =</span> <span class="fu">mean</span>(flipper_length_mm))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##   mean_body_mass_g
+##              &lt;dbl&gt;
+## 1               NA</code></pre>
+<p>If the result is NA, be sure to include the ‘na.rm = T’ argument to tell the function to ‘remove NAs’ before calculating:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="data-wrangling-basics.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set na.rm = T</span></span>
+<span id="cb52-2"><a href="data-wrangling-basics.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(penguins, <span class="at">mean_flipper_length_mm =</span> <span class="fu">mean</span>(flipper_length_mm, <span class="at">na.rm =</span> T))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##   mean_flipper_length_mm
+##                    &lt;dbl&gt;
+## 1                   201.</code></pre>
+<p>But if we want to know the mean flipper length across certain grouping variables, such as sex, we want to combine summarize with group_by.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="data-wrangling-basics.html#cb54-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="data-wrangling-basics.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-3"><a href="data-wrangling-basics.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_flipper_length_mm =</span> <span class="fu">mean</span>(flipper_length_mm, <span class="at">na.rm =</span> T))</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   species   mean_flipper_length_mm
+##   &lt;fct&gt;                      &lt;dbl&gt;
+## 1 Adelie                      190.
+## 2 Chinstrap                   196.
+## 3 Gentoo                      217.</code></pre>
+<p>We group_by multiple columns at once, AND summarize can create several new summary variables within the same summarize function, just separating by a comma in both cases. For instance, we can group by species and sex, and generate two summary variables of mean and standard deviation flipper length:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="data-wrangling-basics.html#cb56-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="data-wrangling-basics.html#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species,sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb56-3"><a href="data-wrangling-basics.html#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_flipper_length_mm =</span> <span class="fu">mean</span>(flipper_length_mm, <span class="at">na.rm =</span> T),</span>
+<span id="cb56-4"><a href="data-wrangling-basics.html#cb56-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_flipper_length_mm =</span> <span class="fu">sd</span>(flipper_length_mm, <span class="at">na.rm =</span> T))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;species&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 8 × 4
+## # Groups:   species [3]
+##   species   sex    mean_flipper_length_mm sd_flipper_length_mm
+##   &lt;fct&gt;     &lt;fct&gt;                   &lt;dbl&gt;                &lt;dbl&gt;
+## 1 Adelie    female                   188.                 5.60
+## 2 Adelie    male                     192.                 6.60
+## 3 Adelie    &lt;NA&gt;                     186.                 6.11
+## 4 Chinstrap female                   192.                 5.75
+## 5 Chinstrap male                     200.                 5.98
+## 6 Gentoo    female                   213.                 3.90
+## 7 Gentoo    male                     222.                 5.67
+## 8 Gentoo    &lt;NA&gt;                     216.                 1.26</code></pre>
+</div>
+<div id="check-in-challenge-1" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Check in challenge<a href="data-wrangling-basics.html#check-in-challenge-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Calculate the mean and standard deviation for each year-sex combination. Before calculating those summaries, remove the observations where there is no data for penguin sex. Name this new summary table ‘summary_challenge’. What is the mean and standard deviation of the body mass for male penguins in 2008?</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="data-wrangling-basics.html#cb59-1" aria-hidden="true" tabindex="-1"></a>summary_challenge <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="data-wrangling-basics.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-3"><a href="data-wrangling-basics.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year,sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-4"><a href="data-wrangling-basics.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_body_mass_g =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> T),</span>
+<span id="cb59-5"><a href="data-wrangling-basics.html#cb59-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_body_mass_g =</span> <span class="fu">sd</span>(body_mass_g, <span class="at">na.rm =</span> T))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;year&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="data-wrangling-basics.html#cb61-1" aria-hidden="true" tabindex="-1"></a>summary_challenge</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+## # Groups:   year [3]
+##    year sex    mean_body_mass_g sd_body_mass_g
+##   &lt;int&gt; &lt;fct&gt;             &lt;dbl&gt;          &lt;dbl&gt;
+## 1  2007 female            3821.           610.
+## 2  2007 male              4479.           833.
+## 3  2008 female            3888.           680.
+## 4  2008 male              4632.           722.
+## 5  2009 female            3874.           709.
+## 6  2009 male              4521.           813.</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="data-wrangling-basics.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean: 4632.456    sd: 722.0687    </span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-wrangling-beyond-basics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

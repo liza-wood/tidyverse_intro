@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Data | Tidyverse: Data wrangling &amp; visualization</title>
+  <meta name="description" content="2 Data | Tidyverse: Data wrangling &amp; visualization" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Data | Tidyverse: Data wrangling &amp; visualization" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="liza-wood/tidyverse_intro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Data | Tidyverse: Data wrangling &amp; visualization" />
+  
+  
+  
+
+<meta name="author" content="Liza Wood" />
+
+
+<meta name="date" content="2023-03-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-the-tidyverse.html"/>
+<link rel="next" href="data-wrangling-basics.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://liza-wood.github.io/">
+  <img src="https://github.com/allisonhorst/palmerpenguins/blob/main/man/figures/lter_penguins.png" style="height: 100%; width: 100%; object-fit: contain" />
+</a></li>
+<li><a href="./" style="font-size: 18px">Tidyverse: Data wrangling & visualization</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>1</b> Introduction to the Tidyverse</a></li>
+<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#palmer-station-penguins"><i class="fa fa-check"></i><b>2.1</b> Palmer Station penguins</a></li>
+<li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#palmer-station-weather"><i class="fa fa-check"></i><b>2.2</b> Palmer Station weather</a></li>
+<li class="chapter" data-level="2.3" data-path="data.html"><a href="data.html#why-palmer-data"><i class="fa fa-check"></i><b>2.3</b> Why Palmer data?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html"><i class="fa fa-check"></i><b>3</b> Data wrangling basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#function-outline"><i class="fa fa-check"></i><b>3.1</b> Function outline</a></li>
+<li class="chapter" data-level="3.2" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#reducing-data-dimensionality"><i class="fa fa-check"></i><b>3.2</b> Reducing data dimensionality</a></li>
+<li class="chapter" data-level="3.3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#combining-multiple-steps"><i class="fa fa-check"></i><b>3.3</b> Combining multiple steps</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#check-in-challenge"><i class="fa fa-check"></i><b>3.3.1</b> Check in challenge</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#creating-new-variables"><i class="fa fa-check"></i><b>3.4</b> Creating new variables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#new-columns"><i class="fa fa-check"></i><b>3.4.1</b> New columns</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#summary-tables"><i class="fa fa-check"></i><b>3.4.2</b> Summary tables</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#check-in-challenge-1"><i class="fa fa-check"></i><b>3.4.3</b> Check in challenge</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html"><i class="fa fa-check"></i><b>4</b> Data wrangling: beyond basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#manipulating-date-variables"><i class="fa fa-check"></i><b>4.1</b> Manipulating date variables</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#summary-challenge"><i class="fa fa-check"></i><b>4.1.1</b> Summary challenge</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#joining-multiple-data-frames"><i class="fa fa-check"></i><b>4.2</b> Joining multiple data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization</a></li>
+<li class="chapter" data-level="6" data-path="create-a-scatterplot-with-colored-points-based-on-species.html"><a href="create-a-scatterplot-with-colored-points-based-on-species.html"><i class="fa fa-check"></i><b>6</b> Create a scatterplot with colored points based on species</a></li>
+<li class="chapter" data-level="7" data-path="year-of-interest.html"><a href="year-of-interest.html"><i class="fa fa-check"></i><b>7</b> Year of interest?</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tidyverse: Data wrangling &amp; visualization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="palmer-station-penguins" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Palmer Station penguins<a href="data.html#palmer-station-penguins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Palmer penguins data<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> is a relatively new dataset from Horst, Hill, and Gorman (2020).</p>
+<p>The data includes: ‘Size measurements, clutch observations, and blood isotope ratios for adult foraging Adélie, Chinstrap, and Gentoo penguins observed on islands in the Palmer Archipelago near Palmer Station, Antarctica. Data were collected and made available by Dr. Kristen Gorman and the Palmer Station Long Term Ecological Research (LTER) Program.’</p>
+<p>You can read more about the package <a href="https://allisonhorst.github.io/palmerpenguins/index.html">here</a>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;palmerpenguins&#39;</span>)</span>
+<span id="cb4-2"><a href="data.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb4-3"><a href="data.html#cb4-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;allisonhorst/palmerpenguins&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code></pre></div>
+<p>Learn more about each variable in the documentation</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data.html#cb6-1" aria-hidden="true" tabindex="-1"></a>?penguins_raw</span></code></pre></div>
+<p>Let’s take a look at its structure</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data.html#cb7-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins_raw</span>
+<span id="cb7-2"><a href="data.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span></code></pre></div>
+<pre><code>## tibble [344 × 17] (S3: tbl_df/tbl/data.frame)
+##  $ studyName          : chr [1:344] &quot;PAL0708&quot; &quot;PAL0708&quot; &quot;PAL0708&quot; &quot;PAL0708&quot; ...
+##  $ Sample Number      : num [1:344] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ Species            : chr [1:344] &quot;Adelie Penguin (Pygoscelis adeliae)&quot; &quot;Adelie Penguin (Pygoscelis adeliae)&quot; &quot;Adelie Penguin (Pygoscelis adeliae)&quot; &quot;Adelie Penguin (Pygoscelis adeliae)&quot; ...
+##  $ Region             : chr [1:344] &quot;Anvers&quot; &quot;Anvers&quot; &quot;Anvers&quot; &quot;Anvers&quot; ...
+##  $ Island             : chr [1:344] &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; ...
+##  $ Stage              : chr [1:344] &quot;Adult, 1 Egg Stage&quot; &quot;Adult, 1 Egg Stage&quot; &quot;Adult, 1 Egg Stage&quot; &quot;Adult, 1 Egg Stage&quot; ...
+##  $ Individual ID      : chr [1:344] &quot;N1A1&quot; &quot;N1A2&quot; &quot;N2A1&quot; &quot;N2A2&quot; ...
+##  $ Clutch Completion  : chr [1:344] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; ...
+##  $ Date Egg           : Date[1:344], format: &quot;2007-11-11&quot; &quot;2007-11-11&quot; ...
+##  $ Culmen Length (mm) : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+##  $ Culmen Depth (mm)  : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+##  $ Flipper Length (mm): num [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
+##  $ Body Mass (g)      : num [1:344] 3750 3800 3250 NA 3450 ...
+##  $ Sex                : chr [1:344] &quot;MALE&quot; &quot;FEMALE&quot; &quot;FEMALE&quot; NA ...
+##  $ Delta 15 N (o/oo)  : num [1:344] NA 8.95 8.37 NA 8.77 ...
+##  $ Delta 13 C (o/oo)  : num [1:344] NA -24.7 -25.3 NA -25.3 ...
+##  $ Comments           : chr [1:344] &quot;Not enough blood for isotopes.&quot; NA NA &quot;Adult not sampled.&quot; ...
+##  - attr(*, &quot;spec&quot;)=List of 3
+##   ..$ cols   :List of 17
+##   .. ..$ studyName          : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Sample Number      : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
+##   .. ..$ Species            : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Region             : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Island             : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Stage              : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Individual ID      : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Clutch Completion  : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Date Egg           :List of 1
+##   .. .. ..$ format: chr &quot;&quot;
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_date&quot; &quot;collector&quot;
+##   .. ..$ Culmen Length (mm) : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
+##   .. ..$ Culmen Depth (mm)  : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
+##   .. ..$ Flipper Length (mm): list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
+##   .. ..$ Body Mass (g)      : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
+##   .. ..$ Sex                : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Delta 15 N (o/oo)  : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
+##   .. ..$ Delta 13 C (o/oo)  : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
+##   .. ..$ Comments           : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
+##   ..$ default: list()
+##   .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_guess&quot; &quot;collector&quot;
+##   ..$ skip   : num 1
+##   ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
+</div>
+<div id="palmer-station-weather" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Palmer Station weather<a href="data.html#palmer-station-weather" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We’re going to want to work an additional data set relevant to the penguins data:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data.html#cb9-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://pasta.lternet.edu/package/data/eml/knb-lter-pal/28/8/375b34051b162d84516ec2d02f864675&quot;</span>) </span></code></pre></div>
+<p>These data are als available thrugh the Environmental Data Initiative Long Term Ecological Research program at Palmer Station. Read more <a href="https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-pal.28.8">here</a></p>
+<p>Palmer Station is…</p>
+<p><img src="img/palmer-station-w-pier.jpg" width="50%" /><img src="img/map_palmer.png" width="50%" /></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weather)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    10674 obs. of  24 variables:
+##  $ Date                           : chr  &quot;1989-04-01&quot; &quot;1989-04-02&quot; &quot;1989-04-03&quot; &quot;1989-04-04&quot; ...
+##  $ Temperature.High..C.           : num  2.8 1.1 -0.6 1.1 -0.6 2.5 -1.4 -0.8 -1 -1.5 ...
+##  $ Temperature.Low..C.            : num  -1 -2.7 -3.5 -4.4 -2.9 -3.1 -3.2 -4.5 -4 -3.8 ...
+##  $ Temperature.Average..C.        : num  0.9 -0.8 -2.05 -1.65 -1.75 -0.3 -2.3 -2.65 -2.5 -2.65 ...
+##  $ Sea.Surface.Temperature..C.    : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Sea.Ice..WMO.Code.             : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ Pressure.High..mbar.           : num  1004 998 998 1002 1002 ...
+##  $ Pressure.Low..mbar.            : num  998 995 995 998 997 ...
+##  $ Pressure.Average..mbar.        : num  1001 996 997 1000 1000 ...
+##  $ Windspeed.Peak                 : int  18 24 13 14 14 15 16 39 27 16 ...
+##  $ Windspeed.5.Sec.Peak           : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Windspeed.2.Min.Peak           : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Windspeed.Average              : num  4 9 8 6 4 4 8 14 11 6 ...
+##  $ Wind.Peak.Direction..True...º. : int  110 30 60 210 230 180 40 120 50 60 ...
+##  $ Wind.Peak.Direction..º.        : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Wind.5.Sec.Peak.Direction...º. : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Wind.2.Min.Peak.Direction...º. : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Wind.Direction.Prevailing      : chr  &quot;SW&quot; &quot;NE&quot; &quot;NE&quot; &quot;NW&quot; ...
+##  $ Rainfall..mm.                  : num  0 0 0 0 0 0 1 0 0 -998 ...
+##  $ Precipitation.Snow..cm.        : num  0 0 0 0 0 0 -998 0 0 -998 ...
+##  $ Depth.at.Snowstake..cm.        : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Cloud.Cover                    : int  4 2 5 5 10 2 9 5 0 10 ...
+##  $ Data.flag...Temperature.Average: chr  &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; ...
+##  $ Data.flag...Pressure.Average   : chr  &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; ...</code></pre>
+</div>
+<div id="why-palmer-data" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Why Palmer data?<a href="data.html#why-palmer-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Documented</p>
+<p>Data sets can be notoriously problematic</p>
+<p>Iris…</p>
+<p>Pima Indians…</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data. R package version 0.1.0. <a href="https://allisonhorst.github.io/palmerpenguins/" class="uri">https://allisonhorst.github.io/palmerpenguins/</a>. doi: 10.5281/zenodo.3960218.<a href="data.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-the-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-wrangling-basics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

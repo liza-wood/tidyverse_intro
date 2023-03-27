@@ -1,0 +1,17 @@
+# Introduction to the Tidyverse
+
+* What is the tidyverse?
+
+```{r, eval = F}
+install.packages('tidyverse')
+```
+
+* Loading the tidyverse packages
+
+```{r}
+# Load required packages
+library(tidyverse)
+```
+
+
+

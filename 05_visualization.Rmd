@@ -1,0 +1,83 @@
+# Visualization
+* Plot architecture
+  * `ggplot`
+  * `aes`
+  * `geom_`
+* Selecting geometries
+  * `geom_point`
+  * `geom_bar` and `geom_col`
+  * `geom_boxplot`
+  * `geom_line`
+* Styling (automatic and manual)
+  * `labs` 
+  * `theme_`
+  * `scale_`
+* Facets
+
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(palmerpenguins)
+library(lubridate)
+weather <- read.csv("https://pasta.lternet.edu/package/data/eml/knb-lter-pal/28/8/375b34051b162d84516ec2d02f864675") 
+weather <- weather %>% 
+  mutate(Date = ymd(Date),
+         year = year(Date))
+```
+
+Create a scatterplot of bill length and body mass
+
+```{r}  
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) + 
+  geom_point()
+```
+                                                                                              
+# Create a scatterplot with colored points based on species
+ 
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species)) + geom_point()
+```
+                                                                                    # Create a barplot of species counts
+```{r}
+ggplot(penguins, aes(x = species)) + geom_bar()
+```
+                                                                                      # Create a scatterplot with faceted plots based on species
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) + geom_point() + facet_wrap(~ species)
+```    
+
+
+```{r}
+weather %>% 
+  ggplot(aes(x = Date, y = Temperature.Average..C.)) +
+  geom_line()
+```
+
+
+
+```{r}
+weather %>% 
+  ungroup() %>% 
+  filter(year != min(year) & year != max(year)) %>% 
+  ggplot(aes(x = year, y = Temperature.Average..C., group = year)) +
+  geom_boxplot() 
+```
+
+# Year of interest?
+Conditional statements
+
+```{r}
+weather <- weather %>% 
+  mutate(penguin_data_year = case_when(
+    year %in% 2007:2009 ~ T,
+    T ~ F
+  ) )
+```
+
+```{r}
+weather %>% 
+  filter(year != min(year) & year != max(year)) %>% 
+  ggplot(aes(x = year, y = Temperature.Average..C., group = year,
+             color = penguin_data_year)) +
+  geom_boxplot() 
+```
+

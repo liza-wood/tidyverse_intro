@@ -1,0 +1,121 @@
+# Data wrangling: beyond basics
+
+* Manipulating date variables
+  * `lubrdiate` package: Use date format functions (e.g. `ymd`) to specify date data formats
+* Joining multiple data frames
+  * `_join` series: Combine two data frames by one or more shared columns. Specify with kind of join(`full_`, `left_`, etc.) to determine which observations are kept/dropped.
+* Reshaping (lengthening/widening) data
+  * `pivot_longer`
+  * `pivot_wider`
+* Working with text to separate/combine columns
+  * `separate`:
+  * `paste`:
+
+## Manipulating date variables
+
+Remember the weather data we loaded in at the start. We have weather data from the Palmer Station in Antarctica from 1989 - 2019. These data are available for each day
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(palmerpenguins)
+weather <- read.csv("https://pasta.lternet.edu/package/data/eml/knb-lter-pal/28/8/375b34051b162d84516ec2d02f864675") 
+```
+
+```{r}
+str(weather)
+```
+
+However, the structure of the data above indicate that the first variable, Date, is a 'character'. This means that R is not reading these dates as numbers, and so we cannot manipulate them any further (e.g. extracting certain years).
+
+```{r}
+head(weather$Date)
+class(weather$Date)
+```
+
+We want to use the lubridate package to convert these variables into dates and create a column for the year.
+
+```{r}
+library(lubridate)
+ymd(weather$Date)
+```
+
+Use the mutate function to overwrite this variable in the weather data frame
+```{r}
+weather <- mutate(weather, Date = ymd(Date))
+```
+
+```{r}
+head(weather$Date)
+class(weather$Date)
+```
+
+Now that R recognizes these as dates, we can extract certain date-related features, such as the year, month, and day
+
+```{r}
+head(year(weather$Date))
+```
+
+Again, let's use mutate to assign this as a new column
+
+```{r}
+weather <- mutate(weather, year = year(Date))
+```
+
+
+### Summary challenge
+We are going to review out basic wrangling skills to prepare the Palmer Station weather data to merge with the penguins data. 
+
+However, we only want to use a subset of these data in the following section. we want to summarize data by year, rather than by day (as it currently is). Per year, we want to know the maximum, minimum, and average temperate. Create this summary table called 'weather_summary'. Then, filter the summary data so that we only have data for 
+```{r}
+weather_summary <- weather %>% 
+  group_by(year) %>% 
+  summarize(average_temp = mean(Temperature.Average..C., na.rm = T),
+            max_temp = max(Temperature.High..C., na.rm = T),
+            min_temp = min(Temperature.Low..C., na.rm = T))
+
+```
+
+## Joining multiple data frames
+  * `_join` series: Combine two data frames by one or more shared columns. Specify with kind of join(`full_`, `left_`, etc.) to determine which observations are kept/dropped.
+  
+```{r}
+penguins_leftjoined <- left_join(penguins, weather_summary, by = "year")
+dim(penguins_leftjoined)
+```
+
+Challenges:
+
+What happens when you use another kind of join?
+```{r}
+penguins_fulljoined <- full_join(penguins, weather_summary, by = "year")
+# We now have more rows for
+dim(penguins_fulljoined)
+```
+
+* Reshaping (lengthening/widening) data
+  * `pivot_longer`
+  * `pivot_wider`
+  
+Pivot the data to make it wider, with one row per species and the columns representing the mean bill length, depth, and mass for that species.
+
+```{r}
+# Pivot the data to make it longer
+penguins_longer <- pivot_longer(penguins, 
+                                cols = c(bill_length_mm, bill_depth_mm,
+                                         flipper_length_mm, body_mass_g), 
+                                names_to = "measure", values_to = "value")
+```
+
+```{r}
+    # Pivot the data to make it wider, with one row per species and the columns representing the mean bill length, depth, and mass for that species.
+    penguins_wider <- penguins %>% group_by(species) %>% summarize(mean_bill_length_mm = mean(bill_length_mm), mean_bill_depth_mm = mean(bill_depth_mm), mean_body_mass_g = mean(body_mass_g))
+    penguins_wider <- pivot_wider(penguins_wider, names_from = "species", values_from = c("mean_bill_length_mm", "mean_bill_depth_mm", "mean_body_mass_g"))
+```
+
+* Working with text to separate/combine columns
+  * `separate`:
+  * `paste`:
+  
+```{r}
+# Load the Palmer Penguins dataset (with additional missing values)
+penguins_raw
+```
