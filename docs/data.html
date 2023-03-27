@@ -137,20 +137,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <img src="img/lter_penguins.png" style="height: 100%; width: 100%; object-fit: contain" />
   <figcaption style="font-size: 8px">Artwork by @allison_horst</figcaption>
 </a></li>
-<li><a href="./" style="font-size: 14px">Tidyverse: Data wrangling & visualization</a></li>
+<li><a href="./" style="font-size: 16px">Tidyverse: Data wrangling & visualization</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>1</b> Introduction to the Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#introduction"><i class="fa fa-check"></i><b>0.1</b> Introduction</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.2</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>1</b> Introduction to the Tidyverse</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#what-is-the-tidyverse"><i class="fa fa-check"></i><b>1.1</b> What is the tidyverse?</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#palmer-station-penguins"><i class="fa fa-check"></i><b>2.1</b> Palmer Station penguins</a></li>
 <li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#palmer-station-weather"><i class="fa fa-check"></i><b>2.2</b> Palmer Station weather</a></li>
-<li class="chapter" data-level="2.3" data-path="data.html"><a href="data.html#why-palmer-data"><i class="fa fa-check"></i><b>2.3</b> Why Palmer data?</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html"><i class="fa fa-check"></i><b>3</b> Data wrangling basics</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#function-outline"><i class="fa fa-check"></i><b>3.1</b> Function outline</a></li>
+<li class="chapter" data-level="3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#outline"><i class="fa fa-check"></i><b>3.1</b> Outline</a></li>
 <li class="chapter" data-level="3.2" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#reducing-data-dimensionality"><i class="fa fa-check"></i><b>3.2</b> Reducing data dimensionality</a></li>
 <li class="chapter" data-level="3.3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#combining-multiple-steps"><i class="fa fa-check"></i><b>3.3</b> Combining multiple steps</a>
 <ul>
@@ -197,86 +203,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">2</span> Data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="palmer-station-penguins" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Palmer Station penguins<a href="data.html#palmer-station-penguins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The Palmer penguins data<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> is a relatively new dataset from Horst, Hill, and Gorman (2020).</p>
-<p>The data includes: ‘Size measurements, clutch observations, and blood isotope ratios for adult foraging Adélie, Chinstrap, and Gentoo penguins observed on islands in the Palmer Archipelago near Palmer Station, Antarctica. Data were collected and made available by Dr. Kristen Gorman and the Palmer Station Long Term Ecological Research (LTER) Program.’</p>
-<p>You can read more about the package <a href="https://allisonhorst.github.io/palmerpenguins/index.html">here</a>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;palmerpenguins&#39;</span>)</span>
-<span id="cb4-2"><a href="data.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
-<span id="cb4-3"><a href="data.html#cb4-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;allisonhorst/palmerpenguins&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code></pre></div>
+<p>The Palmer Station penguins data is a tidy dataset related to three species of Antarctic penguins from Horst, Hill, and Gorman (2020)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>The data contains size measurements for and female adult foraging Adélie, Chinstrap, and Gentoo penguins observed on islands in the Palmer Archipelago near Palmer Station, Antarctica between 2007-2009. Data were collected and made available by Dr. Kristen Gorman and the Palmer Station Long Term Ecological Research (LTER) Program. You can read more about the package <a href="https://allisonhorst.github.io/palmerpenguins/index.html">here</a>.</p>
+<p>Let’s start by installing the package in one of two ways:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install from CRAN</span></span>
+<span id="cb4-2"><a href="data.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;palmerpenguins&#39;</span>)</span>
+<span id="cb4-3"><a href="data.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Or install directory from the github repository</span></span>
+<span id="cb4-4"><a href="data.html#cb4-4" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;allisonhorst/palmerpenguins&quot;</span>)</span></code></pre></div>
+<p>Now we can load in the package library, which stores the <code>penguins</code> dataset.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb5-2"><a href="data.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 8
+##   species island    bill_length_mm bill_depth_mm flipper_l…¹ body_…² sex    year
+##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;       &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+## 1 Adelie  Torgersen           39.1          18.7         181    3750 male   2007
+## 2 Adelie  Torgersen           39.5          17.4         186    3800 fema…  2007
+## 3 Adelie  Torgersen           40.3          18           195    3250 fema…  2007
+## 4 Adelie  Torgersen           NA            NA            NA      NA &lt;NA&gt;   2007
+## 5 Adelie  Torgersen           36.7          19.3         193    3450 fema…  2007
+## 6 Adelie  Torgersen           39.3          20.6         190    3650 male   2007
+## # … with abbreviated variable names ¹​flipper_length_mm, ²​body_mass_g</code></pre>
 <p>Learn more about each variable in the documentation</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data.html#cb6-1" aria-hidden="true" tabindex="-1"></a>?penguins_raw</span></code></pre></div>
-<p>Let’s take a look at its structure</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data.html#cb7-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins_raw</span>
-<span id="cb7-2"><a href="data.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span></code></pre></div>
-<pre><code>## tibble [344 × 17] (S3: tbl_df/tbl/data.frame)
-##  $ studyName          : chr [1:344] &quot;PAL0708&quot; &quot;PAL0708&quot; &quot;PAL0708&quot; &quot;PAL0708&quot; ...
-##  $ Sample Number      : num [1:344] 1 2 3 4 5 6 7 8 9 10 ...
-##  $ Species            : chr [1:344] &quot;Adelie Penguin (Pygoscelis adeliae)&quot; &quot;Adelie Penguin (Pygoscelis adeliae)&quot; &quot;Adelie Penguin (Pygoscelis adeliae)&quot; &quot;Adelie Penguin (Pygoscelis adeliae)&quot; ...
-##  $ Region             : chr [1:344] &quot;Anvers&quot; &quot;Anvers&quot; &quot;Anvers&quot; &quot;Anvers&quot; ...
-##  $ Island             : chr [1:344] &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; ...
-##  $ Stage              : chr [1:344] &quot;Adult, 1 Egg Stage&quot; &quot;Adult, 1 Egg Stage&quot; &quot;Adult, 1 Egg Stage&quot; &quot;Adult, 1 Egg Stage&quot; ...
-##  $ Individual ID      : chr [1:344] &quot;N1A1&quot; &quot;N1A2&quot; &quot;N2A1&quot; &quot;N2A2&quot; ...
-##  $ Clutch Completion  : chr [1:344] &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; &quot;Yes&quot; ...
-##  $ Date Egg           : Date[1:344], format: &quot;2007-11-11&quot; &quot;2007-11-11&quot; ...
-##  $ Culmen Length (mm) : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
-##  $ Culmen Depth (mm)  : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
-##  $ Flipper Length (mm): num [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
-##  $ Body Mass (g)      : num [1:344] 3750 3800 3250 NA 3450 ...
-##  $ Sex                : chr [1:344] &quot;MALE&quot; &quot;FEMALE&quot; &quot;FEMALE&quot; NA ...
-##  $ Delta 15 N (o/oo)  : num [1:344] NA 8.95 8.37 NA 8.77 ...
-##  $ Delta 13 C (o/oo)  : num [1:344] NA -24.7 -25.3 NA -25.3 ...
-##  $ Comments           : chr [1:344] &quot;Not enough blood for isotopes.&quot; NA NA &quot;Adult not sampled.&quot; ...
-##  - attr(*, &quot;spec&quot;)=List of 3
-##   ..$ cols   :List of 17
-##   .. ..$ studyName          : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ Sample Number      : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ Species            : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ Region             : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ Island             : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ Stage              : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ Individual ID      : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ Clutch Completion  : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ Date Egg           :List of 1
-##   .. .. ..$ format: chr &quot;&quot;
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_date&quot; &quot;collector&quot;
-##   .. ..$ Culmen Length (mm) : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ Culmen Depth (mm)  : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ Flipper Length (mm): list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ Body Mass (g)      : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ Sex                : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ Delta 15 N (o/oo)  : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ Delta 13 C (o/oo)  : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ Comments           : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_character&quot; &quot;collector&quot;
-##   ..$ default: list()
-##   .. ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;collector_guess&quot; &quot;collector&quot;
-##   ..$ skip   : num 1
-##   ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data.html#cb7-1" aria-hidden="true" tabindex="-1"></a>?penguins</span></code></pre></div>
+<p>Let’s take a look at its structure:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span></code></pre></div>
+<pre><code>## tibble [344 × 8] (S3: tbl_df/tbl/data.frame)
+##  $ species          : Factor w/ 3 levels &quot;Adelie&quot;,&quot;Chinstrap&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ island           : Factor w/ 3 levels &quot;Biscoe&quot;,&quot;Dream&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ bill_length_mm   : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+##  $ bill_depth_mm    : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+##  $ flipper_length_mm: int [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
+##  $ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
+##  $ sex              : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 1 1 NA 1 2 1 2 NA NA ...
+##  $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
 </div>
 <div id="palmer-station-weather" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Palmer Station weather<a href="data.html#palmer-station-weather" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We’re going to want to work an additional data set relevant to the penguins data:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data.html#cb9-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://pasta.lternet.edu/package/data/eml/knb-lter-pal/28/8/375b34051b162d84516ec2d02f864675&quot;</span>) </span></code></pre></div>
-<p>These data are als available thrugh the Environmental Data Initiative Long Term Ecological Research program at Palmer Station. Read more <a href="https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-pal.28.8">here</a></p>
-<p>Palmer Station is…</p>
-<p><img src="img/palmer-station-w-pier.jpg" width="50%" /><img src="img/map_palmer.png" width="50%" /></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weather)</span></code></pre></div>
+<p>To practice data wrangling skills, this tutorial will also use another data set from the Antarctic LTER Program – the ‘Daily averaged weather timeseries at Palmer Station, Antarctica’<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, which includes various weather metrics measured between 1989-2019. We’ll read in these data directly from online and name the data frame <code>weather</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data.html#cb10-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://pasta.lternet.edu/package/data/eml/knb-lter-pal/28/8/375b34051b162d84516ec2d02f864675&quot;</span>) </span></code></pre></div>
+<p>These data have been made available through the Environmental Data Initiative and more information can be found <a href="https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-pal.28.8">here</a></p>
+<p>Let’s take a look at the data’s structure:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weather)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    10674 obs. of  24 variables:
 ##  $ Date                           : chr  &quot;1989-04-01&quot; &quot;1989-04-02&quot; &quot;1989-04-03&quot; &quot;1989-04-04&quot; ...
 ##  $ Temperature.High..C.           : num  2.8 1.1 -0.6 1.1 -0.6 2.5 -1.4 -0.8 -1 -1.5 ...
@@ -302,13 +269,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ Cloud.Cover                    : int  4 2 5 5 10 2 9 5 0 10 ...
 ##  $ Data.flag...Temperature.Average: chr  &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; ...
 ##  $ Data.flag...Pressure.Average   : chr  &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; ...</code></pre>
-</div>
-<div id="why-palmer-data" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Why Palmer data?<a href="data.html#why-palmer-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Documented</p>
-<p>Data sets can be notoriously problematic</p>
-<p>Iris…</p>
-<p>Pima Indians…</p>
+<p>Together this tutorial uses data collected from pengiuns across three islands in the Palmer archipelago and weather sensing technology at the US Palmer Station.</p>
+<p><img src="img/lter_penguins.png" width="50%" style="display: block; margin: auto;" /><img src="img/gormanetal2014.png" width="40" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
@@ -316,6 +278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <ol start="1">
 <li id="fn1"><p>Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data. R package version 0.1.0. <a href="https://allisonhorst.github.io/palmerpenguins/" class="uri">https://allisonhorst.github.io/palmerpenguins/</a>. doi: 10.5281/zenodo.3960218.<a href="data.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Palmer Station Antarctica LTER and P. Information Manager. 2019. Daily averaged weather timeseries (air temperature, pressure, wind speed, wind direction, precipitation, sky cover) at Palmer Station, Antarctica combining manual observations (1989 - Dec 12, 2003) and PALMOS automatic weather station measurements (Dec 13, 2003 - March 2019). ver 8. Environmental Data Initiative. <a href="https://doi.org/10.6073/pasta/cddd3985350334b876cd7d6d1a5bc7bf" class="uri">https://doi.org/10.6073/pasta/cddd3985350334b876cd7d6d1a5bc7bf</a> (Accessed 2023-03-27).<a href="data.html#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

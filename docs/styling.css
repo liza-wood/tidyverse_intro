@@ -1,41 +1,8 @@
-figcaption {
-    text-align: right;
-}
-
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@liza-wood 
-allisonhorst
-/
-palmerpenguins
-Public
-Fork your own copy of allisonhorst/palmerpenguins
-Code
-Issues
-10
-Pull requests
-2
-Actions
-Projects
-Security
-Insights
-palmerpenguins/pkgdown/extra.css
-@apreshill
-apreshill new pkgdown site (#85)
-…
-Latest commit 821d5ee on Apr 21, 2022
- History
- 1 contributor
-55 lines (42 sloc)  1012 Bytes
-
 /* heavily adapted from Desirée De Leon's tidymodels pkgdown CSS */
 /* https://github.com/tidyverse/tidytemplate/blob/master/inst/pkgdown/assets/tidymodels.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Jost&display=swap');
+
 
 :root {
   --bunker: #272b30;
@@ -44,27 +11,49 @@ Latest commit 821d5ee on Apr 21, 2022
 }
 
 /* fonts ----------------------------------------- */
-.p {
-  font-family: "Jost", Times, Sans-Serif;
+p {
+  font-family: "Jost", Sans-Serif;
 }
 
-/* spacing ----------------------------------------------- */
-
-.contents h2, .contents h3, .contents h4 {
-	margin-bottom: 1.5rem;
-	margin-top: 2rem;
+ul {
+  font-family: "Jost", Sans-Serif;
 }
 
-.row {
-  margin-top: 1.5em;
+h1 {
+  font-family: "Abhaya Libre", Sans-Serif;
+}
+h2 {
+  font-family: "Abhaya Libre", Sans-Serif;
+}
+h3 {
+  font-family: "Abhaya Libre", Sans-Serif;
 }
 
-@media (min-width: 768px) {
-  .contents {
-    padding-right: 4em;
-  }
+p.caption {
+  font-size: 0.75em;
 }
 
+a:link {
+  font-family: "Jost", Sans-Serif;
+  color: purple;
+  hover: purple
+}
+
+a:hover {
+  color: purple
+}
+
+code a {
+  color: var(--wedgewood);
+}
+
+code a:hover {
+  color: var(--bunker);
+}
+
+figcaption {
+    text-align: right;
+}
 /* navbar ----------------------------------------------- */
 
 .navbar {
@@ -86,10 +75,4 @@ Latest commit 821d5ee on Apr 21, 2022
 }
 
 
-code a {
-  color: var(--wedgewood);
-}
 
-code a:hover {
-  color: var(--bunker);
-}

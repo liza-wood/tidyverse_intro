@@ -1,11 +1,14 @@
+fig:unnamed-chunk-1
 fig:unnamed-chunk-19
+introduction
+acknowledgements
 introduction-to-the-tidyverse
+what-is-the-tidyverse
 data
 palmer-station-penguins
 palmer-station-weather
-why-palmer-data
 data-wrangling-basics
-function-outline
+outline
 reducing-data-dimensionality
 combining-multiple-steps
 check-in-challenge

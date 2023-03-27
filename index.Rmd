@@ -20,11 +20,30 @@ output:
             <img src="img/lter_penguins.png" style="height: 100%; width: 100%; object-fit: contain" />
             <figcaption style="font-size: 8px">Artwork by @allison_horst</figcaption>
           </a></li>
-          <li><a href="./" style="font-size: 14px">Tidyverse: Data wrangling & visualization</a></li>
+          <li><a href="./" style="font-size: 16px">Tidyverse: Data wrangling & visualization</a></li>
         collapse: section
 
+header-includes:
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
 ---
 
 # Overview {-}
 
-[description]
+## Introduction
+
+This tutorial is an introduction to data wrangling and visualization using functions from the `tidyverse`. It uses data from the Palmer Station's Long Term Ecological Research program based in Antarctica, including the `palmerpenguins` and weather monitoring data. These lessons walk through key steps in the data wrangling phase, including subsetting data, creating new variables using conditional statements, summarizing data at aggregate levels, working with dates, joining together multiple data frames, and reshaping data. This lesson also provides an introduction to combining data wrangling with visualization. 
+
+**Prerequisites** 
+
+* Installation of R and RStudio
+* General knowledge of R's base functionality (math, naming objects) (note: you can familiarize yourself with R's base functionality and RStudio's layout [here](https://gge-ucd.github.io/R-DAVIS/lesson_01_intro_r_rstudio.html))
+
+
+```{r echo=FALSE, out.width = "60%", fig.align='center',  fig.cap = 'Artwork by @allison_horst'}
+knitr::include_graphics("img/learning_r.png")
+```
+
+## Acknowledgements  
+
+This site was developed based on material from [UC Davis's R-DAVIS course](https://gge-ucd.github.io/R-DAVIS/index.html), which draws heavily on Carpenties R Carpentries lessons. Additionally, artwork is from Allison Horst ([@allison_horst](https://allisonhorst.com/)) and website styling was also based on the designs from the [Palmer Penguins package webpage](https://allisonhorst.github.io/palmerpenguins/)

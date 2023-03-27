@@ -137,20 +137,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <img src="img/lter_penguins.png" style="height: 100%; width: 100%; object-fit: contain" />
   <figcaption style="font-size: 8px">Artwork by @allison_horst</figcaption>
 </a></li>
-<li><a href="./" style="font-size: 14px">Tidyverse: Data wrangling & visualization</a></li>
+<li><a href="./" style="font-size: 16px">Tidyverse: Data wrangling & visualization</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>1</b> Introduction to the Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#introduction"><i class="fa fa-check"></i><b>0.1</b> Introduction</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.2</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>1</b> Introduction to the Tidyverse</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#what-is-the-tidyverse"><i class="fa fa-check"></i><b>1.1</b> What is the tidyverse?</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#palmer-station-penguins"><i class="fa fa-check"></i><b>2.1</b> Palmer Station penguins</a></li>
 <li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#palmer-station-weather"><i class="fa fa-check"></i><b>2.2</b> Palmer Station weather</a></li>
-<li class="chapter" data-level="2.3" data-path="data.html"><a href="data.html#why-palmer-data"><i class="fa fa-check"></i><b>2.3</b> Why Palmer data?</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html"><i class="fa fa-check"></i><b>3</b> Data wrangling basics</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#function-outline"><i class="fa fa-check"></i><b>3.1</b> Function outline</a></li>
+<li class="chapter" data-level="3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#outline"><i class="fa fa-check"></i><b>3.1</b> Outline</a></li>
 <li class="chapter" data-level="3.2" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#reducing-data-dimensionality"><i class="fa fa-check"></i><b>3.2</b> Reducing data dimensionality</a></li>
 <li class="chapter" data-level="3.3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#combining-multiple-steps"><i class="fa fa-check"></i><b>3.3</b> Combining multiple steps</a>
 <ul>
@@ -218,52 +224,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Facets</li>
 </ul>
 <p>Create a scatterplot of bill length and body mass</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="visualization.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span> </span>
-<span id="cb89-2"><a href="visualization.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="visualization.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span> </span>
+<span id="cb90-2"><a href="visualization.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <pre><code>## Warning: Removed 2 rows containing missing values (`geom_point()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <div id="geom_point" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> geom_point<a href="visualization.html#geom_point" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="visualization.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> body_mass_g, <span class="at">color =</span> species)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="visualization.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> body_mass_g, <span class="at">color =</span> species)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
 <pre><code>## Warning: Removed 2 rows containing missing values (`geom_point()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 # Create a barplot of species counts</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="visualization.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="visualization.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 ## Facet</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="visualization.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span> species)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="visualization.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span> species)</span></code></pre></div>
 <pre><code>## Warning: Removed 2 rows containing missing values (`geom_point()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="visualization.html#cb96-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
-<span id="cb96-2"><a href="visualization.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Temperature.Average..C.)) <span class="sc">+</span></span>
-<span id="cb96-3"><a href="visualization.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="05_visualization_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="visualization.html#cb97-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
-<span id="cb97-2"><a href="visualization.html#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb97-3"><a href="visualization.html#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">!=</span> <span class="fu">min</span>(year) <span class="sc">&amp;</span> year <span class="sc">!=</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb97-4"><a href="visualization.html#cb97-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year)) <span class="sc">+</span></span>
-<span id="cb97-5"><a href="visualization.html#cb97-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
+<span id="cb97-2"><a href="visualization.html#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Temperature.Average..C.)) <span class="sc">+</span></span>
+<span id="cb97-3"><a href="visualization.html#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="05_visualization_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="visualization.html#cb98-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb98-2"><a href="visualization.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb98-3"><a href="visualization.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">!=</span> <span class="fu">min</span>(year) <span class="sc">&amp;</span> year <span class="sc">!=</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb98-4"><a href="visualization.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year)) <span class="sc">+</span></span>
+<span id="cb98-5"><a href="visualization.html#cb98-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
 <pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="challenge" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Challenge<a href="visualization.html#challenge" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Conditional statements</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="visualization.html#cb99-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> </span>
-<span id="cb99-2"><a href="visualization.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">penguin_data_year =</span> <span class="fu">case_when</span>(</span>
-<span id="cb99-3"><a href="visualization.html#cb99-3" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%in%</span> <span class="dv">2007</span><span class="sc">:</span><span class="dv">2009</span> <span class="sc">~</span> T,</span>
-<span id="cb99-4"><a href="visualization.html#cb99-4" aria-hidden="true" tabindex="-1"></a>    T <span class="sc">~</span> F</span>
-<span id="cb99-5"><a href="visualization.html#cb99-5" aria-hidden="true" tabindex="-1"></a>  ) )</span></code></pre></div>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="visualization.html#cb100-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
-<span id="cb100-2"><a href="visualization.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">!=</span> <span class="fu">min</span>(year) <span class="sc">&amp;</span> year <span class="sc">!=</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb100-3"><a href="visualization.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year,</span>
-<span id="cb100-4"><a href="visualization.html#cb100-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> penguin_data_year)) <span class="sc">+</span></span>
-<span id="cb100-5"><a href="visualization.html#cb100-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="visualization.html#cb100-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> </span>
+<span id="cb100-2"><a href="visualization.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">penguin_data_year =</span> <span class="fu">case_when</span>(</span>
+<span id="cb100-3"><a href="visualization.html#cb100-3" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%in%</span> <span class="dv">2007</span><span class="sc">:</span><span class="dv">2009</span> <span class="sc">~</span> T,</span>
+<span id="cb100-4"><a href="visualization.html#cb100-4" aria-hidden="true" tabindex="-1"></a>    T <span class="sc">~</span> F</span>
+<span id="cb100-5"><a href="visualization.html#cb100-5" aria-hidden="true" tabindex="-1"></a>  ) )</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="visualization.html#cb101-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb101-2"><a href="visualization.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">!=</span> <span class="fu">min</span>(year) <span class="sc">&amp;</span> year <span class="sc">!=</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb101-3"><a href="visualization.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year,</span>
+<span id="cb101-4"><a href="visualization.html#cb101-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> penguin_data_year)) <span class="sc">+</span></span>
+<span id="cb101-5"><a href="visualization.html#cb101-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
 <pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 
 </div>
 </div>
+
 
 
 

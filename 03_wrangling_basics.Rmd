@@ -1,6 +1,6 @@
 # Data wrangling basics
 
-## Function outline
+## Outline
 * Reducing data dimensionality:
   * `select`: Name the columns to keep, separated by a comma. Using select will reduce the number of columns in your data frame
   * `filter`: Set conditions by which you want to filter (keep) some of the data. Using the filter function will reduce the number of rows in your data frame
@@ -248,7 +248,9 @@ penguins %>%
 
 Calculate the mean and standard deviation for each year-sex combination. Before calculating those summaries, remove the observations where there is no data for penguin sex. Name this new summary table 'summary_challenge'. What is the mean and standard deviation of the body mass for male penguins in 2008?
 
-```{r}
+<details>
+<summary>Check your answer</summary>
+```{r, purl = F}
 summary_challenge <- penguins %>% 
   filter(!is.na(sex)) %>% 
   group_by(year,sex) %>% 
@@ -257,4 +259,4 @@ summary_challenge <- penguins %>%
 summary_challenge
 # mean: 4632.456	sd: 722.0687	
 ```
-
+</details>

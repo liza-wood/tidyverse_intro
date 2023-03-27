@@ -137,20 +137,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <img src="img/lter_penguins.png" style="height: 100%; width: 100%; object-fit: contain" />
   <figcaption style="font-size: 8px">Artwork by @allison_horst</figcaption>
 </a></li>
-<li><a href="./" style="font-size: 14px">Tidyverse: Data wrangling & visualization</a></li>
+<li><a href="./" style="font-size: 16px">Tidyverse: Data wrangling & visualization</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>1</b> Introduction to the Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#introduction"><i class="fa fa-check"></i><b>0.1</b> Introduction</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.2</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>1</b> Introduction to the Tidyverse</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#what-is-the-tidyverse"><i class="fa fa-check"></i><b>1.1</b> What is the tidyverse?</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#palmer-station-penguins"><i class="fa fa-check"></i><b>2.1</b> Palmer Station penguins</a></li>
 <li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#palmer-station-weather"><i class="fa fa-check"></i><b>2.2</b> Palmer Station weather</a></li>
-<li class="chapter" data-level="2.3" data-path="data.html"><a href="data.html#why-palmer-data"><i class="fa fa-check"></i><b>2.3</b> Why Palmer data?</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html"><i class="fa fa-check"></i><b>3</b> Data wrangling basics</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#function-outline"><i class="fa fa-check"></i><b>3.1</b> Function outline</a></li>
+<li class="chapter" data-level="3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#outline"><i class="fa fa-check"></i><b>3.1</b> Outline</a></li>
 <li class="chapter" data-level="3.2" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#reducing-data-dimensionality"><i class="fa fa-check"></i><b>3.2</b> Reducing data dimensionality</a></li>
 <li class="chapter" data-level="3.3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#combining-multiple-steps"><i class="fa fa-check"></i><b>3.3</b> Combining multiple steps</a>
 <ul>
@@ -195,15 +201,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="introduction-to-the-tidyverse" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Introduction to the Tidyverse<a href="introduction-to-the-tidyverse.html#introduction-to-the-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<ul>
-<li>What is the tidyverse?</li>
-</ul>
+<div id="what-is-the-tidyverse" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> What is the tidyverse?<a href="introduction-to-the-tidyverse.html#what-is-the-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <a href="https://www.tidyverse.org/">tidyverse</a> is self-described as ‘an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures’. When you install the <code>tidyverse</code> package, you install a suite of 9 tidy-related packages, all of which are designed to help you work with data, from cleaning and manipulation to plotting and modelling.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="img/tidy_workflow.jpeg" alt="Artwork by @allison_horst" width="60%" />
+<p class="caption">
+Figure 0.1: Artwork by <span class="citation">@allison_horst</span>
+</p>
+</div>
+<p>They are increasingly popular, have large user bases, and are generally very well-documented. You can install the core set of tidyverse packages with the <code>install.packages()</code> function:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction-to-the-tidyverse.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>)</span></code></pre></div>
-<ul>
-<li>Loading the tidyverse packages</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introduction-to-the-tidyverse.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
-<span id="cb2-2"><a href="introduction-to-the-tidyverse.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>Once you install the package, read it into your library for our session today (note: you only have to install packages once, but you must load the packages you are using into your library for ever R ‘session’).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introduction-to-the-tidyverse.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.0     ✔ readr     2.1.4
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.0
@@ -215,6 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors</code></pre>
 
+</div>
 </div>
             </section>
 
