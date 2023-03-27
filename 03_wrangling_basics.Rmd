@@ -172,6 +172,11 @@ summary(penguins_newcolumn$bill_ratio)
 
 All values are greater than 1, so all bill lengths are greater than depths. Still, lower ratio values mean that the bill depth is large relative to its length (deep bills) and higher values mean that bill depth is small relative to its length (shallow bills). Let's say we wanted to use these bill lengths ratios to group penguins into one of three groups: 'deep' 'average' and 'shallow'.
 
+```{r echo=FALSE, out.width = "40%", fig.align='center',  fig.cap = 'Artwork by @allison_horst'}
+knitr::include_graphics("img/culmen_depth.png")
+```
+
+
 The `case_when` functions, combined with `mutate`, lets us set multiple conditions and resulting categories. This function uses a series of two-sided formulas where the left-hand side determines describes the condition, and the right supplies the result. The final condition should always be TRUE, meaning that when the previous conditions have not been met, assign the last value. 
 
 Using these functions we can create a depth ratio category variable:
@@ -202,7 +207,7 @@ penguins_newcolumn <- penguins_newcolumn %>%
     T ~ 'error'
   ))
 
-penguins_newcolumn$bill_depth_cat
+head(penguins_newcolumn$bill_depth_cat)
 ```
 
 ### Summary tables

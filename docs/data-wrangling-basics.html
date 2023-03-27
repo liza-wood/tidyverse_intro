@@ -477,6 +477,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   1.640   2.013   2.138   2.121   2.239   2.450</code></pre>
 <p>All values are greater than 1, so all bill lengths are greater than depths. Still, lower ratio values mean that the bill depth is large relative to its length (deep bills) and higher values mean that bill depth is small relative to its length (shallow bills). Let’s say we wanted to use these bill lengths ratios to group penguins into one of three groups: ‘deep’ ‘average’ and ‘shallow’.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
+<img src="img/culmen_depth.png" alt="Artwork by @allison_horst" width="40%" />
+<p class="caption">
+Figure 3.1: Artwork by <span class="citation">@allison_horst</span>
+</p>
+</div>
 <p>The <code>case_when</code> functions, combined with <code>mutate</code>, lets us set multiple conditions and resulting categories. This function uses a series of two-sided formulas where the left-hand side determines describes the condition, and the right supplies the result. The final condition should always be TRUE, meaning that when the previous conditions have not been met, assign the last value.</p>
 <p>Using these functions we can create a depth ratio category variable:</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="data-wrangling-basics.html#cb46-1" aria-hidden="true" tabindex="-1"></a>penguins_newcolumn <span class="ot">&lt;-</span> penguins_newcolumn <span class="sc">%&gt;%</span> </span>
@@ -521,28 +527,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb48-8"><a href="data-wrangling-basics.html#cb48-8" aria-hidden="true" tabindex="-1"></a>    T <span class="sc">~</span> <span class="st">&#39;error&#39;</span></span>
 <span id="cb48-9"><a href="data-wrangling-basics.html#cb48-9" aria-hidden="true" tabindex="-1"></a>  ))</span>
 <span id="cb48-10"><a href="data-wrangling-basics.html#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-11"><a href="data-wrangling-basics.html#cb48-11" aria-hidden="true" tabindex="-1"></a>penguins_newcolumn<span class="sc">$</span>bill_depth_cat</span></code></pre></div>
-<pre><code>##   [1] &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot; &quot;deep&quot;   
-##   [8] &quot;shallow&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;   
-##  [15] &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;   
-##  [22] &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot;
-##  [29] &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;shallow&quot; &quot;deep&quot;    &quot;average&quot;
-##  [36] &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot;
-##  [43] &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;deep&quot;   
-##  [50] &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;deep&quot;   
-##  [57] &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot;
-##  [64] &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot;
-##  [71] &quot;shallow&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;deep&quot;   
-##  [78] &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot;
-##  [85] &quot;deep&quot;    &quot;shallow&quot; &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;average&quot;
-##  [92] &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;    &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;   
-##  [99] &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;shallow&quot; &quot;shallow&quot;
-## [106] &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;shallow&quot; &quot;deep&quot;   
-## [113] &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot; &quot;average&quot; &quot;average&quot;
-## [120] &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot;
-## [127] &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;shallow&quot;
-## [134] &quot;average&quot; &quot;shallow&quot; &quot;shallow&quot; &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;average&quot;
-## [141] &quot;average&quot; &quot;deep&quot;    &quot;average&quot; &quot;average&quot; &quot;average&quot; &quot;shallow&quot;</code></pre>
+<span id="cb48-11"><a href="data-wrangling-basics.html#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins_newcolumn<span class="sc">$</span>bill_depth_cat)</span></code></pre></div>
+<pre><code>## [1] &quot;average&quot; &quot;shallow&quot; &quot;average&quot; &quot;deep&quot;    &quot;deep&quot;    &quot;average&quot;</code></pre>
 </div>
 <div id="summary-tables" class="section level3 hasAnchor" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Summary tables<a href="data-wrangling-basics.html#summary-tables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
