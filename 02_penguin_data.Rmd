@@ -48,7 +48,7 @@ Let's take a look at the data's structure:
 str(weather)
 ```
 
-Together this tutorial uses data collected from pengiuns across three islands in the Palmer archipelago and weather sensing technology at the US Palmer Station.
+Together this tutorial uses data collected from penguins across three islands in the Palmer archipelago and weather sensing technology at the US Palmer Station.
 
 ```{r echo=FALSE, out.width = c("50%","40"), fig.align= 'center', fig.cap = c('Artwork by @allison_horst', 'Palmer archipelago, image from Gorman et al. 2014 Figure 1')}
 knitr::include_graphics("img/lter_penguins.png")

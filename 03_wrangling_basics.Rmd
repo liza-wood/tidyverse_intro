@@ -93,7 +93,7 @@ You can combined multiple conditions using [logical operators](https://www.w3sch
 | Logical Operator | Name    | Example           |
 |------------------|---------|-------------------|
 | &                | AND     | x == 2 & y == 10  |
-| \\|              | OR      | x == 2 \\| y == 10  |
+| \|              | OR      | x == 2 \| y == 10  |
 
 
 ## Combining multiple steps 
