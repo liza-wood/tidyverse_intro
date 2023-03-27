@@ -10,6 +10,7 @@ knitr::include_graphics("img/tidy_workflow.jpeg")
 
 They are increasingly popular, have large user bases, and are generally very well-documented. You can install the core set of tidyverse packages with the `install.packages()` function:
 
+## Installing and loading in  
 ```{r, eval = F}
 install.packages('tidyverse')
 ```

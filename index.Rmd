@@ -22,10 +22,6 @@ output:
           </a></li>
           <li><a href="./" style="font-size: 16px">Tidyverse: Data wrangling & visualization</a></li>
         collapse: section
-
-header-includes:
-- \usepackage{caption}
-- \captionsetup[figure]{labelformat=empty}
 ---
 
 # Overview {-}

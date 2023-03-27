@@ -148,6 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html"><i class="fa fa-check"></i><b>1</b> Introduction to the Tidyverse</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#what-is-the-tidyverse"><i class="fa fa-check"></i><b>1.1</b> What is the tidyverse?</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-the-tidyverse.html"><a href="introduction-to-the-tidyverse.html#installing-and-loading-in"><i class="fa fa-check"></i><b>1.2</b> Installing and loading in</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a>
 <ul>
@@ -171,16 +172,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html"><i class="fa fa-check"></i><b>4</b> Data wrangling: beyond basics</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#manipulating-date-variables"><i class="fa fa-check"></i><b>4.1</b> Manipulating date variables</a>
+<li class="chapter" data-level="4.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#outline-1"><i class="fa fa-check"></i><b>4.1</b> Outline</a></li>
+<li class="chapter" data-level="4.2" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#manipulating-date-variables"><i class="fa fa-check"></i><b>4.2</b> Manipulating date variables</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#summary-challenge"><i class="fa fa-check"></i><b>4.1.1</b> Summary challenge</a></li>
+<li class="chapter" data-level="4.2.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#check-in-challenge-2"><i class="fa fa-check"></i><b>4.2.1</b> Check in challenge</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#joining-multiple-data-frames"><i class="fa fa-check"></i><b>4.2</b> Joining multiple data frames</a></li>
+<li class="chapter" data-level="4.3" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#joining-multiple-data-frames"><i class="fa fa-check"></i><b>4.3</b> Joining multiple data frames</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#check-in-challenge-3"><i class="fa fa-check"></i><b>4.3.1</b> Check in challenge</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#reshaping-lengtheningwidening-data"><i class="fa fa-check"></i><b>4.3.2</b> Reshaping (lengthening/widening) data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#working-with-text"><i class="fa fa-check"></i><b>4.4</b> Working with text</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="visualization.html"><a href="visualization.html#geom_point"><i class="fa fa-check"></i><b>5.1</b> geom_point</a></li>
-<li class="chapter" data-level="5.2" data-path="visualization.html"><a href="visualization.html#challenge"><i class="fa fa-check"></i><b>5.2</b> Challenge</a></li>
+<li class="chapter" data-level="5.1" data-path="visualization.html"><a href="visualization.html#outline-2"><i class="fa fa-check"></i><b>5.1</b> Outline</a></li>
+<li class="chapter" data-level="5.2" data-path="visualization.html"><a href="visualization.html#plot-architecture"><i class="fa fa-check"></i><b>5.2</b> Plot architecture</a></li>
+<li class="chapter" data-level="5.3" data-path="visualization.html"><a href="visualization.html#selecting-geometries"><i class="fa fa-check"></i><b>5.3</b> Selecting geometries</a></li>
+<li class="chapter" data-level="5.4" data-path="visualization.html"><a href="visualization.html#challenge"><i class="fa fa-check"></i><b>5.4</b> Challenge</a></li>
+<li class="chapter" data-level="5.5" data-path="visualization.html"><a href="visualization.html#styling-automatic-and-manual"><i class="fa fa-check"></i><b>5.5</b> Styling (automatic and manual)</a></li>
 </ul></li>
 </ul>
 
@@ -270,7 +280,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ Data.flag...Temperature.Average: chr  &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; ...
 ##  $ Data.flag...Pressure.Average   : chr  &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; ...</code></pre>
 <p>Together this tutorial uses data collected from pengiuns across three islands in the Palmer archipelago and weather sensing technology at the US Palmer Station.</p>
-<p><img src="img/lter_penguins.png" width="50%" style="display: block; margin: auto;" /><img src="img/gormanetal2014.png" width="40" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-7-1"></span>
+<img src="img/lter_penguins.png" alt="Artwork by @allison_horst" width="50%" />
+<p class="caption">
+Figure 2.1: Artwork by <span class="citation">@allison_horst</span>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-7-2"></span>
+<img src="img/gormanetal2014.png" alt="Palmer archipelago, image from Gorman et al. 2014 Figure 1" width="40" />
+<p class="caption">
+Figure 2.2: Palmer archipelago, image from Gorman et al. 2014 Figure 1
+</p>
+</div>
 
 </div>
 </div>

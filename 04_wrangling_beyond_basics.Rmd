@@ -1,5 +1,7 @@
 # Data wrangling: beyond basics
 
+## Outline  
+
 * Manipulating date variables
   * `lubrdiate` package: Use date format functions (e.g. `ymd`) to specify date data formats
 * Joining multiple data frames
@@ -31,11 +33,10 @@ head(weather$Date)
 class(weather$Date)
 ```
 
-We want to use the lubridate package to convert these variables into dates and create a column for the year.
+We want to use the `lubridate` package (loaded in when we load in `tidyverse`) to convert these variables into dates and create a column for the year.
 
 ```{r}
-library(lubridate)
-ymd(weather$Date)
+head(ymd(weather$Date), n = 75)
 ```
 
 Use the mutate function to overwrite this variable in the weather data frame
@@ -48,12 +49,11 @@ head(weather$Date)
 class(weather$Date)
 ```
 
-Now that R recognizes these as dates, we can extract certain date-related features, such as the year, month, and day
+Now that R recognizes these as dates, we can extract certain date-related features, such as the year, month, and day. The lubridate package has functions conveniently named `year()`, `month()`, `day()` that can be used with a date argument, and that element of the date will be extracted. For example: 
 
 ```{r}
-head(year(weather$Date))
+head(year(weather$Date), n = 75)
 ```
-
 Again, let's use mutate to assign this as a new column
 
 ```{r}
@@ -61,10 +61,14 @@ weather <- mutate(weather, year = year(Date))
 ```
 
 
-### Summary challenge
-We are going to review out basic wrangling skills to prepare the Palmer Station weather data to merge with the penguins data. 
+### Check in challenge  
 
-However, we only want to use a subset of these data in the following section. we want to summarize data by year, rather than by day (as it currently is). Per year, we want to know the maximum, minimum, and average temperate. Create this summary table called 'weather_summary'. Then, filter the summary data so that we only have data for 
+We are going to review our basic wrangling skills to prepare the Palmer Station weather data to merge with the penguins data. 
+
+We would like to merge a _summary_ of the weather data with the penguins. For this summary, we want the data summarized by year, rather than by day (as it currently is). Then per year, we want to know the maximum, minimum, and average temperates. Create this summary table called 'weather_summary'. 
+
+<details>
+<summary>Check your answer</summary>
 ```{r}
 weather_summary <- weather %>% 
   group_by(year) %>% 
@@ -73,16 +77,17 @@ weather_summary <- weather %>%
             min_temp = min(Temperature.Low..C., na.rm = T))
 
 ```
+</details>
 
 ## Joining multiple data frames
-  * `_join` series: Combine two data frames by one or more shared columns. Specify with kind of join(`full_`, `left_`, etc.) to determine which observations are kept/dropped.
+**THIS IS WHERE I LEFT OFF** `_join` series: Combine two data frames by one or more shared columns. Specify with kind of join(`full_`, `left_`, etc.) to determine which observations are kept/dropped.
   
 ```{r}
 penguins_leftjoined <- left_join(penguins, weather_summary, by = "year")
 dim(penguins_leftjoined)
 ```
 
-Challenges:
+### Check in challenge
 
 What happens when you use another kind of join?
 ```{r}
@@ -91,7 +96,8 @@ penguins_fulljoined <- full_join(penguins, weather_summary, by = "year")
 dim(penguins_fulljoined)
 ```
 
-* Reshaping (lengthening/widening) data
+### Reshaping (lengthening/widening) data
+
   * `pivot_longer`
   * `pivot_wider`
   
@@ -111,7 +117,8 @@ penguins_longer <- pivot_longer(penguins,
     penguins_wider <- pivot_wider(penguins_wider, names_from = "species", values_from = c("mean_bill_length_mm", "mean_bill_depth_mm", "mean_body_mass_g"))
 ```
 
-* Working with text to separate/combine columns
+## Working with text
+
   * `separate`:
   * `paste`:
   

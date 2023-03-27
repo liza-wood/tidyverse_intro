@@ -4,9 +4,9 @@
 * Reducing data dimensionality:
   * `select`: Name the columns to keep, separated by a comma. Using select will reduce the number of columns in your data frame
   * `filter`: Set conditions by which you want to filter (keep) some of the data. Using the filter function will reduce the number of rows in your data frame
-   * `is.na()`: Insert a column name to get a logical vector indicated whether each value in that row has an NA value
+    * `is.na()`: Insert a column name to get a logical vector indicated whether each value in that row has an NA value
 * Combining multiple steps
-  * `%v%`: Link together multiple steps by 'piping' the output of one line of code into the next
+  * `%>%`: Link together multiple steps by 'piping' the output of one line of code into the next
 * Creating new variables
   * Summary tables
     * `group_by`: Set a column (or columns) by which you want to perform a summarizing function on. Using this function does apparently nothing on its own, but is powerful when paired with `summarize` (or `mutate`)
@@ -14,9 +14,6 @@
   * New columns
     * `mutate`: Create a new column by assigning a value (transformed or otherwise)
     * `case_when`: Pair with mutate to create a new variable that is based on >1 conditions, typically for creating categorical variables
-* Miscallenous
-  * `arrange`
-  * `rename`
 
 ## Reducing data dimensionality
 
@@ -59,7 +56,7 @@ New, let's filter the data based on a certain condition. Creating 'conditions' i
 | <=                   | Less than or equal to    | x <= y  |
 
 ```{r}
-penguins$year == 2007
+head(penguins$year == 2007, n = 75)
 ```
 
 The filter function evaluates those conditions, and keeps only the rows for which the value os TRUE. For example, let's filter observations so that we only keep those from the year 2007.
@@ -71,15 +68,14 @@ dim(penguins_filtered)
 There are other functions to evaluate columns and get a T/F output. An important one is `is.na()`. This function evaluates a column and reports back a TRUE value when there is an NA in that column's row. For example, we can use the `head()` function to look at the top 6 values of the `sex` column, and see that there is an NA in the fourth row.
 
 ```{r}
-head(penguins$sex)
+head(penguins$sex, n = 75)
 ```
 
 The `is.na` function evaluates the whole column and gives us TRUES whenever it sees an NA. Not surprisingly, we see a TRUE in the fourth observation.  
 
 ```{r}
-is.na(penguins$sex)
+head(is.na(penguins$sex), n = 75)
 ```
-
 Since `is.na()` gives us a T/F vector, it is already a good candidate for putting right into filter. Below we are asking the filter function to keep only the observations that have an NA in the sex column.
 ```{r}
 penguins_filtered_nas <- filter(penguins, is.na(sex))
@@ -97,7 +93,7 @@ You can combined multiple conditions using [logical operators](https://www.w3sch
 | Logical Operator | Name    | Example           |
 |------------------|---------|-------------------|
 | &                | AND     | x == 2 & y == 10  |
-| |                | OR      | x == 2 | y == 10  |
+| \\|              | OR      | x == 2 \\| y == 10  |
 
 
 ## Combining multiple steps 
@@ -133,12 +129,15 @@ We will use the piping approach, as it helps make a smoother workflow for other 
 
 Use pipes to select only the columns for species, sex, bill_length_mm, and body_mass_g, and filter out where sex is missing and body_mass_g is greater than 3500. Name this new data frame 'filter_challenge' and look at a summary of it to check your work.
 
+<details>
+<summary>Check your answer</summary>
 ```{r}
 filter_challenge <- penguins %>% 
   select(species, sex, bill_length_mm, body_mass_g) %>% 
   filter(is.na(sex) & body_mass_g > 3500)
 str(filter_challenge)
 ```
+</details>
 
 ## Creating new variables
 
@@ -191,7 +190,7 @@ penguins_newcolumn <- penguins_newcolumn %>%
     T ~ 'shallow'
   ))
 
-penguins_newcolumn$bill_depth_cat
+head(penguins_newcolumn$bill_depth_cat, n = 75)
 ```
 
 A note: Always be cautious about what might be left out when naming the conditions. In the previous example, we assumes that everything left after the first two conditions would be shallow. To be on the safe side, I often set every condition and leave the last condition either an error notice, or NA, so that I can check my conditions.
@@ -206,8 +205,6 @@ penguins_newcolumn <- penguins_newcolumn %>%
     bill_ratio >= 2.239 ~ 'shallow',
     T ~ 'error'
   ))
-
-head(penguins_newcolumn$bill_depth_cat)
 ```
 
 ### Summary tables

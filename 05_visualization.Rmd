@@ -1,4 +1,6 @@
 # Visualization
+
+## Outline
 * Plot architecture
   * `ggplot`
   * `aes`
@@ -24,26 +26,34 @@ weather <- weather %>%
          year = year(Date))
 ```
 
+## Plot architecture
+
 Create a scatterplot of bill length and body mass
 
 ```{r}  
 ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) + 
   geom_point()
 ```
-                                                                                              
-## geom_point
- 
+
 ```{r}
 ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species)) + geom_point()
 ```
-                                                                                    # Create a barplot of species counts
+
+## Selecting geometries
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species)) + 
+  geom_point() +
+  geom_smooth(method = 'lm')
+```
+Create a barplot of species counts
 ```{r}
 ggplot(penguins, aes(x = species)) + geom_bar()
 ```
-                                                                                     ## Facet
+
 ```{r}
-ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) + geom_point() + facet_wrap(~ species)
-```    
+ggplot(penguins, aes(x = species, y = flipper_length_mm)) + geom_boxplot()
+```
 
 
 ```{r}
@@ -51,7 +61,6 @@ weather %>%
   ggplot(aes(x = Date, y = Temperature.Average..C.)) +
   geom_line()
 ```
-
 
 
 ```{r}
@@ -80,4 +89,10 @@ weather %>%
              color = penguin_data_year)) +
   geom_boxplot() 
 ```
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) + geom_point() + facet_wrap(~ species)
+```    
+
+## Styling (automatic and manual)
 
