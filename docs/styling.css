@@ -10,7 +10,7 @@
   --wedgewood: #437496;
 }
 
-/* fonts ----------------------------------------- */
+/* my own settings ----------------------------------------- */
 p {
   font-family: "Jost", Sans-Serif;
 }
@@ -33,6 +33,11 @@ p.caption {
   font-size: 0.75em;
 }
 
+figcaption {
+    text-align: right;
+}
+
+/* I want these to change link color but they don't-- */
 a:link {
   font-family: "Jost", Sans-Serif;
   color: purple;
@@ -51,9 +56,7 @@ code a:hover {
   color: var(--bunker);
 }
 
-figcaption {
-    text-align: right;
-}
+
 /* navbar ----------------------------------------------- */
 
 .navbar {
