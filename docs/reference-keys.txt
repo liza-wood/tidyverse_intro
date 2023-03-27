@@ -17,5 +17,5 @@ manipulating-date-variables
 summary-challenge
 joining-multiple-data-frames
 visualization
-create-a-scatterplot-with-colored-points-based-on-species
-year-of-interest
+geom_point
+challenge
