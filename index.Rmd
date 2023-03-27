@@ -13,7 +13,8 @@ output:
   bookdown::gitbook:
     css: styling.css
     config:
-      toc:
+      code_folding: show
+      toc: 
         before: |
           <li><a href="https://allisonhorst.github.io/palmerpenguins/">
             <img src="img/lter_penguins.png" style="height: 100%; width: 100%; object-fit: contain" />
@@ -21,10 +22,6 @@ output:
           </a></li>
           <li><a href="./" style="font-size: 14px">Tidyverse: Data wrangling & visualization</a></li>
         collapse: section
-      fontsettings:
-        theme: white
-        family: sans serif
-        size: 2
 
 ---
 
