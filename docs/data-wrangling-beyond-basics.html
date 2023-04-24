@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Data wrangling: beyond basics | Tidyverse: Data wrangling &amp; visualization</title>
   <meta name="description" content="4 Data wrangling: beyond basics | Tidyverse: Data wrangling &amp; visualization" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Data wrangling: beyond basics | Tidyverse: Data wrangling &amp; visualization" />
   <meta property="og:type" content="book" />
@@ -180,9 +180,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#joining-multiple-data-frames"><i class="fa fa-check"></i><b>4.3</b> Joining multiple data frames</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#check-in-challenge-3"><i class="fa fa-check"></i><b>4.3.1</b> Check in challenge</a></li>
-<li class="chapter" data-level="4.3.2" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#reshaping-lengtheningwidening-data"><i class="fa fa-check"></i><b>4.3.2</b> Reshaping (lengthening/widening) data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#working-with-text"><i class="fa fa-check"></i><b>4.4</b> Working with text</a></li>
+<li class="chapter" data-level="4.4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#reshaping-lengtheningwidening-data"><i class="fa fa-check"></i><b>4.4</b> Reshaping (lengthening/widening) data</a></li>
+<li class="chapter" data-level="4.5" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#working-with-text"><i class="fa fa-check"></i><b>4.5</b> Working with text</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization</a>
 <ul>
@@ -214,30 +214,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="outline-1" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Outline<a href="data-wrangling-beyond-basics.html#outline-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Manipulating date variables
+<li>Manipulating date variables:
 <ul>
-<li><code>lubrdiate</code> package: Use date format functions (e.g. <code>ymd</code>) to specify date data formats</li>
+<li><code>lubridate</code> package: Use date format functions (e.g. <code>ymd</code>) to specify date data formats</li>
 </ul></li>
-<li>Joining multiple data frames
+<li>Joining multiple data frames:
 <ul>
 <li><code>_join</code> series: Combine two data frames by one or more shared columns. Specify with kind of join(<code>full_</code>, <code>left_</code>, etc.) to determine which observations are kept/dropped.</li>
 </ul></li>
-<li>Reshaping (lengthening/widening) data
+<li>Reshaping (lengthening/widening) data:
 <ul>
-<li><code>pivot_longer</code></li>
-<li><code>pivot_wider</code></li>
+<li><code>pivot_longer</code>: Take values spread across multiple columns and ‘lengthen’ the data by stacking those columns on top of one another</li>
+<li><code>pivot_wider</code>: Take ‘long’ values stacked into one column and ‘widen’ the data by spreading them out</li>
 </ul></li>
-<li>Working with text to separate/combine columns
+<li>Working with text:
 <ul>
-<li><code>separate</code>:</li>
-<li><code>paste</code>:</li>
+<li><code>separate</code>: divide the contents of one columns into multiple based on particular symbols<br />
+</li>
+<li><code>paste</code>: combine contents from multiple columns (or external text)</li>
 </ul></li>
 </ul>
 </div>
 <div id="manipulating-date-variables" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Manipulating date variables<a href="data-wrangling-beyond-basics.html#manipulating-date-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Remember the weather data we loaded in at the start. We have weather data from the Palmer Station in Antarctica from 1989 - 2019. These data are available for each day</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="data-wrangling-beyond-basics.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weather)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-wrangling-beyond-basics.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weather)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    10674 obs. of  24 variables:
 ##  $ Date                           : chr  &quot;1989-04-01&quot; &quot;1989-04-02&quot; &quot;1989-04-03&quot; &quot;1989-04-04&quot; ...
 ##  $ Temperature.High..C.           : num  2.8 1.1 -0.6 1.1 -0.6 2.5 -1.4 -0.8 -1 -1.5 ...
@@ -264,117 +265,218 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ Data.flag...Temperature.Average: chr  &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; ...
 ##  $ Data.flag...Pressure.Average   : chr  &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; ...</code></pre>
 <p>However, the structure of the data above indicate that the first variable, Date, is a ‘character’. This means that R is not reading these dates as numbers, and so we cannot manipulate them any further (e.g. extracting certain years).</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="data-wrangling-beyond-basics.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(weather<span class="sc">$</span>Date)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data-wrangling-beyond-basics.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(weather<span class="sc">$</span>Date)</span></code></pre></div>
 <pre><code>## [1] &quot;1989-04-01&quot; &quot;1989-04-02&quot; &quot;1989-04-03&quot; &quot;1989-04-04&quot; &quot;1989-04-05&quot;
 ## [6] &quot;1989-04-06&quot;</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="data-wrangling-beyond-basics.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(weather<span class="sc">$</span>Date)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data-wrangling-beyond-basics.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(weather<span class="sc">$</span>Date)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<p>We want to use the <code>lubridate</code> package (loaded in when we load in <code>tidyverse</code>) to convert these variables into dates and create a column for the year.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="data-wrangling-beyond-basics.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">ymd</span>(weather<span class="sc">$</span>Date), <span class="at">n =</span> <span class="dv">75</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;1989-04-01&quot; &quot;1989-04-02&quot; &quot;1989-04-03&quot; &quot;1989-04-04&quot; &quot;1989-04-05&quot;
-##  [6] &quot;1989-04-06&quot; &quot;1989-04-07&quot; &quot;1989-04-08&quot; &quot;1989-04-09&quot; &quot;1989-04-10&quot;
-## [11] &quot;1989-04-11&quot; &quot;1989-04-12&quot; &quot;1989-04-13&quot; &quot;1989-04-14&quot; &quot;1989-04-15&quot;
-## [16] &quot;1989-04-16&quot; &quot;1989-04-17&quot; &quot;1989-04-18&quot; &quot;1989-04-19&quot; &quot;1989-04-20&quot;
-## [21] &quot;1989-04-21&quot; &quot;1989-04-22&quot; &quot;1989-04-23&quot; &quot;1989-04-24&quot; &quot;1989-04-25&quot;
-## [26] &quot;1989-04-26&quot; &quot;1989-04-27&quot; &quot;1989-04-28&quot; &quot;1989-04-29&quot; &quot;1989-04-30&quot;
-## [31] &quot;1989-05-01&quot; &quot;1989-05-02&quot; &quot;1989-05-03&quot; &quot;1989-05-04&quot; &quot;1989-05-05&quot;
-## [36] &quot;1989-05-06&quot; &quot;1989-05-07&quot; &quot;1989-05-08&quot; &quot;1989-05-09&quot; &quot;1989-05-10&quot;
-## [41] &quot;1989-05-11&quot; &quot;1989-05-12&quot; &quot;1989-05-13&quot; &quot;1989-05-14&quot; &quot;1989-05-15&quot;
-## [46] &quot;1989-05-16&quot; &quot;1989-05-17&quot; &quot;1989-05-18&quot; &quot;1989-05-19&quot; &quot;1989-05-20&quot;
-## [51] &quot;1989-05-21&quot; &quot;1989-05-22&quot; &quot;1989-05-23&quot; &quot;1989-05-24&quot; &quot;1989-05-25&quot;
-## [56] &quot;1989-05-26&quot; &quot;1989-05-27&quot; &quot;1989-05-28&quot; &quot;1989-05-29&quot; &quot;1989-05-30&quot;
-## [61] &quot;1989-05-31&quot; &quot;1989-06-01&quot; &quot;1989-06-02&quot; &quot;1989-06-03&quot; &quot;1989-06-04&quot;
-## [66] &quot;1989-06-05&quot; &quot;1989-06-06&quot; &quot;1989-06-07&quot; &quot;1989-06-08&quot; &quot;1989-06-09&quot;
-## [71] &quot;1989-06-10&quot; &quot;1989-06-11&quot; &quot;1989-06-12&quot; &quot;1989-06-13&quot; &quot;1989-06-14&quot;</code></pre>
-<p>Use the mutate function to overwrite this variable in the weather data frame</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="data-wrangling-beyond-basics.html#cb72-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">mutate</span>(weather, <span class="at">Date =</span> <span class="fu">ymd</span>(Date))</span></code></pre></div>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="data-wrangling-beyond-basics.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(weather<span class="sc">$</span>Date)</span></code></pre></div>
-<pre><code>## [1] &quot;1989-04-01&quot; &quot;1989-04-02&quot; &quot;1989-04-03&quot; &quot;1989-04-04&quot; &quot;1989-04-05&quot;
-## [6] &quot;1989-04-06&quot;</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="data-wrangling-beyond-basics.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(weather<span class="sc">$</span>Date)</span></code></pre></div>
+<p>We want to use the <code>lubridate</code> package (loaded in when we load in <code>tidyverse</code>) to convert these variables into dates and create a column for the year. This package is handy because it has very intuitive function names and argument structures. For instance, you can convert a character data type into a date type by using a function with letters representing the date format. You can see all of these formats by specifically calling upon the lubridate package and then using semicolons to call upon the functions, such as those starting with ‘y’. In lubridate, y = year, m = month, d = day, h = hour, m = minute, s = second, etc.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data-wrangling-beyond-basics.html#cb7-1" aria-hidden="true" tabindex="-1"></a>lubridate<span class="sc">::</span>y</span></code></pre></div>
+<p>We can see that our data is formatted in the year-month-day format, and so we can use the <code>ymd</code> function to indicate to R what format we want it to detect as it converts characters to dates. If we use this function and assign the output to a date vector, we can then evaluate the class to see that it is a date.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data-wrangling-beyond-basics.html#cb8-1" aria-hidden="true" tabindex="-1"></a>date_vector <span class="ot">&lt;-</span> <span class="fu">ymd</span>(weather<span class="sc">$</span>Date)</span>
+<span id="cb8-2"><a href="data-wrangling-beyond-basics.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(date_vector)</span></code></pre></div>
+<pre><code>## [1] &quot;Date&quot;</code></pre>
+<p>Important to remember that manipulating a column does not mean it automatically saves into the data frame. Instead, we need to remember to write (or overwrite) that column into our data frame. Remember that we can use the mutate function to do this, where we can overwrite out date column. Note two different ways of doing this. First, we could use the <code>ymd</code> function directly in our mutate function:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-wrangling-beyond-basics.html#cb10-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">mutate</span>(weather, <span class="at">Date =</span> <span class="fu">ymd</span>(Date))</span></code></pre></div>
+<p>Or because we have saved the new date data as its own vector, we can feed that vector into the data frame as is.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-wrangling-beyond-basics.html#cb11-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">mutate</span>(weather, <span class="at">Date =</span> date_vector)</span></code></pre></div>
+<p>Now we have our date data saved in our data frame.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-wrangling-beyond-basics.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(weather<span class="sc">$</span>Date)</span></code></pre></div>
 <pre><code>## [1] &quot;Date&quot;</code></pre>
 <p>Now that R recognizes these as dates, we can extract certain date-related features, such as the year, month, and day. The lubridate package has functions conveniently named <code>year()</code>, <code>month()</code>, <code>day()</code> that can be used with a date argument, and that element of the date will be extracted. For example:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="data-wrangling-beyond-basics.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">year</span>(weather<span class="sc">$</span>Date), <span class="at">n =</span> <span class="dv">75</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-wrangling-beyond-basics.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">year</span>(weather<span class="sc">$</span>Date), <span class="at">n =</span> <span class="dv">75</span>)</span></code></pre></div>
 <pre><code>##  [1] 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989
 ## [16] 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989
 ## [31] 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989
 ## [46] 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989
 ## [61] 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989 1989</code></pre>
 <p>Again, let’s use mutate to assign this as a new column</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="data-wrangling-beyond-basics.html#cb79-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">mutate</span>(weather, <span class="at">year =</span> <span class="fu">year</span>(Date))</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-wrangling-beyond-basics.html#cb16-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">mutate</span>(weather, <span class="at">year =</span> <span class="fu">year</span>(Date))</span></code></pre></div>
 <div id="check-in-challenge-2" class="section level3 hasAnchor" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Check in challenge<a href="data-wrangling-beyond-basics.html#check-in-challenge-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We are going to review our basic wrangling skills to prepare the Palmer Station weather data to merge with the penguins data.</p>
-<p>We would like to merge a <em>summary</em> of the weather data with the penguins. For this summary, we want the data summarized by year, rather than by day (as it currently is). Then per year, we want to know the maximum, minimum, and average temperates. Create this summary table called ‘weather_summary’.</p>
+<p>We would like to merge a <em>summary</em> of the weather data with the penguins. For this summary, we want the data summarized by year, rather than by day (as it currently is). Then per year, we want to know the maximum, minimum, and average temperatures. Create this summary table called ‘weather_summary’.</p>
 <details>
 <summary>
 Check your answer
 </summary>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="data-wrangling-beyond-basics.html#cb80-1" aria-hidden="true" tabindex="-1"></a>weather_summary <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> </span>
-<span id="cb80-2"><a href="data-wrangling-beyond-basics.html#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
-<span id="cb80-3"><a href="data-wrangling-beyond-basics.html#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_temp =</span> <span class="fu">mean</span>(Temperature.Average..C., <span class="at">na.rm =</span> T),</span>
-<span id="cb80-4"><a href="data-wrangling-beyond-basics.html#cb80-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_temp =</span> <span class="fu">max</span>(Temperature.High..C., <span class="at">na.rm =</span> T),</span>
-<span id="cb80-5"><a href="data-wrangling-beyond-basics.html#cb80-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_temp =</span> <span class="fu">min</span>(Temperature.Low..C., <span class="at">na.rm =</span> T))</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-wrangling-beyond-basics.html#cb17-1" aria-hidden="true" tabindex="-1"></a>weather_summary <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="data-wrangling-beyond-basics.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="data-wrangling-beyond-basics.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_temp =</span> <span class="fu">mean</span>(Temperature.Average..C., <span class="at">na.rm =</span> T),</span>
+<span id="cb17-4"><a href="data-wrangling-beyond-basics.html#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_temp =</span> <span class="fu">max</span>(Temperature.High..C., <span class="at">na.rm =</span> T),</span>
+<span id="cb17-5"><a href="data-wrangling-beyond-basics.html#cb17-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_temp =</span> <span class="fu">min</span>(Temperature.Low..C., <span class="at">na.rm =</span> T))</span></code></pre></div>
 </details>
 </div>
 </div>
 <div id="joining-multiple-data-frames" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Joining multiple data frames<a href="data-wrangling-beyond-basics.html#joining-multiple-data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>THIS IS WHERE I LEFT OFF</strong> <code>_join</code> series: Combine two data frames by one or more shared columns. Specify with kind of join(<code>full_</code>, <code>left_</code>, etc.) to determine which observations are kept/dropped.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="data-wrangling-beyond-basics.html#cb81-1" aria-hidden="true" tabindex="-1"></a>penguins_leftjoined <span class="ot">&lt;-</span> <span class="fu">left_join</span>(penguins, weather_summary, <span class="at">by =</span> <span class="st">&quot;year&quot;</span>)</span>
-<span id="cb81-2"><a href="data-wrangling-beyond-basics.html#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(penguins_leftjoined)</span></code></pre></div>
+<p>In your data wrangling journey, you will often find yourself wanting to combine one data frame with some kind of supplementary or partner data frame. In our case, we have the penguins and weather data stored separately, but if we ever wanted to explore any relationships between them, we’d likely want all of that data stored in one place so that we can line up data points. This lining up of data points is called <strong>joining</strong> in the tidyverse language.</p>
+<p>The key to joining is to identify the variables by which you want to join the data. In other words, which columns in each data are the ones that link them together. In some cases these may be one-to-one matches (e.g. identification numbers to identification numbers), or in other cases there is data at different levels that need to be lined up. By default, join functions will link the data together based on all of the shared column names, but usually you’ll want to double check to make sure that this will get you what you want. Typically you can do this by just checking out the column names of each data frame (for this exercise we will sue the weather_summary object created in the last challenge).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-wrangling-beyond-basics.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins)</span></code></pre></div>
+<pre><code>## [1] &quot;species&quot;           &quot;island&quot;            &quot;bill_length_mm&quot;   
+## [4] &quot;bill_depth_mm&quot;     &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;      
+## [7] &quot;sex&quot;               &quot;year&quot;</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-wrangling-beyond-basics.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(weather_summary)</span></code></pre></div>
+<pre><code>## [1] &quot;year&quot;         &quot;average_temp&quot; &quot;max_temp&quot;     &quot;min_temp&quot;</code></pre>
+<p>We have one column overlapping, year, which makes it the likely candidate for joining by. But it is also important to think: what is it that actually links penguins to weather? Penguins experience weather at any given time, and so we will need to choose a shared time scale at which penguins are experiencing weather and the scale of data we collected for weather. In the penguins data set we only know the year that the observations were taken, so we’re interested in the annual weather summaries. This is why we are looking at the weather summary object, so that we can align the data relatively well.</p>
+<p>Now, let’s join. The join functons take three arguments: the two data frames you’d like to join, and the name of the column by which to join. There are also several types of joins, which we can explore in the challenge, but for now let’s use a left join:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-wrangling-beyond-basics.html#cb22-1" aria-hidden="true" tabindex="-1"></a>penguins_leftjoined <span class="ot">&lt;-</span> <span class="fu">left_join</span>(penguins, weather_summary, <span class="at">by =</span> <span class="st">&quot;year&quot;</span>)</span></code></pre></div>
+<p>Now, we go from 8 columns in the penguins data to 11, now that we’ve appended the three weather-related columns to the data. And we stick with 344 rows because that is the number of rows in our ‘left’ data frame, penguins. These dimensions might change depending on the kind of join you use.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-wrangling-beyond-basics.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(penguins_leftjoined)</span></code></pre></div>
 <pre><code>## [1] 344  11</code></pre>
 <div id="check-in-challenge-3" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Check in challenge<a href="data-wrangling-beyond-basics.html#check-in-challenge-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>What happens when you use another kind of join?</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="data-wrangling-beyond-basics.html#cb83-1" aria-hidden="true" tabindex="-1"></a>penguins_fulljoined <span class="ot">&lt;-</span> <span class="fu">full_join</span>(penguins, weather_summary, <span class="at">by =</span> <span class="st">&quot;year&quot;</span>)</span>
-<span id="cb83-2"><a href="data-wrangling-beyond-basics.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We now have more rows for</span></span>
-<span id="cb83-3"><a href="data-wrangling-beyond-basics.html#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(penguins_fulljoined)</span></code></pre></div>
+<p>Go ahead and check out the documentation for join by using the help function, a question mark:</p>
+<pre><code>?join</code></pre>
+<p>You’ll see the variety of joins that exist in dplyr. Try to experiment with them: What happens when you use another kind of join? Check how the dimensions of the data change depending on the join you choose.</p>
+<details>
+<summary>
+Check your answer
+</summary>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-wrangling-beyond-basics.html#cb26-1" aria-hidden="true" tabindex="-1"></a>penguins_fulljoined <span class="ot">&lt;-</span> <span class="fu">full_join</span>(penguins, weather_summary, <span class="at">by =</span> <span class="st">&quot;year&quot;</span>)</span>
+<span id="cb26-2"><a href="data-wrangling-beyond-basics.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(penguins_fulljoined)</span></code></pre></div>
 <pre><code>## [1] 372  11</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-wrangling-beyond-basics.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We now have more rows. Why? We had weather data for more years than we have penguin data, so we have a lot of weather data that is unmatched to any pengion observation</span></span></code></pre></div>
+</details>
 </div>
-<div id="reshaping-lengtheningwidening-data" class="section level3 hasAnchor" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Reshaping (lengthening/widening) data<a href="data-wrangling-beyond-basics.html#reshaping-lengtheningwidening-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="reshaping-lengtheningwidening-data" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Reshaping (lengthening/widening) data<a href="data-wrangling-beyond-basics.html#reshaping-lengtheningwidening-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are often cases where you’d like to change the shape of your data. For instance, you might want to turn several columns into two: one with the measurements or values from the previous columns, and one with a categorical indicator of what is represented in the new column. This is a case for pivoting longer.</p>
+<p>Let’s say we wanted to take the key measures of our penguins and stack them on top of one another (this is not actually useful given our data, but it is the practice that counts). When we stack all of these columns on top of one another we are going to be creating two new columns: one with the names of the columns and another with the values of the columns. In the pivot_ arguments, it looks like this:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-wrangling-beyond-basics.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot the data to make it longer</span></span>
+<span id="cb29-2"><a href="data-wrangling-beyond-basics.html#cb29-2" aria-hidden="true" tabindex="-1"></a>penguins_longer <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(penguins, </span>
+<span id="cb29-3"><a href="data-wrangling-beyond-basics.html#cb29-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">cols =</span> <span class="fu">c</span>(bill_length_mm, bill_depth_mm,</span>
+<span id="cb29-4"><a href="data-wrangling-beyond-basics.html#cb29-4" aria-hidden="true" tabindex="-1"></a>                                         flipper_length_mm, body_mass_g), </span>
+<span id="cb29-5"><a href="data-wrangling-beyond-basics.html#cb29-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">names_to =</span> <span class="st">&quot;measure&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-wrangling-beyond-basics.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins_longer)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##   species island    sex     year measure            value
+##   &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt;
+## 1 Adelie  Torgersen male    2007 bill_length_mm      39.1
+## 2 Adelie  Torgersen male    2007 bill_depth_mm       18.7
+## 3 Adelie  Torgersen male    2007 flipper_length_mm  181  
+## 4 Adelie  Torgersen male    2007 body_mass_g       3750  
+## 5 Adelie  Torgersen female  2007 bill_length_mm      39.5
+## 6 Adelie  Torgersen female  2007 bill_depth_mm       17.4</code></pre>
+<p>The reverse scenario is having data within one column that you’d like to widen out into several columns. Here we have to identify the column we’d like to unstack (values_from), how we’d like to name the new columns filled with the widened values (names_from). Note thay we don’t need to put these column names in quotes because they already exist in the data frame!</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="data-wrangling-beyond-basics.html#cb32-1" aria-hidden="true" tabindex="-1"></a>penguins_wider <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(penguins_longer, </span>
+<span id="cb32-2"><a href="data-wrangling-beyond-basics.html#cb32-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">names_from =</span> measure, </span>
+<span id="cb32-3"><a href="data-wrangling-beyond-basics.html#cb32-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">values_from =</span> value)</span></code></pre></div>
+<pre><code>## Warning: Values from `value` are not uniquely identified; output will contain list-cols.
+## • Use `values_fn = list` to suppress this warning.
+## • Use `values_fn = {summary_fun}` to summarise duplicates.
+## • Use the following dplyr code to identify duplicates.
+##   {data} %&gt;%
+##   dplyr::group_by(species, island, sex, year, measure) %&gt;%
+##   dplyr::summarise(n = dplyr::n(), .groups = &quot;drop&quot;) %&gt;%
+##   dplyr::filter(n &gt; 1L)</code></pre>
+<p>BUT, we get a bit of an issue here. Our result has condensed many of the measures down into list forms, leaving us with only 35 observations and several repeated measured for each observation. Why? When dplyr is widening out the data it wants to match the new columns to <em>unique observations</em>. So the function created one row for each species-island-sex-year combination, thinking those are unique. We can fix this by setting id_cols.</p>
+<p>Here want to specify what it is that actually identifies unique observations in the data. Our issue is that we don’t have unique identifiers in the data. Woops. Let’s fix that and re-run these functions to see why this matters.</p>
+<p>First, let’s assign a unique ID column to the penguins_wider data:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-wrangling-beyond-basics.html#cb34-1" aria-hidden="true" tabindex="-1"></a>penguins<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(penguins)</span>
+<span id="cb34-2"><a href="data-wrangling-beyond-basics.html#cb34-2" aria-hidden="true" tabindex="-1"></a>penguins_longer <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(penguins, </span>
+<span id="cb34-3"><a href="data-wrangling-beyond-basics.html#cb34-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">cols =</span> <span class="fu">c</span>(bill_length_mm, bill_depth_mm,</span>
+<span id="cb34-4"><a href="data-wrangling-beyond-basics.html#cb34-4" aria-hidden="true" tabindex="-1"></a>                                         flipper_length_mm, body_mass_g), </span>
+<span id="cb34-5"><a href="data-wrangling-beyond-basics.html#cb34-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">names_to =</span> <span class="st">&quot;measure&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data-wrangling-beyond-basics.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins_longer)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 7
+##   species island    sex     year    ID measure            value
+##   &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt;
+## 1 Adelie  Torgersen male    2007     1 bill_length_mm      39.1
+## 2 Adelie  Torgersen male    2007     1 bill_depth_mm       18.7
+## 3 Adelie  Torgersen male    2007     1 flipper_length_mm  181  
+## 4 Adelie  Torgersen male    2007     1 body_mass_g       3750  
+## 5 Adelie  Torgersen female  2007     2 bill_length_mm      39.5
+## 6 Adelie  Torgersen female  2007     2 bill_depth_mm       17.4</code></pre>
+<p>Now, let’s set ID as the the id_cols argument in the function:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="data-wrangling-beyond-basics.html#cb37-1" aria-hidden="true" tabindex="-1"></a>penguins_widerID <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(penguins_longer, </span>
+<span id="cb37-2"><a href="data-wrangling-beyond-basics.html#cb37-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">id_cols =</span> ID,</span>
+<span id="cb37-3"><a href="data-wrangling-beyond-basics.html#cb37-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">names_from =</span> measure, </span>
+<span id="cb37-4"><a href="data-wrangling-beyond-basics.html#cb37-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">values_from =</span> value)</span>
+<span id="cb37-5"><a href="data-wrangling-beyond-basics.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins_widerID)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
+##      ID bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##   &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+## 1     1           39.1          18.7               181        3750
+## 2     2           39.5          17.4               186        3800
+## 3     3           40.3          18                 195        3250
+## 4     4           NA            NA                  NA          NA
+## 5     5           36.7          19.3               193        3450
+## 6     6           39.3          20.6               190        3650</code></pre>
+<p>Uh, close, but still some issues. What happened to all of our other columns? Well, since we said ID was our only id column, it dropped everything else. So we can actually pile everything into our ID column that we wan to keep</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="data-wrangling-beyond-basics.html#cb39-1" aria-hidden="true" tabindex="-1"></a>penguins_widerID_allcols <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(penguins_longer, </span>
+<span id="cb39-2"><a href="data-wrangling-beyond-basics.html#cb39-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">id_cols =</span> species<span class="sc">:</span>ID,</span>
+<span id="cb39-3"><a href="data-wrangling-beyond-basics.html#cb39-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">names_from =</span> <span class="st">&quot;measure&quot;</span>, </span>
+<span id="cb39-4"><a href="data-wrangling-beyond-basics.html#cb39-4" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">values_from =</span> <span class="st">&quot;value&quot;</span>)</span>
+<span id="cb39-5"><a href="data-wrangling-beyond-basics.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins_widerID_allcols)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 9
+##   species island    sex     year    ID bill_length_mm bill_depth_mm
+##   &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt; &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Adelie  Torgersen male    2007     1           39.1          18.7
+## 2 Adelie  Torgersen female  2007     2           39.5          17.4
+## 3 Adelie  Torgersen female  2007     3           40.3          18  
+## 4 Adelie  Torgersen &lt;NA&gt;    2007     4           NA            NA  
+## 5 Adelie  Torgersen female  2007     5           36.7          19.3
+## 6 Adelie  Torgersen male    2007     6           39.3          20.6
+## # ℹ 2 more variables: flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;</code></pre>
+</div>
+<div id="working-with-text" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Working with text<a href="data-wrangling-beyond-basics.html#working-with-text" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s back up a bit to the cleaning process. We’ve been working on getting our data in summary form, bringing in new data, and changing data shape, all of which is pretty far down the data wrangling pipeline. But we are going to take this last moment to talk about an earlier stage task: cleaning text data.</p>
+<p>When we first create and collect data, it may not be in its tidy-est form. One common un-tidy data practice is to have multiple types of data in one column. For instance, we can look at the ‘raw’ version of the penguins data, also available through the package. Let’s look at the third and sixth columns, for instance.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="data-wrangling-beyond-basics.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">select</span>(penguins_raw, <span class="dv">3</span>,<span class="dv">6</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 2
+##   Species                             Stage             
+##   &lt;chr&gt;                               &lt;chr&gt;             
+## 1 Adelie Penguin (Pygoscelis adeliae) Adult, 1 Egg Stage
+## 2 Adelie Penguin (Pygoscelis adeliae) Adult, 1 Egg Stage
+## 3 Adelie Penguin (Pygoscelis adeliae) Adult, 1 Egg Stage
+## 4 Adelie Penguin (Pygoscelis adeliae) Adult, 1 Egg Stage
+## 5 Adelie Penguin (Pygoscelis adeliae) Adult, 1 Egg Stage
+## 6 Adelie Penguin (Pygoscelis adeliae) Adult, 1 Egg Stage</code></pre>
+<p>The Stage column is a good example of where multiple data points might be combined into one cell as text. Here we have ‘Adult, 1 Egg Stage’ reported. But, we might want to separate out the title of the penguin’s stage, Adult, from their egg stage count. For this we can use the <code>separate</code> function to divide the contents of one column into multiple based on particular symbols. In this case, there is a convention to separate the word Adult (or other stage) from the egg count using a comma (,).</p>
+<p>For the <code>separate</code> function we need to enter a few arguments: the data, the column to separate, the names of the new columns, and the separator symbol:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="data-wrangling-beyond-basics.html#cb43-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_sep <span class="ot">&lt;-</span> <span class="fu">separate</span>(penguins_raw, Stage, <span class="fu">c</span>(<span class="st">&quot;age_cat&quot;</span>, <span class="st">&quot;egg_stage&quot;</span>), <span class="st">&#39;,&#39;</span>)</span></code></pre></div>
+<p>Now we can see that these two have replace the previous Stage column, and has added one more column to the data frame.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="data-wrangling-beyond-basics.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">select</span>(penguins_raw_sep, <span class="dv">4</span><span class="sc">:</span><span class="dv">7</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+##   Region Island    age_cat egg_stage     
+##   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;         
+## 1 Anvers Torgersen Adult   &quot; 1 Egg Stage&quot;
+## 2 Anvers Torgersen Adult   &quot; 1 Egg Stage&quot;
+## 3 Anvers Torgersen Adult   &quot; 1 Egg Stage&quot;
+## 4 Anvers Torgersen Adult   &quot; 1 Egg Stage&quot;
+## 5 Anvers Torgersen Adult   &quot; 1 Egg Stage&quot;
+## 6 Anvers Torgersen Adult   &quot; 1 Egg Stage&quot;</code></pre>
+<p>Now, we could even go one step further. The data here are well organized and uniform, meaning that separate works quite well. Every Stage column has a comma, and even now in the egg_stage column, there are three words, so we could separate by a space ” ” and get three new columns. However, when data is messy we might need some more powerful text manipulation tools.</p>
+<p>Enter: the <code>stringr</code> package and regular expressions.</p>
+<p><a href="https://edrub.in/CheatSheets/cheatSheetStringr.pdf" class="uri">https://edrub.in/CheatSheets/cheatSheetStringr.pdf</a></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="data-wrangling-beyond-basics.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract</span>(penguins_raw_sep<span class="sc">$</span>egg_stage, <span class="st">&#39;</span><span class="sc">\\</span><span class="st">d+&#39;</span>)</span></code></pre></div>
+<pre><code>##   [1] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+##  [19] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+##  [37] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+##  [55] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+##  [73] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+##  [91] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [109] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [127] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [145] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [163] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [181] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [199] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [217] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [235] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [253] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [271] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [289] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [307] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [325] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot;
+## [343] &quot;1&quot; &quot;1&quot;</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="data-wrangling-beyond-basics.html#cb48-1" aria-hidden="true" tabindex="-1"></a>egg_no <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">str_extract</span>(penguins_raw_sep<span class="sc">$</span>egg_stage, <span class="st">&#39;</span><span class="sc">\\</span><span class="st">d+&#39;</span>))</span></code></pre></div>
 <ul>
-<li><code>pivot_longer</code></li>
-<li><code>pivot_wider</code></li>
+<li><code>paste</code>: combine contents from multiple columns (or external text)</li>
 </ul>
-<p>Pivot the data to make it wider, with one row per species and the columns representing the mean bill length, depth, and mass for that species.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="data-wrangling-beyond-basics.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot the data to make it longer</span></span>
-<span id="cb85-2"><a href="data-wrangling-beyond-basics.html#cb85-2" aria-hidden="true" tabindex="-1"></a>penguins_longer <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(penguins, </span>
-<span id="cb85-3"><a href="data-wrangling-beyond-basics.html#cb85-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">cols =</span> <span class="fu">c</span>(bill_length_mm, bill_depth_mm,</span>
-<span id="cb85-4"><a href="data-wrangling-beyond-basics.html#cb85-4" aria-hidden="true" tabindex="-1"></a>                                         flipper_length_mm, body_mass_g), </span>
-<span id="cb85-5"><a href="data-wrangling-beyond-basics.html#cb85-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">names_to =</span> <span class="st">&quot;measure&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="data-wrangling-beyond-basics.html#cb86-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Pivot the data to make it wider, with one row per species and the columns representing the mean bill length, depth, and mass for that species.</span></span>
-<span id="cb86-2"><a href="data-wrangling-beyond-basics.html#cb86-2" aria-hidden="true" tabindex="-1"></a>    penguins_wider <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean_bill_length_mm =</span> <span class="fu">mean</span>(bill_length_mm), <span class="at">mean_bill_depth_mm =</span> <span class="fu">mean</span>(bill_depth_mm), <span class="at">mean_body_mass_g =</span> <span class="fu">mean</span>(body_mass_g))</span>
-<span id="cb86-3"><a href="data-wrangling-beyond-basics.html#cb86-3" aria-hidden="true" tabindex="-1"></a>    penguins_wider <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(penguins_wider, <span class="at">names_from =</span> <span class="st">&quot;species&quot;</span>, <span class="at">values_from =</span> <span class="fu">c</span>(<span class="st">&quot;mean_bill_length_mm&quot;</span>, <span class="st">&quot;mean_bill_depth_mm&quot;</span>, <span class="st">&quot;mean_body_mass_g&quot;</span>))</span></code></pre></div>
-</div>
-</div>
-<div id="working-with-text" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> Working with text<a href="data-wrangling-beyond-basics.html#working-with-text" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><code>separate</code>:</li>
-<li><code>paste</code>:</li>
-</ul>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="data-wrangling-beyond-basics.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the Palmer Penguins dataset (with additional missing values)</span></span>
-<span id="cb87-2"><a href="data-wrangling-beyond-basics.html#cb87-2" aria-hidden="true" tabindex="-1"></a>penguins_raw</span></code></pre></div>
-<pre><code>## # A tibble: 344 × 17
-##    studyName Sample Num…¹ Species Region Island Stage Indiv…² Clutc…³ `Date Egg`
-##    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;date&gt;    
-##  1 PAL0708              1 Adelie… Anvers Torge… Adul… N1A1    Yes     2007-11-11
-##  2 PAL0708              2 Adelie… Anvers Torge… Adul… N1A2    Yes     2007-11-11
-##  3 PAL0708              3 Adelie… Anvers Torge… Adul… N2A1    Yes     2007-11-16
-##  4 PAL0708              4 Adelie… Anvers Torge… Adul… N2A2    Yes     2007-11-16
-##  5 PAL0708              5 Adelie… Anvers Torge… Adul… N3A1    Yes     2007-11-16
-##  6 PAL0708              6 Adelie… Anvers Torge… Adul… N3A2    Yes     2007-11-16
-##  7 PAL0708              7 Adelie… Anvers Torge… Adul… N4A1    No      2007-11-15
-##  8 PAL0708              8 Adelie… Anvers Torge… Adul… N4A2    No      2007-11-15
-##  9 PAL0708              9 Adelie… Anvers Torge… Adul… N5A1    Yes     2007-11-09
-## 10 PAL0708             10 Adelie… Anvers Torge… Adul… N5A2    Yes     2007-11-09
-## # … with 334 more rows, 8 more variables: `Culmen Length (mm)` &lt;dbl&gt;,
-## #   `Culmen Depth (mm)` &lt;dbl&gt;, `Flipper Length (mm)` &lt;dbl&gt;,
-## #   `Body Mass (g)` &lt;dbl&gt;, Sex &lt;chr&gt;, `Delta 15 N (o/oo)` &lt;dbl&gt;,
-## #   `Delta 13 C (o/oo)` &lt;dbl&gt;, Comments &lt;chr&gt;, and abbreviated variable names
-## #   ¹​`Sample Number`, ²​`Individual ID`, ³​`Clutch Completion`</code></pre>
 
 </div>
 </div>

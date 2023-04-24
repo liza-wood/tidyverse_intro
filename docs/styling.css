@@ -37,7 +37,11 @@ figcaption {
     text-align: right;
 }
 
-/* I want these to change link color but they don't-- */
+/* I want these to change link color but they don't--
+  --bunker: #272b30;
+  --ziggurat: #BED4E2;
+  --wedgewood: #437496;  */
+  
 a:link {
   font-family: "Jost", Sans-Serif;
   color: purple;

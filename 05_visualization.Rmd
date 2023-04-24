@@ -28,24 +28,44 @@ weather <- weather %>%
 
 ## Plot architecture
 
-Create a scatterplot of bill length and body mass
-
-```{r}  
-ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) + 
-  geom_point()
-```
+Create a scatterplot of...
 
 ```{r}
-ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species)) + geom_point()
+ggplot(data = penguins,
+                         aes(x = bill_length_mm,
+                             y = bill_depth_mm)) +
+  geom_point()
 ```
+```{r}
+ggplot(data = penguins,
+                         aes(x = bill_length_mm,
+                             y = bill_depth_mm)) +
+  geom_point(alpha = .8, size = 3)
+```
+
+What;s the trend?
+```{r}
+ggplot(data = penguins,
+                         aes(x = bill_length_mm,
+                             y = bill_depth_mm)) +
+  geom_point(alpha = .8, size = 3) +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+BUT, exploratory data analysis is super important:
+```{r}
+ggplot(data = penguins,
+               aes(x = bill_length_mm,
+                   y = bill_depth_mm,
+                   color = species)) +
+  geom_point(alpha = .8, size = 3) +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+Simpson's paradox!
 
 ## Selecting geometries
 
-```{r}
-ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species)) + 
-  geom_point() +
-  geom_smooth(method = 'lm')
-```
 Create a barplot of species counts
 ```{r}
 ggplot(penguins, aes(x = species)) + geom_bar()
@@ -62,6 +82,29 @@ weather %>%
   geom_line()
 ```
 
+
+```{r}
+weather %>% 
+  ungroup() %>% 
+  ggplot(aes(x = year, y = Temperature.Average..C., group = year)) +
+  geom_boxplot() 
+```
+
+We notice something weird... maybe check our end years?
+
+```{r}
+weather %>% 
+  filter(year == min(year)) %>% 
+  select(Date) %>% 
+  summary(Date)
+```
+
+```{r}
+weather %>% 
+  filter(year == max(year)) %>% 
+  select(Date) %>% 
+  summary(Date)
+```
 
 ```{r}
 weather %>% 
@@ -90,9 +133,51 @@ weather %>%
   geom_boxplot() 
 ```
 
-```{r}
-ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) + geom_point() + facet_wrap(~ species)
-```    
 
 ## Styling (automatic and manual)
 
+```{r}
+base_p <- weather %>% 
+  filter(year != min(year) & year != max(year)) %>% 
+  ggplot(aes(x = year, y = Temperature.Average..C., group = year,
+             color = penguin_data_year)) +
+  geom_boxplot() 
+```
+
+```{r}
+base_p +
+  scale_color_manual(values = c("darkorange","cyan4"))
+```
+
+```{r}
+base_p +
+  scale_color_manual(values = c("darkorange","cyan4")) +
+  labs(x = "Year", y = "Average Temperature (C)", 
+       title = "Daily average temperature range at Palmer Station (1985-2018)",
+       color = "Penguin data")
+```
+
+```{r}
+base_p +
+  scale_color_manual(values = c("darkorange","cyan4")) +
+  labs(x = "Year", y = "Average Temperature (C)", 
+       title = "Daily average temperature range at Palmer Station (1985-2018)",
+       color = "Penguin data")
+  theme_minimal()
+```
+
+# Analyzing relationships  
+
+https://www.tmwr.org/
+Body mass and bill length
+
+lm
+
+Flipper length and species
+
+lm
+anova
+
+Body mass and bill length over time
+
+lm

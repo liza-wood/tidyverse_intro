@@ -33,3 +33,5 @@ plot-architecture
 selecting-geometries
 challenge
 styling-automatic-and-manual
+fig:unnamed-chunk-7
+analyzing-relationships
