@@ -10,7 +10,7 @@ data
 palmer-station-penguins
 palmer-station-weather
 data-wrangling-basics
-outline
+outline-cheat-sheet
 reducing-data-dimensionality
 combining-multiple-steps
 check-in-challenge
@@ -19,7 +19,7 @@ new-columns
 summary-tables
 check-in-challenge-1
 data-wrangling-beyond-basics
-outline-1
+outline-cheat-sheet-1
 manipulating-date-variables
 check-in-challenge-2
 joining-multiple-data-frames
@@ -28,7 +28,7 @@ reshaping-lengtheningwidening-data
 working-with-text
 check-in-challenge-4
 visualization
-outline-2
+outline-cheat-sheet-2
 plot-architecture
 selecting-geometries
 combining-wrangling-visualization

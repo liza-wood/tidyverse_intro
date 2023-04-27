@@ -1,19 +1,19 @@
 # Visualization
 
-## Outline
+## Outline / cheat sheet  
 * Plot architecture
-  * `ggplot`
-  * `aes`
-  * `geom_`
+  * `ggplot`: create a blank canvas to plot on
+  * `aes`: identify variables in the data frame you'd like to map, including x and y coordinates as well as features like shape, size, color, etc.
+  * `geom_`: select from various geometries to give shape to your aesthetic mappings
 * Geometries
-  * `geom_point`
-  * `geom_bar` 
-  * `geom_boxplot`
-  * `geom_line`
+  * `geom_point`: points for scatter plots, useful for continuous x continuous variables
+  * `geom_bar`: bar graph for counting up observations of categorical variables
+  * `geom_boxplot`: box plots, useful for distribution of continuous x categorical
+  * `geom_line`: line plot, useful for tracking continuous variables over time
 * Styling (automatic and manual)
-  * `labs` 
-  * `theme_`
-  * `scale_`
+  * `scale_`: adjust any mapping (e.g. `scale_color_`, `scale_size_`) for customization  
+  * `labs`: add labels to any mapping
+  * `theme_`: adjust the overall look of plot (e.g. background, axis lines)  
 
 ```{r, echo = F, warning = F, message = F}
 library(tidyverse)

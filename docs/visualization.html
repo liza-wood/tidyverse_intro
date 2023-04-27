@@ -157,7 +157,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html"><i class="fa fa-check"></i><b>3</b> Data wrangling basics</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#outline"><i class="fa fa-check"></i><b>3.1</b> Outline</a></li>
+<li class="chapter" data-level="3.1" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#outline-cheat-sheet"><i class="fa fa-check"></i><b>3.1</b> Outline / cheat sheet</a></li>
 <li class="chapter" data-level="3.2" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#reducing-data-dimensionality"><i class="fa fa-check"></i><b>3.2</b> Reducing data dimensionality</a></li>
 <li class="chapter" data-level="3.3" data-path="data-wrangling-basics.html"><a href="data-wrangling-basics.html#combining-multiple-steps"><i class="fa fa-check"></i><b>3.3</b> Combining multiple steps</a>
 <ul>
@@ -172,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html"><i class="fa fa-check"></i><b>4</b> Data wrangling: beyond basics</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#outline-1"><i class="fa fa-check"></i><b>4.1</b> Outline</a></li>
+<li class="chapter" data-level="4.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#outline-cheat-sheet-1"><i class="fa fa-check"></i><b>4.1</b> Outline / cheat sheet</a></li>
 <li class="chapter" data-level="4.2" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#manipulating-date-variables"><i class="fa fa-check"></i><b>4.2</b> Manipulating date variables</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#check-in-challenge-2"><i class="fa fa-check"></i><b>4.2.1</b> Check in challenge</a></li>
@@ -189,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="visualization.html"><a href="visualization.html#outline-2"><i class="fa fa-check"></i><b>5.1</b> Outline</a></li>
+<li class="chapter" data-level="5.1" data-path="visualization.html"><a href="visualization.html#outline-cheat-sheet-2"><i class="fa fa-check"></i><b>5.1</b> Outline / cheat sheet</a></li>
 <li class="chapter" data-level="5.2" data-path="visualization.html"><a href="visualization.html#plot-architecture"><i class="fa fa-check"></i><b>5.2</b> Plot architecture</a></li>
 <li class="chapter" data-level="5.3" data-path="visualization.html"><a href="visualization.html#selecting-geometries"><i class="fa fa-check"></i><b>5.3</b> Selecting geometries</a>
 <ul>
@@ -217,27 +217,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="visualization" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">5</span> Visualization<a href="visualization.html#visualization" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="outline-2" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Outline<a href="visualization.html#outline-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="outline-cheat-sheet-2" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Outline / cheat sheet<a href="visualization.html#outline-cheat-sheet-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Plot architecture
 <ul>
-<li><code>ggplot</code></li>
-<li><code>aes</code></li>
-<li><code>geom_</code></li>
+<li><code>ggplot</code>: create a blank canvas to plot on</li>
+<li><code>aes</code>: identify variables in the data frame you’d like to map, including x and y coordinates as well as features like shape, size, color, etc.</li>
+<li><code>geom_</code>: select from various geometries to give shape to your aesthetic mappings</li>
 </ul></li>
 <li>Geometries
 <ul>
-<li><code>geom_point</code></li>
-<li><code>geom_bar</code></li>
-<li><code>geom_boxplot</code></li>
-<li><code>geom_line</code></li>
+<li><code>geom_point</code>: points for scatter plots, useful for continuous x continuous variables</li>
+<li><code>geom_bar</code>: bar graph for counting up observations of categorical variables</li>
+<li><code>geom_boxplot</code>: box plots, useful for distribution of continuous x categorical</li>
+<li><code>geom_line</code>: line plot, useful for tracking continuous variables over time</li>
 </ul></li>
 <li>Styling (automatic and manual)
 <ul>
-<li><code>labs</code></li>
-<li><code>theme_</code></li>
-<li><code>scale_</code></li>
+<li><code>scale_</code>: adjust any mapping (e.g. <code>scale_color_</code>, <code>scale_size_</code>) for customization<br />
+</li>
+<li><code>labs</code>: add labels to any mapping</li>
+<li><code>theme_</code>: adjust the overall look of plot (e.g. background, axis lines)</li>
 </ul></li>
 </ul>
 </div>

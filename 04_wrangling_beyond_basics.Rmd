@@ -1,6 +1,6 @@
 # Data wrangling: beyond basics
 
-## Outline  
+## Outline / cheat sheet  
 * Manipulating date variables:
   * `lubridate` package: Use date format functions (e.g. `ymd`) to specify date data formats
 * Joining multiple data frames:

@@ -1,6 +1,6 @@
 # Data wrangling basics
 
-## Outline
+## Outline / cheat sheet  
 * Reducing data dimensionality:
   * `select`: Name the columns to keep, separated by a comma. Using select will reduce the number of columns in your data frame
   * `filter`: Set conditions by which you want to filter (keep) some of the data. Using the filter function will reduce the number of rows in your data frame
