@@ -184,7 +184,7 @@ weather %>%
   geom_boxplot() 
 ```
 
-## Check in challenge
+### Check in challenge
 
 Let's practice combining data wrangling with plotting. First, use the `case_when` function to `mutate` a new column called 'penguin_data_year'. The condition we'd like to set is to identify the years for which we have data in the 'penguins' data (2007:2009) as TRUE, and all of the other years FALSE. Second, re-create the yearly tempoerature boxplot we just made, but add a color aesthetic using the 'penguin_year_data' to define the color. The end result should be the boxplot, but with the distributions of 2007-2009 a different color from the rest. You can do this is two steps, or bonus if you pipe it all together.
 
@@ -205,8 +205,9 @@ weather %>%
 ```
 </details>
 
-## Styling (automatic and manual)
+## Styling
 
+You can save plots as objects
 ```{r}
 base_p <- weather %>% 
   filter(year != min(year) & year != max(year)) %>% 
@@ -215,11 +216,23 @@ base_p <- weather %>%
   geom_boxplot() 
 ```
 
+Then you can add layers to that base plot.
+
+Let's set colors using pre-set palettes
+
+```{r}
+base_p +
+  scale_color_viridis_d()
+```
+
+Or set colors manually
+
 ```{r}
 base_p +
   scale_color_manual(values = c("darkorange","cyan4"))
 ```
 
+Add labels
 ```{r}
 base_p +
   scale_color_manual(values = c("darkorange","cyan4")) +
@@ -228,6 +241,7 @@ base_p +
        color = "Penguin data")
 ```
 
+Change themes
 ```{r}
 base_p +
   scale_color_manual(values = c("darkorange","cyan4")) +
@@ -237,3 +251,27 @@ base_p +
   theme_minimal()
 ```
 
+Customize themes to change all sorts of things:
+
+Remove legend
+```{r}
+base_p +
+  scale_color_manual(values = c("darkorange","cyan4")) +
+  labs(x = "Year", y = "Average Temperature (C)", 
+       title = "Daily average temperature range at Palmer Station (1985-2018)",
+       color = "Penguin data") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+change text
+```{r}
+base_p +
+  scale_color_manual(values = c("darkorange","cyan4")) +
+  labs(x = "Year", y = "Average Temperature (C)", 
+       title = "Daily average temperature range at Palmer Station (1985-2018)",
+       color = "Penguin data") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        text = element_text(family = "Avenir"))
+```

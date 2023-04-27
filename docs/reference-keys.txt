@@ -33,4 +33,4 @@ plot-architecture
 selecting-geometries
 combining-wrangling-visualization
 check-in-challenge-5
-styling-automatic-and-manual
+styling
