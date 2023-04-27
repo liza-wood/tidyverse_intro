@@ -31,5 +31,6 @@ visualization
 outline-2
 plot-architecture
 selecting-geometries
-challenge
+combining-wrangling-visualization
+check-in-challenge-5
 styling-automatic-and-manual
