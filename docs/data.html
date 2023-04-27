@@ -23,7 +23,7 @@
 <meta name="author" content="Liza Wood" />
 
 
-<meta name="date" content="2023-03-27" />
+<meta name="date" content="2023-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -180,9 +180,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#joining-multiple-data-frames"><i class="fa fa-check"></i><b>4.3</b> Joining multiple data frames</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#check-in-challenge-3"><i class="fa fa-check"></i><b>4.3.1</b> Check in challenge</a></li>
-<li class="chapter" data-level="4.3.2" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#reshaping-lengtheningwidening-data"><i class="fa fa-check"></i><b>4.3.2</b> Reshaping (lengthening/widening) data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#working-with-text"><i class="fa fa-check"></i><b>4.4</b> Working with text</a></li>
+<li class="chapter" data-level="4.4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#reshaping-lengtheningwidening-data"><i class="fa fa-check"></i><b>4.4</b> Reshaping (lengthening/widening) data</a></li>
+<li class="chapter" data-level="4.5" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#working-with-text"><i class="fa fa-check"></i><b>4.5</b> Working with text</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#check-in-challenge-4"><i class="fa fa-check"></i><b>4.5.1</b> Check in challenge</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization</a>
 <ul>
@@ -216,13 +219,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The Palmer Station penguins data is a tidy dataset related to three species of Antarctic penguins from Horst, Hill, and Gorman (2020)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <p>The data contains size measurements for and female adult foraging Adélie, Chinstrap, and Gentoo penguins observed on islands in the Palmer Archipelago near Palmer Station, Antarctica between 2007-2009. Data were collected and made available by Dr. Kristen Gorman and the Palmer Station Long Term Ecological Research (LTER) Program. You can read more about the package <a href="https://allisonhorst.github.io/palmerpenguins/index.html">here</a>.</p>
 <p>Let’s start by installing the package in one of two ways:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install from CRAN</span></span>
-<span id="cb1-2"><a href="data.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;palmerpenguins&#39;</span>)</span>
-<span id="cb1-3"><a href="data.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Or install directory from the github repository</span></span>
-<span id="cb1-4"><a href="data.html#cb1-4" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;allisonhorst/palmerpenguins&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install from CRAN</span></span>
+<span id="cb4-2"><a href="data.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;palmerpenguins&#39;</span>)</span>
+<span id="cb4-3"><a href="data.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Or install directory from the github repository</span></span>
+<span id="cb4-4"><a href="data.html#cb4-4" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;allisonhorst/palmerpenguins&quot;</span>)</span></code></pre></div>
 <p>Now we can load in the package library, which stores the <code>penguins</code> dataset.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
-<span id="cb2-2"><a href="data.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb5-2"><a href="data.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 ##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
@@ -234,9 +237,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6 Adelie  Torgersen           39.3          20.6               190        3650
 ## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <p>Learn more about each variable in the documentation</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data.html#cb4-1" aria-hidden="true" tabindex="-1"></a>?penguins</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data.html#cb7-1" aria-hidden="true" tabindex="-1"></a>?penguins</span></code></pre></div>
 <p>Let’s take a look at its structure:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span></code></pre></div>
 <pre><code>## tibble [344 × 8] (S3: tbl_df/tbl/data.frame)
 ##  $ species          : Factor w/ 3 levels &quot;Adelie&quot;,&quot;Chinstrap&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ island           : Factor w/ 3 levels &quot;Biscoe&quot;,&quot;Dream&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
@@ -250,10 +253,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="palmer-station-weather" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Palmer Station weather<a href="data.html#palmer-station-weather" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To practice data wrangling skills, this tutorial will also use another data set from the Antarctic LTER Program – the ‘Daily averaged weather timeseries at Palmer Station, Antarctica’<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, which includes various weather metrics measured between 1989-2019. We’ll read in these data directly from online and name the data frame <code>weather</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data.html#cb7-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://pasta.lternet.edu/package/data/eml/knb-lter-pal/28/8/375b34051b162d84516ec2d02f864675&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data.html#cb10-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://pasta.lternet.edu/package/data/eml/knb-lter-pal/28/8/375b34051b162d84516ec2d02f864675&quot;</span>) </span></code></pre></div>
 <p>These data have been made available through the Environmental Data Initiative and more information can be found <a href="https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-pal.28.8">here</a></p>
 <p>Let’s take a look at the data’s structure:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weather)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weather)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    10674 obs. of  24 variables:
 ##  $ Date                           : chr  &quot;1989-04-01&quot; &quot;1989-04-02&quot; &quot;1989-04-03&quot; &quot;1989-04-04&quot; ...
 ##  $ Temperature.High..C.           : num  2.8 1.1 -0.6 1.1 -0.6 2.5 -1.4 -0.8 -1 -1.5 ...

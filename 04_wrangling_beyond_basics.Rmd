@@ -205,7 +205,13 @@ head(penguins_widerID_allcols)
 
 Let's back up a bit to the cleaning process. We've been working on getting our data in summary form, bringing in new data, and changing data shape, all of which is pretty far down the data wrangling pipeline. But we are going to take this last moment to talk about an earlier stage task: cleaning text data.  
 
-When we first create and collect data, it may not be in its tidy-est form. One common un-tidy data practice is to have multiple types of data in one column. For instance, we can look at the 'raw' version of the penguins data, also available through the package. Let's look at the third and sixth columns, for instance.  
+When we first create and collect data, it may not be in its tidy-est form. One common un-tidy data practice is to have multiple types of data in one column. For instance, we can look at the 'raw' version of the penguins data, also available through the package. Go ahead and read that in:
+
+```{r}
+penguins_raw <- penguins_raw
+```
+
+Let's look at the third and sixth columns, for instance.  
 
 ```{r}
 head(select(penguins_raw, 3,6))
@@ -213,33 +219,67 @@ head(select(penguins_raw, 3,6))
 
 The Stage column is a good example of where multiple data points might be combined into one cell as text. Here we have 'Adult, 1 Egg Stage' reported. But, we might want to separate out the title of the penguin's stage, Adult, from their egg stage count. For this we can use the `separate` function to divide the contents of one column into multiple based on particular symbols. In this case, there is a convention to separate the word Adult (or other stage) from the egg count using a comma (,). 
 
-For the `separate` function we need to enter a few arguments: the data, the column to separate, the names of the new columns, and the separator symbol:
+For the `separate` function we need to enter a few arguments: the data, the column to separate, the names of the new columns, and the separator symbol. Note that the help file says that the separator symbol is "interpreted as a regular expression" -- we'll get to to that in a second. 
 
 ```{r}
 penguins_raw_sep <- separate(penguins_raw, Stage, c("age_cat", "egg_stage"), ',')
 ```
 
 Now we can see that these two have replace the previous Stage column, and has added one more column to the data frame.  
+
 ```{r}
 head(select(penguins_raw_sep, 4:7))
 ```
 
 Now, we could even go one step further. The data here are well organized and uniform, meaning that separate works quite well. Every Stage column has a comma, and even now in the egg_stage column, there are three words, so we could separate by a space " " and get three new columns. However, when data is messy we might need some more powerful text manipulation tools.
 
-Enter: the `stringr` package and regular expressions. 
+Enter: the `stringr` package and regular expressions. Stringr is a package providing a set of functions for manipulating "strings", also called text or character data. Check out the great [stringr cheat sheet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf). Part of what makes stringr to powerful is that it relies on patterns interpreted as 'regular expressions' (or regex). Regex is its own pattern language that allows you to generalize string patterns for great adaptability to string cleaning. 
 
-https://edrub.in/CheatSheets/cheatSheetStringr.pdf
+We will practice just one example, which is to extract the number from the egg_stage column. The power of regex is that instead of specifying every possible number that could exist in the column, there is a symbol for numbers in the regex language, which is `\\d`. There is also a symbol to quantify the number of symbols, where `?` is zero or one, `*` is zero or more, `+` is one or more, etc. By combining `\\d+` we've created a regular expression for the pattern: one or more digits. We can then use this in one of the string functions, `str_extract`, with the two arguments it needs: the character vector and the pattern.
 
 ```{r}
 str_extract(penguins_raw_sep$egg_stage, '\\d+')
 ```
 
+Excellent. Our pattern worked and we've successfully extracted the number pattern from the column. One tiny tweak is that the numbers are in quotation marks, meaning that they are still character data. We can coerce them to numeric once they are all numbers.
 
 ```{r}
-egg_no <- as.numeric(str_extract(penguins_raw_sep$egg_stage, '\\d+'))
+penguins_raw_sep$egg_no <- as.numeric(str_extract(penguins_raw_sep$egg_stage,
+                                                  '\\d+'))
+head(penguins_raw_sep$egg_no)
 ```
 
-  * `paste`: combine contents from multiple columns (or external text)
-  
+Finally, want to put things back together? The `paste` function is a straightforward way to paste columns or values back together. The arguments for paste are as many value you'd like to paste together, separated by a comma. For instance:
 
+```{r}
+head(paste(penguins_raw_sep$age_cat, penguins_raw_sep$egg_stage))
+```
+
+And you can also mix and match data types and lengths, etc:
+
+```{r}
+paste("Paste together items of different lengths, for example:", 
+      1:10, "different items")
+```
+
+  
+### Check in challenge
+
+Try to separate the common name from the scientific name from the 'Species' column in penguins_raw. E.g. separate 'Adelie Penguin (Pygoscelis adeliae)' into two columns: 'Adelie Penguin' and 'Pygoscelis adeliae'. You may need to combine separate with a stringr function (e.g. `str_remove`) depending on how you'd like to deal with the parentheses. Note that parentheses in regular expressions are special characters and will need to be treated as such both in the `separate` and `stringr` functions -- see the cheat sheet!
+
+<details>
+<summary>Check your answer</summary>
+```{r}
+# Separate by the first opening parentheses
+penguins_raw <- separate(penguins_raw, Species, 
+                         c("common_name", "sci_name"), "\\(")
+# Then remove the second closing parentheses with stringr
+penguins_raw$sci_name <- str_remove(penguins_raw$sci_name, "\\)")
+# I also like to use the base R function 'trimws' to trim white space
+penguins_raw$common_name <- trimws(penguins_raw$common_name)
+penguins_raw$sci_name <- trimws(penguins_raw$sci_name)
+# Let's take a look
+head(select(penguins_raw, common_name, sci_name))
+```
+</details>
 

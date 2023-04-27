@@ -1,6 +1,5 @@
 fig:unnamed-chunk-1
-fig:unnamed-chunk-7-1
-fig:unnamed-chunk-7-2
+fig:unnamed-chunk-7
 fig:unnamed-chunk-19
 introduction
 acknowledgements
@@ -27,11 +26,10 @@ joining-multiple-data-frames
 check-in-challenge-3
 reshaping-lengtheningwidening-data
 working-with-text
+check-in-challenge-4
 visualization
 outline-2
 plot-architecture
 selecting-geometries
 challenge
 styling-automatic-and-manual
-fig:unnamed-chunk-7
-analyzing-relationships

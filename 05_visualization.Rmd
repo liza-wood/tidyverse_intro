@@ -166,18 +166,3 @@ base_p +
   theme_minimal()
 ```
 
-# Analyzing relationships  
-
-https://www.tmwr.org/
-Body mass and bill length
-
-lm
-
-Flipper length and species
-
-lm
-anova
-
-Body mass and bill length over time
-
-lm

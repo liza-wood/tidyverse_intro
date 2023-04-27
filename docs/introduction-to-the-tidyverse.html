@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Introduction to the Tidyverse | Tidyverse: Data wrangling &amp; visualization</title>
   <meta name="description" content="1 Introduction to the Tidyverse | Tidyverse: Data wrangling &amp; visualization" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Introduction to the Tidyverse | Tidyverse: Data wrangling &amp; visualization" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Liza Wood" />
 
 
-<meta name="date" content="2023-03-27" />
+<meta name="date" content="2023-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -180,9 +180,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#joining-multiple-data-frames"><i class="fa fa-check"></i><b>4.3</b> Joining multiple data frames</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#check-in-challenge-3"><i class="fa fa-check"></i><b>4.3.1</b> Check in challenge</a></li>
-<li class="chapter" data-level="4.3.2" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#reshaping-lengtheningwidening-data"><i class="fa fa-check"></i><b>4.3.2</b> Reshaping (lengthening/widening) data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#working-with-text"><i class="fa fa-check"></i><b>4.4</b> Working with text</a></li>
+<li class="chapter" data-level="4.4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#reshaping-lengtheningwidening-data"><i class="fa fa-check"></i><b>4.4</b> Reshaping (lengthening/widening) data</a></li>
+<li class="chapter" data-level="4.5" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#working-with-text"><i class="fa fa-check"></i><b>4.5</b> Working with text</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#check-in-challenge-4"><i class="fa fa-check"></i><b>4.5.1</b> Check in challenge</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization</a>
 <ul>
@@ -228,15 +231,15 @@ Figure 0.1: Artwork by <span class="citation">@allison_horst</span>
 <p>Once you install the package, read it into your library for our session today (note: you only have to install packages once, but you must load the packages you are using into your library for ever R ‘session’).</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introduction-to-the-tidyverse.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.0     ✔ readr     2.1.4
+## ✔ dplyr     1.1.1     ✔ readr     2.1.4
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.0
-## ✔ ggplot2   3.4.1     ✔ tibble    3.1.8
+## ✔ ggplot2   3.4.2     ✔ tibble    3.2.1
 ## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
 ## ✔ purrr     1.0.1     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors</code></pre>
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 
 </div>
 </div>

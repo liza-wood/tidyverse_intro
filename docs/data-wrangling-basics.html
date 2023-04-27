@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Data wrangling basics | Tidyverse: Data wrangling &amp; visualization</title>
   <meta name="description" content="3 Data wrangling basics | Tidyverse: Data wrangling &amp; visualization" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Data wrangling basics | Tidyverse: Data wrangling &amp; visualization" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Liza Wood" />
 
 
-<meta name="date" content="2023-03-27" />
+<meta name="date" content="2023-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -180,9 +180,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#joining-multiple-data-frames"><i class="fa fa-check"></i><b>4.3</b> Joining multiple data frames</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#check-in-challenge-3"><i class="fa fa-check"></i><b>4.3.1</b> Check in challenge</a></li>
-<li class="chapter" data-level="4.3.2" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#reshaping-lengtheningwidening-data"><i class="fa fa-check"></i><b>4.3.2</b> Reshaping (lengthening/widening) data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#working-with-text"><i class="fa fa-check"></i><b>4.4</b> Working with text</a></li>
+<li class="chapter" data-level="4.4" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#reshaping-lengtheningwidening-data"><i class="fa fa-check"></i><b>4.4</b> Reshaping (lengthening/widening) data</a></li>
+<li class="chapter" data-level="4.5" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#working-with-text"><i class="fa fa-check"></i><b>4.5</b> Working with text</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="data-wrangling-beyond-basics.html"><a href="data-wrangling-beyond-basics.html#check-in-challenge-4"><i class="fa fa-check"></i><b>4.5.1</b> Check in challenge</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization</a>
 <ul>
@@ -444,7 +447,7 @@ Check your answer
 ##  8 Adelie  female           41.1          17.6       2.34
 ##  9 Adelie  male             38.6          21.2       1.82
 ## 10 Adelie  male             34.6          21.1       1.64
-## # … with 136 more rows</code></pre>
+## # ℹ 136 more rows</code></pre>
 <p>Note that in order to save the column in the data frame, we must assign it as a new data frame object. The output of mutate is not just a new column on its own, but the whole data frame with the new column appended. So far we have not overwritten in, and we can see that bill_depth_cm is not in our penguins data frame</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="data-wrangling-basics.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins_piped)</span></code></pre></div>
 <pre><code>## [1] &quot;species&quot;        &quot;sex&quot;            &quot;bill_length_mm&quot; &quot;bill_depth_mm&quot;</code></pre>
