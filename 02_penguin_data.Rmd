@@ -21,7 +21,7 @@ library(palmerpenguins)
 head(penguins)
 ```
 
-Learn more about each variable in the documentation
+Learn more about each variable in the documentation  
 ```{r}
 ?penguins
 ```
