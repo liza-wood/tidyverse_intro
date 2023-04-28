@@ -4,20 +4,20 @@
 * Reducing data dimensionality:
   * `select`: Name the columns to keep, separated by a comma. Using select will reduce the number of columns in your data frame
   * `filter`: Set conditions by which you want to filter (keep) some of the data. Using the filter function will reduce the number of rows in your data frame
-    * `is.na()`: Insert a column name to get a logical vector indicated whether each value in that row has an NA value
+    * `is.na()`: Specify a column name to get a logical vector indicated whether each value in that row has an NA value. Useful when paired with filter.  
 * Combining multiple steps
   * `%>%`: Link together multiple steps by 'piping' the output of one line of code into the next
 * Creating new variables
-  * Summary tables
-    * `group_by`: Set a column (or columns) by which you want to perform a summarizing function on. Using this function does apparently nothing on its own, but is powerful when paired with `summarize` (or `mutate`)
-    * `summarize`: Create a new variable by performing a variety of summary/transformative functions on an existing column (or set of columns). When paired with `group_by`, data is reduced to a summary table
   * New columns
     * `mutate`: Create a new column by assigning a value (transformed or otherwise)
-    * `case_when`: Pair with mutate to create a new variable that is based on >1 conditions, typically for creating categorical variables
+    * `case_when`: Pair with `mutate` to create a new variable that is based on one or more conditions, typically for creating categorical variables
+  * Summary tables
+    * `group_by`: Set a column (or columns) by which you want to perform a summarizing function on. Using this function does apparently nothing on its own, but is powerful when paired with `summarize` or `mutate`
+    * `summarize`: Create a new variable by performing a variety of summary/transformative functions on an existing column (or set of columns). When paired with `group_by`, data is reduced to a summary table
 
 ## Reducing data dimensionality
 
-The functions, `select` and `filter`, are what you can use to reduce dimensionality of your data frame. That means reducing the number of column (with `select`) and/or the number of rows (with `filter`). To use `select`, name the columns to keep, separated by a comma. For example, let's select the species, year, sex, and body mass.
+The functions, `select` and `filter`, are what you can use to reduce dimensionality of your data frame. That means reducing the number of column (with `select`) and/or the number of rows (with `filter`). To use `select`, name the columns to keep, separated by a comma. For example, let's select the species, year, sex, and body mass columns.
 
 ```{r, echo = F, warning = F, message = F}
 library(tidyverse)
@@ -35,7 +35,7 @@ penguins_selected <- select(penguins, species, year, sex, body_mass_g)
 # Take a look at the 'dimensions' with dim()
 dim(penguins_selected)
 ```
-The select columns can also be used to remove columns (unselect) rather than select by using the `-` operator. For example, we may want to remove only two columns, island and year:
+The select columns can also be used to remove columns rather than select by using the `-` operator. For example, we may want to remove only two columns, island and year:
 
 ```{r}
 # Un-select the island and year columns by using -.
@@ -44,7 +44,7 @@ penguins_unselected <- select(penguins, -island, -year)
 dim(penguins_unselected)
 ```
 
-New, let's filter the data based on a certain condition. Creating 'conditions' in R means writing logical statements with a response that will be either TRUE or FALSE. To write conditions we can use [comparative operators](https://www.w3schools.com/r/r_operators.asp), which give a logical output: 
+Now, let's filter the data based on a certain condition. Creating 'conditions' in R means writing logical statements with a response that will be either TRUE or FALSE. To write conditions we can use [comparative operators](https://www.w3schools.com/r/r_operators.asp), which give a logical output: 
 
 | Comparative Operator | Name                     | Example |
 |----------------------|--------------------------|---------|
@@ -59,13 +59,13 @@ New, let's filter the data based on a certain condition. Creating 'conditions' i
 head(penguins$year == 2007, n = 75)
 ```
 
-The filter function evaluates those conditions, and keeps only the rows for which the value os TRUE. For example, let's filter observations so that we only keep those from the year 2007.
+The filter function evaluates the condition and keeps only the rows for which the value is TRUE. For example, let's filter observations so that we only keep those from the year 2007.
 ```{r}
 penguins_filtered <- filter(penguins, year == 2007)
 dim(penguins_filtered)
 ```
 
-There are other functions to evaluate columns and get a T/F output. An important one is `is.na()`. This function evaluates a column and reports back a TRUE value when there is an NA in that column's row. For example, we can use the `head()` function to look at the top 6 values of the `sex` column, and see that there is an NA in the fourth row.
+There are other functions we can use to evaluate columns and get a T/F output. An important one is `is.na()`. This function evaluates a column and reports back a TRUE value when there is an NA in that column's row. For example, we can use the `head()` function to look at the top 6 values of the `sex` column, and see that there is an NA in the fourth row.
 
 ```{r}
 head(penguins$sex, n = 75)
@@ -76,7 +76,7 @@ The `is.na` function evaluates the whole column and gives us TRUES whenever it s
 ```{r}
 head(is.na(penguins$sex), n = 75)
 ```
-Since `is.na()` gives us a T/F vector, it is already a good candidate for putting right into filter. Below we are asking the filter function to keep only the observations that have an NA in the sex column.
+Since `is.na()` gives us a T/F vector, it is already a good candidate for using it as a condition in filter. Below we are asking the filter function to keep only the observations that have an NA in the sex column. In other others, evaluate the logical conditions "are there NAs in the sex column?" then filter out the rows where the condition is TRUE, meaning there are NAs.
 ```{r}
 penguins_filtered_nas <- filter(penguins, is.na(sex))
 dim(penguins_filtered_nas)
@@ -95,6 +95,13 @@ You can combined multiple conditions using [logical operators](https://www.w3sch
 | &                | AND     | x == 2 & y == 10  |
 | \|              | OR      | x == 2 \| y == 10  |
 
+For example, we can filter out the rows where there are NAs in the sex column AND keep only the rows of the penguin species named Adelie. 
+
+```{r}
+penguins_filtered_2conditions <- filter(penguins, !is.na(sex) & 
+                                          species == "Adelie")
+dim(penguins_filtered_2conditions)
+```
 
 ## Combining multiple steps 
 
@@ -163,20 +170,20 @@ penguins_newcolumn <- mutate(penguins_piped, bill_ratio = bill_length_mm / bill_
 colnames(penguins_newcolumn)
 ```
 
-In addition to the mathematical transformations we just tried, we may want to create new, discrete categories with our data. For example, let's categorize bill length into discrete size groups, small, 
+In addition to the mathematical transformations we just tried, we may want to create new, discrete categories with our data. For example, let's categorize bill ratio into discrete size groups based on its distribution. 
 
 ```{r}
 summary(penguins_newcolumn$bill_ratio)
 ```
 
-All values are greater than 1, so all bill lengths are greater than depths. Still, lower ratio values mean that the bill depth is large relative to its length (deep bills) and higher values mean that bill depth is small relative to its length (shallow bills). Let's say we wanted to use these bill lengths ratios to group penguins into one of three groups: 'deep' 'average' and 'shallow'.
+All values are greater than 1, so all bill lengths are greater than depths. Still, lower ratio values mean that the bill depth is large relative to its length (deep bills) and higher values mean that bill depth is small relative to its length (shallow bills). Let's say we wanted to use these bill ratios to group penguins into one of three groups: 'deep' 'average' and 'shallow'.
 
 ```{r echo=FALSE, out.width = "40%", fig.align='center',  fig.cap = 'Artwork by @allison_horst'}
 knitr::include_graphics("img/culmen_depth.png")
 ```
 
 
-The `case_when` functions, combined with `mutate`, lets us set multiple conditions and resulting categories. This function uses a series of two-sided formulas where the left-hand side determines describes the condition, and the right supplies the result. The final condition should always be TRUE, meaning that when the previous conditions have not been met, assign the last value. 
+The `case_when` function, combined with `mutate`, lets us set multiple conditions and assign resulting categories. This function uses a series of two-sided formulas where the left-hand side determines describes the condition, and the right supplies the result. The final condition should always be TRUE, meaning that when the previous conditions have not been met, assign the last value. 
 
 Using these functions we can create a depth ratio category variable:
 
@@ -193,7 +200,7 @@ penguins_newcolumn <- penguins_newcolumn %>%
 head(penguins_newcolumn$bill_depth_cat, n = 75)
 ```
 
-A note: Always be cautious about what might be left out when naming the conditions. In the previous example, we assumes that everything left after the first two conditions would be shallow. To be on the safe side, I often set every condition and leave the last condition either an error notice, or NA, so that I can check my conditions.
+A note: Always be cautious about what might be left out when naming the conditions. In the previous example, we assume that everything left after the first two conditions would be shallow. To be on the safe side, I often set every condition and leave the last condition either an error notice, or NA, so that I can check my conditions.
 
 ```{r}
 penguins_newcolumn <- penguins_newcolumn %>% 
@@ -203,15 +210,22 @@ penguins_newcolumn <- penguins_newcolumn %>%
     # Between 1st and 2rd Q
     bill_ratio > 2.013 & bill_ratio <= 2.239 ~ 'average',
     bill_ratio >= 2.239 ~ 'shallow',
-    T ~ 'error'
+    T ~ 'ERROR'
   ))
 ```
 
+Then we can use the `unique` function to look at all of the unique values of that new variable to check out work.
+
+```{r}
+unique(penguins_newcolumn$bill_depth_cat)
+```
+
+
 ### Summary tables
 
-Often we want to aggregate data at certain levels to better understand differences across groups. For instance, does flipper length differ by species? Does body mass change between years? We can combined `group_by` and `summarize` to help answer that. `group_by` sets a column (or columns) by which you want to perform a summarizing function on, then `summarize` creates a new variable by performing a variety of summary/transformative functions on an existing column. 
+Often we want to aggregate data at certain levels to better understand differences across groups. For instance, does flipper length differ by species? Does body mass change between years? We can combine the `group_by` and `summarize` functions to help answer these kinds of questions. `group_by` sets a column (or columns) by which you want to perform a summarizing function on, then `summarize` creates a new variable by performing a variety of summary/transformative functions on an existing column. 
 
-First, we can use sumamrize on its own, without any grouping, to get a single summary about the data frame. For example, if we want to know the mean body mass:
+First, we can use summarize on its own, without any grouping, to get a single summary about the data frame. For example, if we want to know the mean body mass:
 
 ```{r}
 # calculate the mean body mass for the whole data frame
@@ -224,7 +238,7 @@ If the result is NA, be sure to include the 'na.rm = T' argument to tell the fun
 summarize(penguins, mean_flipper_length_mm = mean(flipper_length_mm, na.rm = T))
 ```
 
-But if we want to know the mean flipper length across certain grouping variables, such as sex, we want to combine summarize with group_by.
+But if we want to know the mean flipper length across certain grouping variables, such as sex, we want to combine summarize with `group_by` first.
 
 ```{r}
 penguins %>% 
@@ -232,7 +246,7 @@ penguins %>%
   summarize(mean_flipper_length_mm = mean(flipper_length_mm, na.rm = T))
 ```
 
-We group_by multiple columns at once, AND summarize can create several new summary variables within the same summarize function, just separating by a comma in both cases. For instance, we can group by species and sex, and generate two summary variables of mean and standard deviation flipper length:
+These functions are powerful. We can group by multiple columns at once AND summarize can create several new summary variables within the same summarize function, just by separating arguments by a comma in both cases. For instance, we can group by species and sex, and generate two summary variables of mean and standard deviation flipper length:
 
 ```{r}
 penguins %>% 
@@ -243,7 +257,7 @@ penguins %>%
 
 ### Check in challenge
 
-Calculate the mean and standard deviation for each year-sex combination. Before calculating those summaries, remove the observations where there is no data for penguin sex. Name this new summary table 'summary_challenge'. What is the mean and standard deviation of the body mass for male penguins in 2008?
+Use summarize to calculate the mean and standard deviation for each year-sex group combination. Before calculating those summaries, filter out the observations where there is no data for penguin sex. Name this new summary table 'summary_challenge'. What is the mean and standard deviation of the body mass for male penguins in 2008?
 
 <details>
 <summary>Check your answer</summary>

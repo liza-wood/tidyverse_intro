@@ -1,7 +1,7 @@
 ---
 title: 'Tidyverse: Data wrangling & visualization'
 author: Liza Wood
-date: "`r Sys.Date()`"
+date: "2023-04-27"
 
 github-repo: liza-wood/tidyverse_intro
 url: "https://github.com/liza-wood/tidyverse_intro"
@@ -38,9 +38,10 @@ This tutorial is an introduction to data wrangling and visualization using funct
 * General knowledge of R's base functionality (math, naming objects) (note: you can familiarize yourself with R's base functionality and RStudio's layout [here](https://gge-ucd.github.io/R-DAVIS/lesson_01_intro_r_rstudio.html))
 
 
-```{r echo=FALSE, out.width = "60%", fig.align='center',  fig.cap = 'Artwork by @allison_horst'}
-knitr::include_graphics("img/learning_r.png")
-```
+<div class="figure" style="text-align: center">
+<img src="img/learning_r.png" alt="Artwork by @allison_horst" width="60%" />
+<p class="caption">(\#fig:unnamed-chunk-1)Artwork by @allison_horst</p>
+</div>
 
 ## Acknowledgements  
 
