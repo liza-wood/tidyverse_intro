@@ -45,3 +45,13 @@ knitr::include_graphics("img/learning_r.png")
 ## Acknowledgements  
 
 This site was developed based on material from [UC Davis's R-DAVIS course](https://gge-ucd.github.io/R-DAVIS/index.html), which draws heavily on [Carpentries](https://datacarpentry.org/R-ecology-lesson/) R lessons. Additionally, artwork is from Allison Horst ([@allison_horst](https://allisonhorst.com/)) and website styling was also based on the designs from the [Palmer Penguins package webpage](https://allisonhorst.github.io/palmerpenguins/)
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HJX1JG1FCV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HJX1JG1FCV');
+</script>

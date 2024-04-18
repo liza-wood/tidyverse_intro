@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Visualization | Tidyverse: Data wrangling &amp; visualization</title>
   <meta name="description" content="5 Visualization | Tidyverse: Data wrangling &amp; visualization" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Visualization | Tidyverse: Data wrangling &amp; visualization" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Liza Wood" />
 
 
-<meta name="date" content="2023-04-28" />
+<meta name="date" content="2024-04-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="styling.css" type="text/css" />
 </head>
@@ -249,37 +253,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>ggplot</code> is an incredibly powerful plotting tool that follows the ‘grammar of graphics’ – an approach that supports data visualization according to best practices. A <code>ggplot</code> has a template with three basic parts 1) data, 2) mappings, and 3) geometries, as well as countless other add-ons to enhance the plot. The generic syntax for combining these parts is below:</p>
 <pre><code>ggplot(data = &lt;DATA&gt;, mapping = aes(&lt;MAPPINGS&gt;)) +  &lt;GEOM_FUNCTION&gt;()</code></pre>
 <p>We’ll get into the add-ons throughout this lesson, but let’s start by building a plot from the base up. First, let’s input the penguins data into the ggplot function:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="visualization.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="visualization.html#cb124-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins)</span></code></pre></div>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>What we get is a blank canvas of a plot – ggplot knows you want to plot something, but it isn’t sure what yet because you haven’t given it any specifics about the data. We get into the specifics with mappings, where we give the plot data-based features like x and y coordinates:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="visualization.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
-<span id="cb3-2"><a href="visualization.html#cb3-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">y =</span> bill_depth_mm))</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="visualization.html#cb125-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb125-2"><a href="visualization.html#cb125-2" tabindex="-1"></a>                                      <span class="at">y =</span> bill_depth_mm))</span></code></pre></div>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Now ggplot knows what you want to plot, and it maps them onto the x and y axes, as we specified. But we still haven’t told ggplot <em>how</em> to map them (i.e. in what shape?). We can specify the shape using one of several <code>geom_</code> functions. Let’s select a ‘point’ geometry, which we use for a scatter plot of continuous x continuous variables.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="visualization.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
-<span id="cb4-2"><a href="visualization.html#cb4-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="visualization.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 2 rows containing missing values (`geom_point()`).</code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="visualization.html#cb126-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb126-2"><a href="visualization.html#cb126-2" tabindex="-1"></a>                                      <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
+<span id="cb126-3"><a href="visualization.html#cb126-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Now we’re getting somewhere. Let’s play around a bit with some additional arguments that you can add to the plot, such as changing the transparency, size, shape, and color. These are all their own arguments that can be placed inside either the ggplot function or the geom function. I prefer to put them in the goem function.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="visualization.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,</span>
-<span id="cb6-2"><a href="visualization.html#cb6-2" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
-<span id="cb6-3"><a href="visualization.html#cb6-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="visualization.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">15</span>, <span class="at">color =</span> <span class="st">&quot;darkorange&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 2 rows containing missing values (`geom_point()`).</code></pre>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="visualization.html#cb128-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,</span>
+<span id="cb128-2"><a href="visualization.html#cb128-2" tabindex="-1"></a>                         <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb128-3"><a href="visualization.html#cb128-3" tabindex="-1"></a>                             <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
+<span id="cb128-4"><a href="visualization.html#cb128-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">15</span>, <span class="at">color =</span> <span class="st">&quot;darkorange&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>What’s powerful about ggplot is that you can add on multiple layers using the plus sign, and can even add several geometries to one plot. One geometry used for discerning trends is the <code>geom_smooth()</code> geometry, which will assign a trend line based on the distribution you specify, such as “lm”, “glm”, “gam”, or “loess”. Let’s stick with a basic ‘lm’ method, which will create a trend line using the coefficient from the equation <code>lm(y ~ x)</code>, which in our case is <code>lm(bill_depth_mm ~ bill_length_mm, data = penguins)</code></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="visualization.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,</span>
-<span id="cb8-2"><a href="visualization.html#cb8-2" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
-<span id="cb8-3"><a href="visualization.html#cb8-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="visualization.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">15</span>, <span class="at">color =</span> <span class="st">&quot;darkorange&quot;</span>) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="visualization.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="visualization.html#cb130-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,</span>
+<span id="cb130-2"><a href="visualization.html#cb130-2" tabindex="-1"></a>                         <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb130-3"><a href="visualization.html#cb130-3" tabindex="-1"></a>                             <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
+<span id="cb130-4"><a href="visualization.html#cb130-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">15</span>, <span class="at">color =</span> <span class="st">&quot;darkorange&quot;</span>) <span class="sc">+</span></span>
+<span id="cb130-5"><a href="visualization.html#cb130-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (`stat_smooth()`).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (`geom_point()`).</code></pre>
+<pre><code>## Warning: Removed 2 rows containing non-finite outside the scale range
+## (`stat_smooth()`).</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Here we see a slightly negative relationship between bill depth and length, which we can verify by running the same linear model we just passively applied using geom_smooth():</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="visualization.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(bill_depth_mm <span class="sc">~</span> bill_length_mm, <span class="at">data =</span> penguins)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="visualization.html#cb134-1" tabindex="-1"></a><span class="fu">lm</span>(bill_depth_mm <span class="sc">~</span> bill_length_mm, <span class="at">data =</span> penguins)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = bill_depth_mm ~ bill_length_mm, data = penguins)
@@ -289,20 +297,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##       20.88547        -0.08502</code></pre>
 <p>But remember, one of the reasons we visualize data is because it can be an incredibly helpful tool for exploratory data analysis, particularly because it gives you the opportunity to ‘get to know’ your data. If you are a penguin expert, you might be surprised by this result: bills tend to grow proportionally, right? And so we’d expect a positive relationship between these two variables. So, what else do we know about our data that might be hiding this relationship? Different penguin species!</p>
 <p>Species is an attribute of our data that we want to represent in our current plot, let’s say with color. Previously, we used the color argument to add in a color, and you might want to follow that same pattern now.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="visualization.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
-<span id="cb14-2"><a href="visualization.html#cb14-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="visualization.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">15</span>, <span class="at">color =</span> species) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="visualization.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="visualization.html#cb136-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb136-2"><a href="visualization.html#cb136-2" tabindex="-1"></a>                            <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
+<span id="cb136-3"><a href="visualization.html#cb136-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">15</span>, <span class="at">color =</span> species) <span class="sc">+</span></span>
+<span id="cb136-4"><a href="visualization.html#cb136-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>However, this approach won’t work because ggplot doesn’t know what “species” is, based on how we’ve input it into the code. We need a way to tell R that “species” is a column inside our penguins data. To do that, we include species as part of our aesthetic mapping, because the <code>aes()</code> function is what cues ggplot to look inside the data for values.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="visualization.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,</span>
-<span id="cb15-2"><a href="visualization.html#cb15-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
-<span id="cb15-3"><a href="visualization.html#cb15-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> bill_depth_mm,</span>
-<span id="cb15-4"><a href="visualization.html#cb15-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">color =</span> species)) <span class="sc">+</span></span>
-<span id="cb15-5"><a href="visualization.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb15-6"><a href="visualization.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="visualization.html#cb137-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins,</span>
+<span id="cb137-2"><a href="visualization.html#cb137-2" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb137-3"><a href="visualization.html#cb137-3" tabindex="-1"></a>                   <span class="at">y =</span> bill_depth_mm,</span>
+<span id="cb137-4"><a href="visualization.html#cb137-4" tabindex="-1"></a>                   <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb137-5"><a href="visualization.html#cb137-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb137-6"><a href="visualization.html#cb137-6" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (`stat_smooth()`).</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (`geom_point()`).</code></pre>
+<pre><code>## Warning: Removed 2 rows containing non-finite outside the scale range
+## (`stat_smooth()`).</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Now its got it! So remember, if you want to add a feature to your plot that <strong>is not related</strong> to the data (e.g. color = “blue”) it goes <em>outside</em> the <code>aes</code> function. If you want to add a feature to your plot that <strong>is related</strong> to the data (e.g. color = Species), goes <em>inside</em> the <code>aes</code> function.</p>
 <p>Now that we’ve got that straight, let’s draw attention to what happened to our trends: Simpson’s paradox! (i.e. ‘statistical phenomenon where an association between two variables in a population emerges, disappears or reverses when the population is divided into subpopulations’) (<a href="https://plato.stanford.edu/entries/paradox-simpson/#:~:text=Simpson&#39;s%20Paradox%20is%20a%20statistical,population%20is%20divided%20into%20subpopulations.">Stanford 2021</a>).</p>
@@ -311,49 +321,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.3</span> Selecting geometries<a href="visualization.html#selecting-geometries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s move on to discuss different geometries and when to use them. We’ve already noted that scatter plots with <code>geom_point</code> are a good candidate for continuous x continuous variables. What about when we start working with categorical variables? Let’s review a few different approaches:</p>
 <p><strong>geom_bar</strong>: This bar plot geometry is well suited when you want to count up the observations of one categorical variable. By default, it takes only one mapping argument, x, and then calculates the counts based on the grouping of x.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="visualization.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="visualization.html#cb141-1" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><strong>geom_boxplot</strong>: This box plot geometry is well suited when you want to show the distribution of a continuous variable based on categorical groupings. Just like geom_point, geom_boxplot takes a x and a y argument, but one should be continuous and one should be categorical.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="visualization.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> flipper_length_mm)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 2 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="visualization.html#cb142-1" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> flipper_length_mm)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p><strong>geom_line</strong>: This line geometry is well suited when you want to show how a continuous variable changes over time, where time is a bit of a mix between a continuous and categorical variable.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="visualization.html#cb22-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
-<span id="cb22-2"><a href="visualization.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Temperature.Average..C.)) <span class="sc">+</span></span>
-<span id="cb22-3"><a href="visualization.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="visualization.html#cb144-1" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb144-2"><a href="visualization.html#cb144-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Temperature.Average..C.)) <span class="sc">+</span></span>
+<span id="cb144-3"><a href="visualization.html#cb144-3" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <div id="combining-wrangling-visualization" class="section level3 hasAnchor" number="5.3.1">
 <h3><span class="header-section-number">5.3.1</span> Combining wrangling &amp; visualization<a href="visualization.html#combining-wrangling-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s practice plotting using the weather data, and let’s think about our Date column as a categorical variable, with each year being a category. This will be a bit tricky, however, because the year variable is currently classified as a numeric data type, which means ggplot will want to treat it as continuous.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="visualization.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(weather<span class="sc">$</span>year)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="visualization.html#cb145-1" tabindex="-1"></a><span class="fu">class</span>(weather<span class="sc">$</span>year)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <p>Because of this, ggplot gets a bit confused…</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="visualization.html#cb25-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
-<span id="cb25-2"><a href="visualization.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C.)) <span class="sc">+</span></span>
-<span id="cb25-3"><a href="visualization.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="visualization.html#cb147-1" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb147-2"><a href="visualization.html#cb147-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C.)) <span class="sc">+</span></span>
+<span id="cb147-3"><a href="visualization.html#cb147-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
 <pre><code>## Warning: Continuous x aesthetic
 ## ℹ did you forget `aes(group = ...)`?</code></pre>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>So, there are two ways we can prompt ggplot to think of year as a category. One way is to coerce our year variable into a ‘factor’, which tells R that these numbers are actually categories.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="visualization.html#cb28-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
-<span id="cb28-2"><a href="visualization.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(year), <span class="at">y =</span> Temperature.Average..C.)) <span class="sc">+</span></span>
-<span id="cb28-3"><a href="visualization.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="visualization.html#cb150-1" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb150-2"><a href="visualization.html#cb150-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(year), <span class="at">y =</span> Temperature.Average..C.)) <span class="sc">+</span></span>
+<span id="cb150-3"><a href="visualization.html#cb150-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Another way is to assign are group aesthetic.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="visualization.html#cb30-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
-<span id="cb30-2"><a href="visualization.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year)) <span class="sc">+</span></span>
-<span id="cb30-3"><a href="visualization.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="visualization.html#cb152-1" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb152-2"><a href="visualization.html#cb152-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year)) <span class="sc">+</span></span>
+<span id="cb152-3"><a href="visualization.html#cb152-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Now, remember the importance of using visualization to <em>explore</em> data. Does anything look off?</p>
 <p>It jumps out to me that our first and last years are shaped different than the others. They have no low-temperature outliers and their distributions are much smaller. Let’s use our wrangling skills to investigate.</p>
 <p>Take a look at a summary of the lowest (min) year:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="visualization.html#cb32-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
-<span id="cb32-2"><a href="visualization.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">min</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-3"><a href="visualization.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Date) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-4"><a href="visualization.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(Date)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="visualization.html#cb154-1" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb154-2"><a href="visualization.html#cb154-2" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">min</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb154-3"><a href="visualization.html#cb154-3" tabindex="-1"></a>  <span class="fu">select</span>(Date) <span class="sc">%&gt;%</span> </span>
+<span id="cb154-4"><a href="visualization.html#cb154-4" tabindex="-1"></a>  <span class="fu">summary</span>(Date)</span></code></pre></div>
 <pre><code>##       Date           
 ##  Min.   :1989-04-01  
 ##  1st Qu.:1989-06-08  
@@ -362,10 +376,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  3rd Qu.:1989-10-23  
 ##  Max.   :1989-12-31</code></pre>
 <p>It only starts in April, so we are missing some data for that year. What about the final year:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="visualization.html#cb34-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
-<span id="cb34-2"><a href="visualization.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-3"><a href="visualization.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Date) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-4"><a href="visualization.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(Date)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="visualization.html#cb156-1" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb156-2"><a href="visualization.html#cb156-2" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb156-3"><a href="visualization.html#cb156-3" tabindex="-1"></a>  <span class="fu">select</span>(Date) <span class="sc">%&gt;%</span> </span>
+<span id="cb156-4"><a href="visualization.html#cb156-4" tabindex="-1"></a>  <span class="fu">summary</span>(Date)</span></code></pre></div>
 <pre><code>##       Date           
 ##  Min.   :2019-01-01  
 ##  1st Qu.:2019-01-16  
@@ -374,11 +388,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  3rd Qu.:2019-03-15  
 ##  Max.   :2019-03-31</code></pre>
 <p>In ends in March, so we’re also missing data for that year. So let’s filter those out and pipe that filtered data frame directly into our ggplot:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="visualization.html#cb36-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
-<span id="cb36-2"><a href="visualization.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">!=</span> <span class="fu">min</span>(year) <span class="sc">&amp;</span> year <span class="sc">!=</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-3"><a href="visualization.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year)) <span class="sc">+</span></span>
-<span id="cb36-4"><a href="visualization.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="visualization.html#cb158-1" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb158-2"><a href="visualization.html#cb158-2" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">!=</span> <span class="fu">min</span>(year) <span class="sc">&amp;</span> year <span class="sc">!=</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb158-3"><a href="visualization.html#cb158-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year)) <span class="sc">+</span></span>
+<span id="cb158-4"><a href="visualization.html#cb158-4" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 </div>
 <div id="check-in-challenge-5" class="section level3 hasAnchor" number="5.3.2">
@@ -388,18 +403,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <summary>
 Check your answer
 </summary>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="visualization.html#cb38-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> </span>
-<span id="cb38-2"><a href="visualization.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">penguin_data_year =</span> <span class="fu">case_when</span>(</span>
-<span id="cb38-3"><a href="visualization.html#cb38-3" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%in%</span> <span class="dv">2007</span><span class="sc">:</span><span class="dv">2009</span> <span class="sc">~</span> T,</span>
-<span id="cb38-4"><a href="visualization.html#cb38-4" aria-hidden="true" tabindex="-1"></a>    T <span class="sc">~</span> F</span>
-<span id="cb38-5"><a href="visualization.html#cb38-5" aria-hidden="true" tabindex="-1"></a>  ) )</span>
-<span id="cb38-6"><a href="visualization.html#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-7"><a href="visualization.html#cb38-7" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
-<span id="cb38-8"><a href="visualization.html#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">!=</span> <span class="fu">min</span>(year) <span class="sc">&amp;</span> year <span class="sc">!=</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-9"><a href="visualization.html#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year,</span>
-<span id="cb38-10"><a href="visualization.html#cb38-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> penguin_data_year)) <span class="sc">+</span></span>
-<span id="cb38-11"><a href="visualization.html#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="visualization.html#cb160-1" tabindex="-1"></a>weather <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> </span>
+<span id="cb160-2"><a href="visualization.html#cb160-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">penguin_data_year =</span> <span class="fu">case_when</span>(</span>
+<span id="cb160-3"><a href="visualization.html#cb160-3" tabindex="-1"></a>    year <span class="sc">%in%</span> <span class="dv">2007</span><span class="sc">:</span><span class="dv">2009</span> <span class="sc">~</span> T,</span>
+<span id="cb160-4"><a href="visualization.html#cb160-4" tabindex="-1"></a>    T <span class="sc">~</span> F</span>
+<span id="cb160-5"><a href="visualization.html#cb160-5" tabindex="-1"></a>  ) )</span>
+<span id="cb160-6"><a href="visualization.html#cb160-6" tabindex="-1"></a></span>
+<span id="cb160-7"><a href="visualization.html#cb160-7" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb160-8"><a href="visualization.html#cb160-8" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">!=</span> <span class="fu">min</span>(year) <span class="sc">&amp;</span> year <span class="sc">!=</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb160-9"><a href="visualization.html#cb160-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year,</span>
+<span id="cb160-10"><a href="visualization.html#cb160-10" tabindex="-1"></a>             <span class="at">color =</span> penguin_data_year)) <span class="sc">+</span></span>
+<span id="cb160-11"><a href="visualization.html#cb160-11" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <img src="05_visualization_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 </details>
 </div>
@@ -407,63 +423,77 @@ Check your answer
 <div id="styling" class="section level2 hasAnchor" number="5.4">
 <h2><span class="header-section-number">5.4</span> Styling<a href="visualization.html#styling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For this last section, we are going to add some additional stylistic features to our plots that make them more presentable. Because <code>ggplot</code> works in layers, you can actually save a version of the plot as a object, and then use that to layer on different features without re-typing everything. So let’s do that.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="visualization.html#cb40-1" aria-hidden="true" tabindex="-1"></a>base_plot <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> </span>
-<span id="cb40-2"><a href="visualization.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">!=</span> <span class="fu">min</span>(year) <span class="sc">&amp;</span> year <span class="sc">!=</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb40-3"><a href="visualization.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year,</span>
-<span id="cb40-4"><a href="visualization.html#cb40-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> penguin_data_year)) <span class="sc">+</span></span>
-<span id="cb40-5"><a href="visualization.html#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="visualization.html#cb162-1" tabindex="-1"></a>base_plot <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> </span>
+<span id="cb162-2"><a href="visualization.html#cb162-2" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">!=</span> <span class="fu">min</span>(year) <span class="sc">&amp;</span> year <span class="sc">!=</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb162-3"><a href="visualization.html#cb162-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Temperature.Average..C., <span class="at">group =</span> year,</span>
+<span id="cb162-4"><a href="visualization.html#cb162-4" tabindex="-1"></a>             <span class="at">color =</span> penguin_data_year)) <span class="sc">+</span></span>
+<span id="cb162-5"><a href="visualization.html#cb162-5" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code></pre></div>
 <p>Now we can add layers to that object. One of the first things we might want to do is set colors using pre-set palettes. We can adjust all of the mappings, such as color, using functions that start with <code>scale_&lt;MAPPING&gt;_</code>. One great set of palettes are linked to the <code>viridis</code> package, which makes colorblind friendly gradients, and ggplot includes the following functionality:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="visualization.html#cb41-1" aria-hidden="true" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
-<span id="cb41-2"><a href="visualization.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="visualization.html#cb163-1" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
+<span id="cb163-2"><a href="visualization.html#cb163-2" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Here we choose <code>_d</code> because we want a palette for a discrete (d) variable, not continuous (c).</p>
 <p>We can also set colors manually with <code>scale_color_manual</code>, where we provide a vector of colors to the values argument.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="visualization.html#cb43-1" aria-hidden="true" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
-<span id="cb43-2"><a href="visualization.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkorange&quot;</span>,<span class="st">&quot;cyan4&quot;</span>))</span></code></pre></div>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="visualization.html#cb165-1" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
+<span id="cb165-2"><a href="visualization.html#cb165-2" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkorange&quot;</span>,<span class="st">&quot;cyan4&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>We can also add labels for all of the mappings with the <code>labs</code> function.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="visualization.html#cb45-1" aria-hidden="true" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
-<span id="cb45-2"><a href="visualization.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average Temperature (C)&quot;</span>, </span>
-<span id="cb45-3"><a href="visualization.html#cb45-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Daily average temperature range at Palmer Station (1985-2018)&quot;</span>,</span>
-<span id="cb45-4"><a href="visualization.html#cb45-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Penguin data&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="visualization.html#cb167-1" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
+<span id="cb167-2"><a href="visualization.html#cb167-2" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average Temperature (C)&quot;</span>, </span>
+<span id="cb167-3"><a href="visualization.html#cb167-3" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Daily average temperature range at Palmer Station (1985-2018)&quot;</span>,</span>
+<span id="cb167-4"><a href="visualization.html#cb167-4" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Penguin data&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>Next, <code>theme_</code> can add an overall nice touch to adjust the overall look of plot (e.g. background, axis lines). I like <code>theme_minimal</code> but there are all kinds of themes. Try tab completing after you type the following</p>
 <pre><code>theme_</code></pre>
 <p>Let’s apply one:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="visualization.html#cb48-1" aria-hidden="true" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
-<span id="cb48-2"><a href="visualization.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="visualization.html#cb170-1" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
+<span id="cb170-2"><a href="visualization.html#cb170-2" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>You can also further customize the theme with a stand-alone <code>theme</code> function. Here we can add customization like removing the legend.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="visualization.html#cb50-1" aria-hidden="true" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
-<span id="cb50-2"><a href="visualization.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb50-3"><a href="visualization.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="visualization.html#cb172-1" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
+<span id="cb172-2"><a href="visualization.html#cb172-2" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb172-3"><a href="visualization.html#cb172-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Also within theme you can change the text (and much more!)</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="visualization.html#cb52-1" aria-hidden="true" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
-<span id="cb52-2"><a href="visualization.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb52-3"><a href="visualization.html#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb52-4"><a href="visualization.html#cb52-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Avenir&quot;</span>))</span></code></pre></div>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="visualization.html#cb174-1" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
+<span id="cb174-2"><a href="visualization.html#cb174-2" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb174-3"><a href="visualization.html#cb174-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb174-4"><a href="visualization.html#cb174-4" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Avenir&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Now, let’s put it all together</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="visualization.html#cb54-1" aria-hidden="true" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
-<span id="cb54-2"><a href="visualization.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkorange&quot;</span>,<span class="st">&quot;cyan4&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb54-3"><a href="visualization.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average Temperature (C)&quot;</span>, </span>
-<span id="cb54-4"><a href="visualization.html#cb54-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Daily average temperature range at Palmer Station (1985-2018)&quot;</span>,</span>
-<span id="cb54-5"><a href="visualization.html#cb54-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Penguin data&quot;</span>) <span class="sc">+</span></span>
-<span id="cb54-6"><a href="visualization.html#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb54-7"><a href="visualization.html#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb54-8"><a href="visualization.html#cb54-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Avenir&quot;</span>))</span></code></pre></div>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="visualization.html#cb176-1" tabindex="-1"></a>base_plot <span class="sc">+</span></span>
+<span id="cb176-2"><a href="visualization.html#cb176-2" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkorange&quot;</span>,<span class="st">&quot;cyan4&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb176-3"><a href="visualization.html#cb176-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average Temperature (C)&quot;</span>, </span>
+<span id="cb176-4"><a href="visualization.html#cb176-4" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Daily average temperature range at Palmer Station (1985-2018)&quot;</span>,</span>
+<span id="cb176-5"><a href="visualization.html#cb176-5" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Penguin data&quot;</span>) <span class="sc">+</span></span>
+<span id="cb176-6"><a href="visualization.html#cb176-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb176-7"><a href="visualization.html#cb176-7" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb176-8"><a href="visualization.html#cb176-8" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">&quot;Avenir&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning: Removed 11 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="05_visualization_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 
 </div>
 </div>
+
+
+
+
+
+
+
             </section>
 
           </div>
