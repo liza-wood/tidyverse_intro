@@ -1,8 +1,8 @@
 cff-version: 1.0.0
 message: "If you use this software, please cite it as below."
 authors:
-- family-names: "Liza"
-  given-names: "Wood"
+- family-names: "Wood"
+  given-names: "Liza"
   orcid: "https://orcid.org/0000-0003-4325-6498"
 title: "Introduction to the Tidyverse"
 version: 1.0.0
