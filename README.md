@@ -9,3 +9,7 @@ This tutorial is an introduction to data wrangling and visualization using funct
 ## Acknowledgements  
 
 This site was developed based on material from [UC Davis's R-DAVIS course](https://gge-ucd.github.io/R-DAVIS/index.html), which draws heavily on [Carpentries](https://datacarpentry.org/R-ecology-lesson/) R lessons. Additionally, artwork is from Allison Horst ([@allison_horst](https://allisonhorst.com/)) and website styling was also based on the designs from the [Palmer Penguins package webpage](https://allisonhorst.github.io/palmerpenguins/)
+
+## Citation
+
+Wood, L. (2024). Introduction to the Tidyverse (Version 1.0.0). https://doi.org/10.5281/zenodo.1234
