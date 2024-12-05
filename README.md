@@ -13,3 +13,4 @@ This site was developed based on material from [UC Davis's R-DAVIS course](https
 ## Citation
 
 Wood, L. (2024). Introduction to the Tidyverse (Version 1.0.0). https://doi.org/10.5281/zenodo.1234
+
